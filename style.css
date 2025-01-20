@@ -1,0 +1,432 @@
+
+  #cartMenu {
+    min-width: 90px;
+ /* Ajusta el ancho del menú del carrito si es necesario */
+  }
+
+  #cartItems {
+    max-height: 100px; /* Ajusta la altura máxima del contenedor de los productos */
+    overflow-y: auto; /* Permite el desplazamiento si hay demasiados productos */
+  }
+
+  #cartItems .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+  }
+
+  #cartItems .cart-item .btn-danger {
+    
+    font-size: 1rem; /* Tamaño del botón de eliminar */
+   
+  }
+
+  /* Estilos para las tarjetas */
+
+  .card-container {
+    display: flex;
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    align-items: center; /* Centra las tarjetas verticalmente */
+    gap: 20px; /* Espacio entre las tarjetas */
+    padding: 20px;
+    flex-wrap: wrap; /* Para que las tarjetas se ajusten en múltiples filas si el espacio es pequeño */
+  }
+
+  .card {
+    box-shadow: 0 4px 10px rgba(35, 207, 13, 0.918); /* Agregar sombra a las tarjetas */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(1, 1, 1, 0);
+  }
+
+  .card:hover {
+    transform: translateY(-50px);
+    box-shadow: 0 8px 16px rgb(2, 190, 33);
+  }
+
+  .card img {
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+  }
+
+  .card:hover img {
+    transform: scale(1.2); /* Agranda la imagen */
+  }
+
+  .btn-primary {
+    background-color: rgb(59, 6, 78); /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 13px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: all 0.3s ease; /* Transición suave */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.18); /* Sombra ligera */
+  }
+
+  .btn-primary:hover {
+    background-color: rgb(13, 227, 48); /* Color de fondo al hacer hover */
+    box-shadow: 0 8px 12px rgb(0, 0, 0); /* Sombra más intensa al hacer hover */
+    transform: translateY(-3px); /* Elevar el botón al hacer hover */
+  }
+
+
+
+  .image-link {
+    display: inline-block;
+  }
+  .img-fluid {
+    max-height: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+    width: auto;
+  }
+
+
+  .scrollable-container {
+    width: 300px;
+    height: 150px;
+    overflow-y: auto; /* Barra de scroll vertical */
+    border: 1px solid #490261;
+    padding: 10px;
+    margin: 50px;
+  }
+
+
+  .center-align {
+    text-align: center;
+  }
+
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+thead th {
+  background-color: #e70101;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+tbody tr {
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+  background-color: #ffcc00;
+}
+
+tbody td {
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+}
+
+
+section {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente las imágenes dentro de la sección */
+  align-items: center;     /* Centra verticalmente las imágenes dentro de la sección */
+  width: 600px;
+  height: 430px;
+  margin: 0 auto; /* Esto centrará la sección en la página */
+}
+
+section img {
+  width: 100px; /* Puedes ajustar el ancho de las imágenes */
+  margin: 0 10px; /* Espacio entre imágenes */
+  opacity: 0.8;
+  transition: 0.5s ease;
+}
+section img:hover {
+    cursor: crosshair;
+    width: 450px;
+    opacity: 1;
+    filter: contrast(120%);
+    border-radius: 10px;
+  }
+
+  .images-container {
+  display: flex;
+  transition: transform 0.5s ease; /* Transición suave al desplazar las imágenes */
+}
+
+
+
+  /* Estilos del modal */
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(185, 0, 0);
+  background-color: rgb(255, 255, 255);
+  display: none; /* Ocultarlo por defecto */
+}
+.modal-content {
+  background-color: #3C3D37;
+  margin: 20% auto;
+  padding: 20px;
+  border: 2px solid #06ad03;
+  width: 400px;
+}
+
+
+.close {
+  color: #10c10a;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: rgb(179, 17, 17);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilos para las tarjetas de Pokémon */
+.pokemon-card {
+  border: 1px solid #0a0a0a; /* Color de borde */
+  border-radius: 10px; /* Bordes redondeados */
+  transition: transform 0.2s; /* Efecto de transformación al pasar el mouse */
+}
+
+.pokemon-card:hover {
+  transform: scale(1.02); /* Aumenta el tamaño al pasar el mouse */
+  box-shadow: 0 8px 16px rgb(156, 1, 161);
+}
+
+
+.pokemon-card .card-body {
+  background-color: #7e0578; /* Color de fondo para el cuerpo de la tarjeta */
+}
+
+.pokemon-card .card-title {
+  color: #deda02; /* Color del título */
+}
+
+.pokemon-card .card-text {
+  color: #deda02; /* Color del texto */
+}
+
+/* Botones específicos */
+.pokemon-card .btn-primary {
+  background-color: #deda02; /* Color de fondo del botón */
+  border: none; /* Sin borde */
+}
+
+.pokemon-card .btn-primary:hover {
+  background-color: #498cb9; /* Color del botón al pasar el mouse */
+}
+
+
+/* Estilos para las tarjetas2 de Pokémon */
+.pokemon-card2 {
+  border: 1px solid #00000000; /* Color de borde */
+  border-radius: 10px; /* Bordes redondeados */
+  transition: transform 0.2s; /* Efecto de transformación al pasar el mouse */
+}
+
+.pokemon-card2:hover {
+  transform: scale(1.02); /* Aumenta el tamaño al pasar el mouse */
+  box-shadow: 0 8px 16px rgb(225, 222, 2);
+}
+
+
+.pokemon-card2 .card-body {
+  background-color: #ebbe09; /* Color de fondo para el cuerpo de la tarjeta */
+}
+
+.pokemon-card2 .card-title {
+  color: #000000; /* Color del título */
+}
+
+.pokemon-card2 .card-text {
+  color: #010101; /* Color del texto */
+}
+
+/* Botones específicos */
+.pokemon-card2 .btn-primary {
+  background-color: #04368e; /* Color de fondo del botón */
+  border: none; /* Sin borde */
+}
+
+.pokemon-card2 .btn-primary:hover {
+  background-color: #32ce07; /* Color del botón al pasar el mouse */
+}
+
+/* Estilos para las tarjeta3 de Pokémon */
+
+.pokemon-card3{
+  border: 1px solid #000000; /* Color de borde */
+  border-radius: 10px; /* Bordes redondeados */
+  transition: transform 0.2s; /* Efecto de transformación al pasar el mouse */
+}
+
+.pokemon-card3:hover {
+  transform: scale(1.02); /* Aumenta el tamaño al pasar el mouse */
+  box-shadow: 0 8px 16px #0c42f1;
+}
+
+
+.pokemon-card3 .card-body {
+  background-color: #050505; /* Color de fondo para el cuerpo de la tarjeta */
+}
+
+.pokemon-card3 .card-title {
+  color: #0c42f1; /* Color del título */
+}
+
+.pokemon-card3 .card-text {
+  color: #0c42f1; /* Color del texto */
+}
+
+/* Botones específicos */
+.pokemon-card3 .btn-primary {
+  background-color: #0c42f1; /* Color de fondo del botón */
+  border: none; /* Sin borde */
+}
+
+.pokemon-card3 .btn-primary:hover {
+  background-color: #498cb9; /* Color del botón al pasar el mouse */
+}
+
+
+/* Estilos para el botón de carga */
+.btn-danger {
+  background-color: #ce0000; /* Un rojo vibrante */
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase; /* Pone el texto en mayúsculas */
+  margin-left: auto;
+}
+
+.btn-danger:hover {
+  background-color: #2a013a; /* Un tono más oscuro al pasar el mouse */
+  transform: scale(1.05); /* Efecto de agrandar ligeramente */
+}
+
+.btn-danger:active {
+  background-color: #a93232; /* Un tono más oscuro cuando se hace clic */
+  transform: scale(0.98); /* Ligeramente más pequeño al hacer clic */
+}
+
+.btn-danger:focus {
+  box-shadow: 0 0 10px rgba(255, 74, 74, 0.5); /* Resaltado con sombra */
+  outline: none; /* Quita el borde por defecto */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilos generales del footer */
+.footer {
+  background-color: #2a013a; /* Color de fondo oscuro */
+  color: #fff; /* Texto en blanco */
+  padding: 40px 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo de los títulos */
+.footer h5 {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #e60012; /* Rojo Nintendo */
+}
+
+/* Estilos para la información de contacto y enlaces */
+.footer p,
+.footer ul {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #b5b5b5; /* Color gris claro */
+}
+
+.footer ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.footer ul li {
+  margin-bottom: 10px;
+}
+
+.footer ul li a {
+  color: #b5b5b5;
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  color: #fff; /* Cambia a blanco cuando se pasa el cursor */
+}
+
+/* Estilos para los iconos sociales */
+.social-icons a {
+  margin-right: 15px;
+  font-size: 20px;
+  color: #b5b5b5;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #e60012; /* Cambia a rojo Nintendo al hacer hover */
+}
+
+/* Estilo para el texto centrado al final */
+.footer .text-center {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #b5b5b5;
+}
+
+/* Ajustes de diseño responsivo */
+@media (max-width: 768px) {
+  .footer .row {
+    flex-direction: column;
+  }
+
+  .footer .col-md-4 {
+    margin-bottom: 30px;
+  }
+
+  .social-icons a {
+    margin-bottom: 10px;
+  }
+}
