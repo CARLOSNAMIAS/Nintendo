@@ -1,0 +1,916 @@
+/**
+ * ========================================
+ * NINTENDO WEBSITE STYLES
+ * ========================================
+ * 
+ * Archivo CSS principal para el sitio web de Nintendo
+ * Incluye estilos para tema oscuro y claro
+ * 
+ * Autor: [Carlos Gómez]
+ * Versión: 2.0
+ * Fecha: Diciembre 2024
+ * 
+ * Índice de contenido:
+ * 1. Reset y configuración base
+ * 2. Variables CSS (Custom Properties)
+ * 3. Estilos base del body
+ * 4. Header y navegación
+ * 5. Carrusel principal
+ * 6. Banner de descuentos
+ * 7. Tarjetas de productos
+ * 8. Secciones de juegos
+ * 9. Tarjetas Pokémon especiales
+ * 10. Footer
+ * 11. Modales
+ * 12. Offcanvas
+ * 13. Animaciones
+ * 14. Tema claro (Light mode)
+ * 15. Media queries (Responsive)
+ * 16. Utilidades y helpers
+ */
+
+/* ========================================
+   1. RESET Y CONFIGURACIÓN BASE
+   ======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================
+   2. VARIABLES CSS (CUSTOM PROPERTIES)
+   ======================================== */
+
+:root {
+  /* === COLORES PRINCIPALES === */
+  --nintendo-red: #E60012;
+  --nintendo-blue: #0066CC;
+  --nintendo-dark: #0F0F23;
+  --nintendo-purple: #663399;
+  --nintendo-light: #F7F7F7;
+  --nintendo-gray: #666666;
+  --nintendo-yellow: #FFD700;
+
+  /* === GRADIENTES === */
+  --gradient-primary: linear-gradient(135deg, var(--nintendo-red) 0%, var(--nintendo-purple) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--nintendo-blue) 0%, var(--nintendo-purple) 100%);
+
+  /* === SOMBRAS === */
+  --shadow-soft: 0 10px 40px rgba(230, 0, 18, 0.15);
+  --shadow-hover: 0 20px 60px rgba(230, 0, 18, 0.25);
+
+  /* === BORDES === */
+  --border-radius: 20px;
+  --border-radius-small: 10px;
+  --border-radius-large: 50px;
+
+  /* === ESPACIADO === */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+
+  /* === TIPOGRAFÍA === */
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+  --font-size-title: 2.5rem;
+
+  /* === TRANSICIONES === */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* === VARIABLES TEMÁTICAS (TEMA OSCURO) === */
+  --body-bg: linear-gradient(135deg, #0F0F23 0%, #1a1a3a 50%, #0F0F23 100%);
+  --text-color: var(--nintendo-light);
+  --navbar-bg: rgba(15, 15, 35, 0.95);
+  --product-card-bg: rgba(255, 255, 255, 0.05);
+  --game-section-bg: rgba(255, 255, 255, 0.03);
+  --offcanvas-bg: linear-gradient(135deg, var(--nintendo-dark) 0%, var(--nintendo-purple) 100%);
+  --footer-bg: linear-gradient(135deg, var(--nintendo-dark) 0%, #1a1a3a 100%);
+  --form-control-bg: rgba(255, 255, 255, 0.1);
+  --form-control-focus-bg: rgba(255, 255, 255, 0.15);
+  --form-control-color: white;
+  --form-placeholder-color: rgba(255, 255, 255, 0.6);
+
+  /* === Z-INDEX SCALE === */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+/* ========================================
+   3. ESTILOS BASE DEL BODY
+   ======================================== */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  background: var(--body-bg);
+  color: var(--text-color);
+  overflow-x: hidden;
+  transition: background var(--transition-slow), color var(--transition-slow);
+}
+
+/* ========================================
+   4. HEADER Y NAVEGACIÓN
+   ======================================== */
+
+/* === NAVBAR PRINCIPAL === */
+.navbar {
+  background: var(--navbar-bg) !important;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(230, 0, 18, 0.3);
+  transition: all var(--transition-base);
+  padding: var(--spacing-md) 0;
+padding-top: 0.2rem;    /* Reduce el espacio superior */
+  padding-bottom: 0.2rem; /* Reduce el espacio inferior */
+}
+
+/* === LOGO === */
+.navbar-brand img {
+  filter: brightness(1.2);
+  transition: transform var(--transition-base);
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.1);
+}
+
+/* === ENLACES DE NAVEGACIÓN === */
+.navbar-nav .nav-link {
+  color: var(--nintendo-light) !important;
+  font-weight: 500;
+  margin: 0 var(--spacing-sm);
+  padding: 0.75rem var(--spacing-lg) !important;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto hover con pseudo-elemento */
+.navbar-nav .nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  transition: left var(--transition-base);
+  z-index: -1;
+}
+
+.navbar-nav .nav-link:hover::before {
+  left: 0;
+}
+
+.navbar-nav .nav-link:hover {
+  color: white !important;
+  transform: translateY(-2px);
+}
+
+/* === BOTÓN DEL CARRITO === */
+.btn-cart {
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+  padding: 0.75rem var(--spacing-lg);
+  border-radius: var(--border-radius-large);
+  font-weight: bold;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto ripple en botón del carrito */
+.btn-cart::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: all var(--transition-base);
+  transform: translate(-50%, -50%);
+}
+
+.btn-cart:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-cart:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* === BADGE DEL CARRITO === */
+.cart-badge {
+  background: var(--nintendo-yellow);
+  color: var(--nintendo-dark);
+  border-radius: 50%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-left: var(--spacing-sm);
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+/* ========================================
+   5. CARRUSEL PRINCIPAL
+   ======================================== */
+
+.carousel {
+  margin-bottom: var(--spacing-xxl);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.carousel-item img {
+  height: 500px;
+  width: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.carousel-item.active img {
+  transform: scale(1.02);
+}
+
+/* === CONTROLES DEL CARRUSEL === */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev {
+  background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+}
+
+.carousel-control-next {
+  background: linear-gradient(-90deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+}
+
+/* ========================================
+   6. BANNER DE DESCUENTOS
+   ======================================== */
+
+.discount-banner {
+  background: var(--gradient-primary);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
+  margin: var(--spacing-xxl) 0;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto shimmer animado */
+.discount-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: shimmer 3s infinite;
+}
+
+.discount-banner h3 {
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-size: var(--font-size-xl);
+}
+
+.discount-banner p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--font-size-lg);
+}
+
+/* ========================================
+   7. TARJETAS DE PRODUCTOS
+   ======================================== */
+
+/* === CONTENEDOR DE PRODUCTOS === */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xl) 0;
+  
+}
+
+/* === TARJETA INDIVIDUAL === */
+.product-card {
+  background: var(--product-card-bg);
+  border: 1px solid rgba(230, 0, 18, 0.3);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Efecto de barrido luminoso */
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(230, 0, 18, 0.1), transparent);
+  transition: left var(--transition-slow);
+}
+
+.product-card:hover::before {
+  left: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--nintendo-red);
+}
+
+/* === IMAGEN DEL PRODUCTO === */
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: calc(var(--border-radius) - 10px);
+  transition: transform var(--transition-base);
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* === TEXTO DEL PRODUCTO === */
+.product-title {
+  color: var(--nintendo-red);
+  font-weight: bold;
+  margin: var(--spacing-md) 0;
+  font-size: var(--font-size-lg);
+}
+
+.product-price {
+  color: var(--nintendo-yellow);
+  font-size: var(--font-size-xl);
+  font-weight: bold;
+  margin: var(--spacing-sm) 0;
+}
+
+/* ========================================
+   8. SECCIONES DE JUEGOS
+   ======================================== */
+/* En tu archivo styles.css */
+.game-section {
+  text-align: center;
+  margin: 0 auto;       /* Centra el contenedor */
+  max-width: 1200px;    /* Opcional: limita el ancho máximo */
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+/* === TÍTULO DE SECCIÓN === */
+.section-title {
+  color: var(--nintendo-red);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-title);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+/* Línea decorativa debajo del título */
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+/* ========================================
+   9. TARJETAS POKÉMON ESPECIALES
+   ======================================== */
+
+/* === CONTENEDOR DE TARJETAS POKÉMON === */
+.pokemon-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 320px);
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+  justify-content: center;
+}
+
+/* === TARJETA POKÉMON BASE === */
+.pokemon-card {
+  background: linear-gradient(145deg, #6a0dad 0%, #4b0082 100%);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+/* Efecto de brillo en hover */
+.pokemon-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.pokemon-card:hover::before {
+  opacity: 1;
+}
+
+.pokemon-card:hover {
+  transform: scale(1.05) rotateY(5deg);
+  box-shadow: 0 20px 40px rgba(106, 13, 173, 0.4);
+}
+
+/* === VARIANTES DE TARJETAS POKÉMON === */
+.pokemon-card-2 {
+  background: linear-gradient(145deg, #FFD700 0%, #FFA500 100%);
+}
+
+.pokemon-card-3 {
+  background: linear-gradient(145deg, #0066CC 0%, #003d7a 100%);
+}
+
+/* === TEXTO EN TARJETAS POKÉMON === */
+.pokemon-card .card-title,
+.pokemon-card .card-text {
+  color: white;
+}
+
+.pokemon-card-2 .card-title,
+.pokemon-card-2 .card-text {
+  color: #212529;
+}
+
+/* ========================================
+   10. FOOTER
+   ======================================== */
+
+.footer {
+  background: var(--footer-bg);
+  color: var(--nintendo-light);
+  padding: var(--spacing-xxl) 0 var(--spacing-xl);
+  margin-top: 4rem;
+  border-top: 2px solid var(--nintendo-red);
+}
+
+.footer h5 {
+  color: var(--nintendo-red);
+  font-weight: bold;
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer a {
+  color: var(--nintendo-light);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.footer a:hover {
+  color: var(--nintendo-red);
+}
+
+/* === ICONOS SOCIALES === */
+.social-icons a {
+  display: inline-block;
+  margin: 0 var(--spacing-md);
+  font-size: var(--font-size-xl);
+  transition: all var(--transition-base);
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px);
+  color: var(--nintendo-red);
+}
+
+/* ========================================
+   11. MODALES
+   ======================================== */
+
+/* === OVERLAY DEL MODAL === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === CONTENIDO DEL MODAL === */
+.modal-content-modern {
+  background: var(--gradient-primary);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-hover);
+  transform: scale(0.9);
+  transition: transform var(--transition-base);
+}
+
+.modal-content-modern.show {
+  transform: scale(1);
+}
+
+.modal-content-modern img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: var(--spacing-md) 0;
+  border: 3px solid white;
+}
+
+/* ========================================
+   12. OFFCANVAS
+   ======================================== */
+
+.offcanvas {
+  background: var(--offcanvas-bg);
+  border-right: 2px solid var(--nintendo-red);
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid rgba(230, 0, 18, 0.3);
+}
+
+.offcanvas-title {
+  color: var(--nintendo-red);
+  font-weight: bold;
+}
+
+/* === FORMULARIOS === */
+.form-control {
+  background: var(--form-control-bg);
+  border: 1px solid rgba(230, 0, 18, 0.3);
+  border-radius: var(--border-radius-small);
+  color: var(--form-control-color);
+  padding: 0.75rem;
+  transition: all var(--transition-base);
+}
+
+.form-control:focus {
+  background: var(--form-control-focus-bg);
+  border-color: var(--nintendo-red);
+  box-shadow: 0 0 10px rgba(230, 0, 18, 0.3);
+  color: var(--form-control-color);
+}
+
+.form-control::placeholder {
+  color: var(--form-placeholder-color);
+}
+
+/* ========================================
+   13. ANIMACIONES
+   ======================================== */
+
+/* === ANIMACIÓN FADE IN UP === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* === ANIMACIÓN SHIMMER === */
+@keyframes shimmer {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* === ANIMACIÓN SPIN === */
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* === ANIMACIÓN FLOAT (PARTÍCULAS) === */
+@keyframes float {
+  0% { 
+    transform: translateY(0); 
+    opacity: 0.7; 
+  }
+  100% { 
+    transform: translateY(-100vh); 
+    opacity: 0; 
+  }
+}
+
+/* ========================================
+   14. TEMA CLARO (LIGHT MODE)
+   ======================================== */
+
+body.light-mode {
+  /* === VARIABLES PARA TEMA CLARO === */
+  --body-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  --text-color: #343a40;
+  --navbar-bg: rgba(255, 255, 255, 0.9);
+  --product-card-bg: #ffffff;
+  --game-section-bg: #f8f9fa;
+  --offcanvas-bg: linear-gradient(135deg, #ffffff 0%, #e9ecef 100%);
+  --footer-bg: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  --form-control-bg: rgba(0, 0, 0, 0.05);
+  --form-control-focus-bg: rgba(0, 0, 0, 0.1);
+  --form-control-color: #343a40;
+  --form-placeholder-color: rgba(0, 0, 0, 0.4);
+  --nintendo-dark: #f8f9fa;
+  --nintendo-light: #343a40;
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* === OVERRIDES ESPECÍFICOS PARA TEMA CLARO === */
+body.light-mode .product-price {
+  color: var(--nintendo-red);
+}
+
+body.light-mode .product-card .text-light {
+  color: var(--text-color) !important;
+}
+
+body.light-mode .navbar-nav .nav-link:hover {
+  color: var(--nintendo-light) !important;
+}
+
+body.light-mode .dropdown-menu {
+  background: #ffffff;
+  border-color: #dee2e6;
+}
+
+body.light-mode .dropdown-item {
+  color: #212529;
+}
+
+body.light-mode .dropdown-item:hover {
+  background: var(--nintendo-red);
+  color: white;
+}
+
+/* ========================================
+   15. MEDIA QUERIES (RESPONSIVE)
+   ======================================== */
+
+/* === TABLETS === */
+@media (max-width: 992px) {
+  .section-title {
+    font-size: var(--font-size-xxl);
+  }
+  
+  .carousel-item img {
+    height: 350px;
+  }
+}
+
+/* === MÓVILES === */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: var(--font-size-xxl);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .card-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .pokemon-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .discount-banner {
+    padding: var(--spacing-lg);
+  }
+  
+  .discount-banner h3 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .carousel-item img {
+    height: 250px;
+  }
+  
+  .game-section {
+    padding: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+  }
+  
+  .footer {
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+  }
+  
+  .social-icons a {
+    margin: 0 var(--spacing-sm);
+  }
+}
+
+/* === MÓVILES PEQUEÑOS === */
+@media (max-width: 480px) {
+  .modal-content-modern {
+    width: 95%;
+    padding: var(--spacing-lg);
+  }
+  
+  .product-card {
+    padding: var(--spacing-md);
+  }
+  
+  .discount-banner {
+    padding: var(--spacing-md);
+  }
+}
+
+/* ========================================
+   16. UTILIDADES Y HELPERS
+   ======================================== */
+
+/* === BOTONES === */
+.btn-primary {
+  background: var(--gradient-secondary);
+  border: none;
+  color: white;
+  padding: 0.75rem var(--spacing-xl);
+  border-radius: var(--border-radius-large);
+  font-weight: bold;
+  transition: all var(--transition-base);
+  box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
+  width: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 102, 204, 0.5);
+}
+
+.btn-danger {
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--border-radius-large);
+  padding: 0.75rem var(--spacing-lg);
+  font-weight: bold;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-danger::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: all var(--transition-base);
+  transform: translate(-50%, -50%);
+}
+
+.btn-danger:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* === ACCESIBILIDAD === */
+:focus-visible {
+  outline: 2px solid var(--nintendo-yellow);
+  outline-offset: 2px;
+}
+
+/* === ESTADOS DE CARGA === */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--nintendo-red);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+/* === DROPDOWN MENUS === */
+.dropdown-menu {
+  background: var(--nintendo-dark);
+  border: 1px solid var(--nintendo-red);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-soft);
+}
+
+.dropdown-item {
+  color: var(--nintendo-light);
+  transition: all var(--transition-base);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-small);
+}
+
+.dropdown-item:hover {
+  background: var(--nintendo-red);
+  color: white;
+}
+
+.dropdown-divider {
+  border-color: rgba(230, 0, 18, 0.3);
+}
+
+/* === UTILIDADES DE TEXTO === */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === UTILIDADES DE ESPACIADO === */
+.section-spacing {
+  margin: var(--spacing-xxl) 0;
+}
+
+.content-spacing {
+  padding: var(--spacing-xl) 0;
+}
+
+/* ========================================
+   FIN DEL ARCHIVO CSS
+   ======================================== */
