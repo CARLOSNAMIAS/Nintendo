@@ -911,6 +911,181 @@ body.light-mode .dropdown-item:hover {
   padding: var(--spacing-xl) 0;
 }
 
+
+
+
+/* ====================================
+   EFECTO SUPER ESTRELLA - MARIO BROS
+   ==================================== */
+
+/* Clase base: Configuración inicial del botón */
+.super-star {
+  position: relative;  /* Permite posicionar elementos pseudo (::before, ::after) */
+  overflow: hidden;    /* Evita que las partículas se salgan del contenedor */
+}
+
+/* Estado activo: Se aplica cuando el botón tiene la clase 'active' */
+.super-star.active {
+  animation: superStarGlow 3s ease-in-out;  /* Animación de brillo dorado por 3 segundos */
+}
+
+/* Imagen dentro del botón activo: Anima el icono/imagen */
+.super-star.active img {
+  animation: superStarRotate 3s ease-in-out;  /* Rotación y cambio de colores por 3 segundos */
+}
+
+/* Partículas brillantes: Crea las estrellitas alrededor del botón */
+.super-star.active::before,
+.super-star.active::after {
+  content: '✨';                              /* Emoji de estrella como contenido */
+  position: absolute;                         /* Posicionamiento absoluto respecto al botón */
+  font-size: 16px;                           /* Tamaño de la estrellita */
+  animation: floatingSparkles 2s ease-out;   /* Animación de flotación por 2 segundos */
+  pointer-events: none;                      /* No interfiere con los clics del mouse */
+}
+
+/* Primera partícula: Esquina superior izquierda */
+.super-star.active::before {
+  top: -10px;              /* 10px arriba del borde del botón */
+  left: -10px;             /* 10px a la izquierda del borde del botón */
+  animation-delay: 0.2s;   /* Aparece 0.2 segundos después del inicio */
+}
+
+/* Segunda partícula: Esquina inferior derecha */
+.super-star.active::after {
+  bottom: -10px;           /* 10px abajo del borde del botón */
+  right: -10px;            /* 10px a la derecha del borde del botón */
+  animation-delay: 0.8s;   /* Aparece 0.8 segundos después del inicio */
+}
+
+/* ANIMACIÓN 1: Brillo dorado del botón (como la estrella de Mario) */
+@keyframes superStarGlow {
+  
+  /* Inicio y final: Estado de reposo */
+  0%,
+  100% {
+    box-shadow: 0 0 10px #ffd700;                    /* Brillo dorado suave */
+    background: rgba(255, 215, 0, 0.1);             /* Fondo dorado muy transparente */
+    transform: scale(1);                             /* Tamaño normal del botón */
+  }
+
+  /* 20%: Primer incremento de poder */
+  20% {
+    box-shadow: 0 0 50px #ffd700, 0 0 100px #ffff00; /* Doble brillo: dorado + amarillo */
+    background: rgba(255, 215, 0, 0.3);              /* Fondo más visible */
+    transform: scale(1.05);                          /* Crece 5% */
+  }
+
+  /* 40%: MÁXIMO PODER - Punto culminante del efecto */
+  40% {
+    box-shadow: 0 0 70px #ffd700, 0 0 140px #ffff00, 0 0 210px #ffa500; /* Triple brillo intenso */
+    background: rgba(255, 215, 0, 0.2);              /* Fondo balanceado */
+    transform: scale(1.1);                           /* Tamaño máximo: crece 10% */
+  }
+
+  /* 60%: Segundo incremento (bajada gradual) */
+  60% {
+    box-shadow: 0 0 50px #ffd700, 0 0 100px #ffff00; /* Vuelve al doble brillo */
+    background: rgba(255, 215, 0, 0.3);              /* Fondo más visible otra vez */
+    transform: scale(1.05);                          /* Tamaño intermedio */
+  }
+
+  /* 80%: Decrecimiento hacia el estado normal */
+  80% {
+    box-shadow: 0 0 30px #ffd700;                    /* Brillo moderado */
+    background: rgba(255, 215, 0, 0.1);             /* Fondo casi transparente */
+    transform: scale(1.02);                          /* Casi el tamaño original */
+  }
+}
+
+/* ANIMACIÓN 2: Rotación y cambio de colores de la imagen */
+@keyframes superStarRotate {
+  /* Inicio: Estado normal */
+  0% {
+    transform: rotate(0deg) scale(1);        /* Sin rotación, tamaño normal */
+    filter: brightness(1) hue-rotate(0deg);  /* Brillo y colores normales */
+  }
+
+  /* 25%: Primer cuarto de vuelta */
+  25% {
+    transform: rotate(90deg) scale(1.3);     /* Rota 90°, crece 30% */
+    filter: brightness(1.8) hue-rotate(90deg); /* Más brillante, colores cambiados */
+  }
+
+  /* 50%: Media vuelta - Punto máximo de transformación */
+  50% {
+    transform: rotate(180deg) scale(1.1);    /* Rota 180°, tamaño intermedio */
+    filter: brightness(2) hue-rotate(180deg); /* Máximo brillo y cambio de color */
+  }
+
+  /* 75%: Tercer cuarto de vuelta */
+  75% {
+    transform: rotate(270deg) scale(1.3);    /* Rota 270°, grande otra vez */
+    filter: brightness(1.8) hue-rotate(270deg); /* Alto brillo */
+  }
+
+  /* 100%: Vuelta completa - Regreso al inicio */
+  100% {
+    transform: rotate(360deg) scale(1);      /* Vuelta completa, tamaño normal */
+    filter: brightness(1) hue-rotate(360deg); /* Colores y brillo normales */
+  }
+}
+
+/* ANIMACIÓN 3: Partículas flotantes (estrellitas que suben) */
+@keyframes floatingSparkles {
+  /* Inicio: Partícula invisible y pequeña */
+  0% {
+    opacity: 0;                              /* Completamente transparente */
+    transform: scale(0) translateY(0);       /* Tamaño 0, sin movimiento vertical */
+  }
+
+  /* Mitad: Máxima visibilidad y tamaño */
+  50% {
+    opacity: 1;                              /* Completamente visible */
+    transform: scale(1.2) translateY(-20px); /* 20% más grande, sube 20px */
+  }
+
+  /* Final: Se desvanece mientras continúa subiendo */
+  100% {
+    opacity: 0;                              /* Vuelve a ser transparente */
+    transform: scale(0.5) translateY(-50px); /* Se hace pequeña, sube 50px en total */
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ========================================
    FIN DEL ARCHIVO CSS
    ======================================== */

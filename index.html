@@ -13,7 +13,8 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
   <!-- Favicon del sitio -->
-  <link rel="icon" type="image/png" href="/img/maarryu.png">
+
+  <link rel="icon" type="image/png" href="img/mairo-corriendo.png">
 
 
   <!-- Iconos de Bootstrap para elementos de interfaz -->
@@ -43,6 +44,10 @@
   #notificationModal.show-modal {
     display: flex;
   }
+
+
+
+  
 </style>
 
 <body>
@@ -58,11 +63,10 @@
         </a>
 
         <!-- Botón para mostrar/ocultar menú en dispositivos móviles -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          title="Abrir menú de navegación">
+        <button class="navbar-toggler super-star" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" title="Abrir menú de navegación" onclick="activateStarEffect(this)">
           <img src="./img/Menu.png" alt="Menú" style="width: 30px; height: 30px;">
         </button>
-
 
         <!-- Contenido del menú de navegación -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -184,8 +188,10 @@
           </div>
           <!-- Slide 3 -->
           <div class="carousel-item" data-bs-interval="3000">
-            <img src="./img/CARRUSEL3.avif" class="d-block w-100" alt="Banner Nintendo 3" />
+            <img src="./img/carruselllll.jpeg" class="d-block w-100" alt="Banner Nintendo 3" />
           </div>
+
+
         </div>
 
         <!-- Controles de navegación del carrusel -->
@@ -266,9 +272,9 @@
 
         <!-- Tarjeta de producto 4: Super Mario Bros. Wonder -->
         <div class="product-card fade-in-up">
-          <img src="./img/futbol2.avif" alt="EA SPORTS FC 24">
+          <img src="./img/imgc1.avif" alt="EA SPORTS FC 24">
           <h3 class="product-title">EA SPORTS FC™ 24</h3>
-          <p class="text-light">La experiencia futbolística más auténtica</p>
+          <p class="text-light">Mini craft </p>
           <p class="product-price">$59.99</p>
           <button class="btn btn-primary">🛒 Agregar al carrito</button>
         </div>
@@ -341,8 +347,8 @@
           <h5>📍 Información de Contacto</h5>
           <div class="contact-info">
             <p><strong>Dirección:</strong> Nintendo of America Inc., Redmond, WA</p>
-            <p><strong>Teléfono:</strong> +1 800-255-3700</p>
-            <p><strong>Email:</strong> support@nintendo.com</p>
+            <p><strong>Teléfono:</strong> +1111 00000</p>
+            <p><strong>Email:</strong> nint@nintendo.com</p>
             <p><strong>Horario:</strong> L-V 9:00-18:00 PST</p>
           </div>
         </div>
@@ -448,6 +454,26 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+
+
+  <script>
+    function activateStarEffect(button) {
+      button.classList.remove('active');
+      button.offsetHeight;
+      button.classList.add('active');
+
+      setTimeout(() => {
+        button.classList.remove('active');
+      }, 3000);
+    }
+  </script>
+
+
+
+
+
+
+
 
 </body>
 
