@@ -138,8 +138,8 @@ body {
   border-bottom: 1px solid rgba(230, 0, 18, 0.3);
   transition: all var(--transition-base);
   padding: var(--spacing-md) 0;
-padding-top: 0.2rem;    /* Reduce el espacio superior */
-  padding-bottom: 0.2rem; /* Reduce el espacio inferior */
+padding-top: 0.1rem;    /* Reduce el espacio superior */
+  padding-bottom: 0.1rem; /* Reduce el espacio inferior */
 }
 
 /* === LOGO === */
@@ -620,6 +620,22 @@ padding-top: 0.2rem;    /* Reduce el espacio superior */
   color: var(--form-placeholder-color);
 }
 
+
+.btn-close-red {
+    filter: invert(17%) sepia(100%) saturate(3500%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /* ========================================
    13. ANIMACIONES
    ======================================== */
@@ -686,6 +702,212 @@ body.light-mode {
   --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
   --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
+
+/* ========================================
+   GALERÍA DE PERSONAJES
+   ======================================== */
+
+.character-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xl) 0;
+  perspective: 1000px;
+}
+
+.character-card {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  transform-style: preserve-3d;
+}
+
+.character-card:hover {
+  transform: translateY(-10px) rotateY(10deg) rotateX(5deg) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0);
+}
+
+.character-card img {
+  width: 100%;
+  border-radius: var(--border-radius);
+  transition: filter var(--transition-base);
+  filter: drop-shadow(5px 5px 10px rgba(64, 255, 0, 0.256));
+}
+
+.character-card:hover img {
+  filter: drop-shadow(10px 15px 20px rgba(0,0,0,0.5)) brightness(1.1);
+}
+
+.character-name-plate {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-large);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all var(--transition-base);
+}
+
+.character-card:hover .character-name-plate {
+  background: var(--nintendo-red);
+  transform: translateX(-50%) translateY(5px) scale(1.1);
+  box-shadow: 0 0 15px var(--nintendo-red);
+}
+
+/* === MODAL DE PERSONAJE === */
+.character-modal-content {
+  max-width: 450px;
+  background: var(--offcanvas-bg);
+  border: 2px solid var(--nintendo-red);
+  position: relative;
+}
+
+#closeCharacterModal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+}
+
+.character-modal-img {
+  width: 200px;
+  height: auto;
+  margin-bottom: var(--spacing-md);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.358));
+  border-radius: 0 !important; /* Override default modal img style */
+  border: none !important; /* Override default modal img style */
+}
+
+.character-modal-title {
+  color: var(--nintendo-red);
+  font-size: var(--font-size-title);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-sm);
+}
+
+.character-modal-description {
+  font-size: var(--font-size-lg);
+  color: var(--text-color);
+  margin-bottom: var(--spacing-lg);
+}
+
+.character-modal-tag {
+  display: inline-block;
+  background: var(--nintendo-red);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-small);
+  font-weight: bold;
+}
+
+/* ========================================
+   SECCIÓN DE NOTICIAS
+   ======================================== */
+
+.news-section {
+  margin-top: var(--spacing-xxl);
+  margin-bottom: var(--spacing-xxl);
+}
+
+.news-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.news-card {
+  background: var(--product-card-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  border: 1px solid rgba(230, 0, 18, 0.2);
+}
+
+.news-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+}
+
+.news-card-img-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.news-card-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.news-card:hover .news-card-img-container img {
+  transform: scale(1.1);
+}
+
+.news-card-body {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.news-card-tag {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-small);
+  font-weight: bold;
+  margin-bottom: var(--spacing-md);
+  align-self: flex-start;
+  color: white;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+}
+
+.tag-direct { background-color: var(--nintendo-red); }
+.tag-esports { background-color: var(--nintendo-purple); }
+.tag-update { background-color: var(--nintendo-blue); }
+
+.news-card-title {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-sm);
+  text-align: left;
+}
+
+.news-card-text {
+  color: var(--text-color);
+  flex-grow: 1;
+  margin-bottom: var(--spacing-lg);
+  text-align: left;
+}
+
+.news-card .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color);
+  align-self: flex-start;
+  font-weight: bold;
+  transition: all var(--transition-base);
+}
+
+.news-card .btn-outline-light:hover {
+    background-color: var(--nintendo-red);
+    color: white;
+    border-color: var(--nintendo-red);
+}
+
+
 
 /* === OVERRIDES ESPECÍFICOS PARA TEMA CLARO === */
 body.light-mode .product-price {

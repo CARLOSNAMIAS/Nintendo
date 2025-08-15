@@ -210,4 +210,85 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('theme', newTheme);
   });
 
+  // Lógica de la galería de personajes
+  const characterData = {
+    mario: {
+      name: "Mario",
+      description: "El héroe icónico del Reino Champiñón, siempre listo para saltar a la acción y frustrar los planes de Bowser.",
+      tag: "Super Mario",
+      img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Mario"
+    },
+    luigi: {
+      name: "Luigi",
+      description: "El hermano menor, más alto y a menudo temeroso de Mario. A pesar de su naturaleza nerviosa, es muy capaz y siempre ayuda cuando es necesario.",
+      tag: "Super Mario",
+      img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Luigi"
+    },
+    peach: {
+      name: "Peach",
+      description: "La benevolente y elegante gobernante del Reino Champiñón. A menudo es el objetivo de los planes de secuestro de Bowser.",
+      tag: "Super Mario",
+      img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Peach"
+    },
+    bowser: {
+        name: "Bowser",
+        description: "El rey de los Koopas, una tortuga gigante con una coraza con púas. Su objetivo principal es conquistar el Reino Champiñón.",
+        tag: "Super Mario",
+        img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Bowser"
+    },
+    link: {
+        name: "Link",
+        description: "El valiente héroe de Hyrule, destinado a proteger el reino y a la Princesa Zelda del malvado Ganon. Poseedor de la Trifuerza del Valor.",
+        tag: "The Legend of Zelda",
+        img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Link"
+    },
+    kirby: {
+        name: "Kirby",
+        description: "Una adorable criatura rosa del planeta Popstar con la habilidad de inhalar enemigos para copiar sus poderes. Tiene un apetito infinito.",
+        tag: "Kirby",
+        img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Kirby"
+    }
+  };
+
+  const characterModal = document.getElementById('characterModal');
+  const characterModalBody = document.getElementById('characterModalBody');
+  const closeCharacterModal = document.getElementById('closeCharacterModal');
+
+  document.querySelectorAll('.character-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const characterId = card.dataset.character;
+      const data = characterData[characterId];
+
+      if (data) {
+        characterModalBody.innerHTML = `
+          <img src="${data.img}" class="character-modal-img" alt="${data.name}">
+          <h2 class="character-modal-title">${data.name}</h2>
+          <p class="character-modal-description">${data.description}</p>
+          <span class="character-modal-tag">${data.tag}</span>
+        `;
+        characterModal.style.display = 'flex';
+        // Forzar un reflow para aplicar la animación de entrada
+        characterModal.querySelector('.modal-content-modern').classList.add('show');
+      }
+    });
+  });
+
+  function closeCharacterModalFunction() {
+    const modalContent = characterModal.querySelector('.modal-content-modern');
+    modalContent.classList.remove('show');
+    // Esperar a que la animación de salida termine para ocultar el overlay
+    setTimeout(() => {
+        characterModal.style.display = 'none';
+    }, 300); // Debe coincidir con la duración de la transición en CSS
+  }
+
+  closeCharacterModal.addEventListener('click', closeCharacterModalFunction);
+
+  // Cierra el modal si se hace clic fuera del contenido
+  characterModal.addEventListener('click', (e) => {
+    if (e.target === characterModal) {
+        closeCharacterModalFunction();
+    }
+  });
+
 });

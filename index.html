@@ -44,10 +44,6 @@
   #notificationModal.show-modal {
     display: flex;
   }
-
-
-
-  
 </style>
 
 <body>
@@ -75,7 +71,7 @@
             <!-- Botón para cambiar tema (claro/oscuro) -->
             <li class="nav-item">
               <button class="btn nav-link" id="theme-toggle" title="Cambiar tema">
-                <i class="bi bi-sun-fill"></i>
+                <i class="bi bi-nintendo-switch"></i>
               </button>
             </li>
 
@@ -137,7 +133,7 @@
     <div class="offcanvas-header">
       <h5 class="offcanvas-title">🎮 Iniciar sesión</h5>
       <!-- Botón para cerrar el panel -->
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas">.</button>
+      <button type="button" class="btn-close btn-close-red" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
 
     <!-- Contenido del panel de login -->
@@ -321,6 +317,105 @@
       </div>
     </section>
 
+    <br>
+    <!-- SECCIÓN GALERÍA DE PERSONAJES -->
+    <section class="container game-section">
+      <h2 class="section-title fade-in-up">⭐ Personajes Icónicos</h2>
+      <div class="character-container">
+        <!-- Tarjeta de Personaje: Mario -->
+        <div class="character-card fade-in-up" data-character="mario">
+          <img src="./img/mario-bros.png" alt="Mario">
+          <div class="character-name-plate">
+            <span>Mario</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Personaje: Luigi -->
+        <div class="character-card fade-in-up" data-character="luigi">
+          <img src="./img/luigii.png" alt="Luigi">
+          <div class="character-name-plate">
+            <span>Luigi</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Personaje: Peach -->
+        <div class="character-card fade-in-up" data-character="peach">
+          <img src="./img/princesaa.PNG" alt="Peach">
+          <div class="character-name-plate">
+            <span>Peach</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Personaje: Bowser -->
+        <div class="character-card fade-in-up" data-character="bowser">
+          <img src="./img/bower.png" alt="Bowser">
+          <div class="character-name-plate">
+            <span>Bowser</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Personaje: Link -->
+        <div class="character-card fade-in-up" data-character="link">
+          <img src="./img/wario.png" alt="Link">
+          <div class="character-name-plate">
+            <span>Wario</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta de Personaje: Kirby -->
+
+    </section>
+
+    <!-- SECCIÓN DE NOTICIAS -->
+    <section class="container news-section">
+      <h2 class="section-title fade-in-up">📰 Últimas Noticias</h2>
+      <div class="news-container">
+
+        <!-- Noticia 1 -->
+        <div class="news-card fade-in-up">
+          <div class="news-card-img-container">
+            <img src="./img/zelda.avif" alt="Nintendo Direct">
+          </div>
+          <div class="news-card-body">
+            <span class="news-card-tag tag-direct">Nintendo Direct</span>
+            <h3 class="news-card-title">Resumen del Nintendo Direct de Junio 2024</h3>
+            <p class="news-card-text">Un vistazo a todos los anuncios, desde Metroid Prime 4: Beyond hasta The Legend of
+              Zelda: Echoes of Wisdom.</p>
+            <a href="#" class="btn btn-outline-light">Leer más <i class="bi bi-arrow-right-short"></i></a>
+          </div>
+        </div>
+
+        <!-- Noticia 2 -->
+        <div class="news-card fade-in-up">
+          <div class="news-card-img-container">
+            <img src="./img/futbol.avif" alt="Splatoon 3">
+          </div>
+          <div class="news-card-body">
+            <span class="news-card-tag tag-esports">eSports</span>
+            <h3 class="news-card-title">¡El campeonato de Splatoon 3 llega a Nintendo Live!</h3>
+            <p class="news-card-text">Los mejores equipos compiten por la gloria en el torneo más colorido del año.
+              ¡Entérate de los detalles!</p>
+            <a href="#" class="btn btn-outline-light">Leer más <i class="bi bi-arrow-right-short"></i></a>
+          </div>
+        </div>
+
+        <!-- Noticia 3 -->
+        <div class="news-card fade-in-up">
+          <div class="news-card-img-container">
+            <img src="./img/pokemon3.avif" alt="Pokémon Scarlet & Violet">
+          </div>
+          <div class="news-card-body">
+            <span class="news-card-tag tag-update">Actualización</span>
+            <h3 class="news-card-title">Nuevos eventos de Tera-Incursiones en Pokémon</h3>
+            <p class="news-card-text">Prepara a tu equipo para enfrentarte a nuevos y poderosos Pokémon Paradoja en
+              eventos por tiempo limitado.</p>
+            <a href="#" class="btn btn-outline-light">Leer más <i class="bi bi-arrow-right-short"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- SECCIÓN DE IMÁGENES PROMOCIONALES -->
     <section class="container my-5 text-center">
       <div class="row g-4">
@@ -443,6 +538,27 @@
     </div>
   </div>
 
+  <!-- MODAL DE PERSONAJE -->
+  <div id="characterModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content-modern character-modal-content">
+
+      <!-- Contenido del personaje se carga aquí -->
+      <div id="characterModalBody" class="text-center">
+        <!-- Ejemplo de contenido (se reemplazará con JS) -->
+        <img
+          src="https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Mario"
+          class="character-modal-img" alt="Mario">
+        <h2 class="character-modal-title">Mario</h2>
+        <p class="character-modal-description">El héroe icónico del Reino Champiñón, siempre listo para saltar a la
+          acción y frustrar los planes de Bowser.</p>
+        <span class="character-modal-tag">Super Mario</span>
+      </div>
+
+      <!-- Botón de cierre posicionado -->
+      <button class="btn-close btn-close-white" id="closeCharacterModal"></button>
+    </div>
+  </div>
+
   <!-- SCRIPTS -->
 
   <!-- Script personalizado con la lógica de la aplicación -->
@@ -473,26 +589,26 @@
   <!-- 🎨 SCRIPT DE DETECCIÓN DE TEMA - MOVIDO AL FINAL -->
   <script>
     function aplicarTemaSegunSistema() {
-        // Buscar por ID (más específico y confiable)
-        const metaThemeColor = document.getElementById('theme-color-meta');
-        
-        // Verificar que el elemento existe antes de usarlo
-        if (!metaThemeColor) {
-            console.error('❌ No se encontró la meta etiqueta theme-color');
-            return;
-        }
-        
-        // Verificar si el usuario prefiere tema oscuro
-        const prefiereTemaOscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        // Aplicar el color correspondiente
-        if (prefiereTemaOscuro) {
-            metaThemeColor.setAttribute('content', '#0F0F23');
-            console.log('🌙 Aplicando tema oscuro');
-        } else {
-            metaThemeColor.setAttribute('content', '#F7F7F7');
-            console.log('☀️ Aplicando tema claro');
-        }
+      // Buscar por ID (más específico y confiable)
+      const metaThemeColor = document.getElementById('theme-color-meta');
+
+      // Verificar que el elemento existe antes de usarlo
+      if (!metaThemeColor) {
+        console.error('❌ No se encontró la meta etiqueta theme-color');
+        return;
+      }
+
+      // Verificar si el usuario prefiere tema oscuro
+      const prefiereTemaOscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      // Aplicar el color correspondiente
+      if (prefiereTemaOscuro) {
+        metaThemeColor.setAttribute('content', 'rgba(15, 15, 35, 0.95)');
+        console.log('🌙 Aplicando tema oscuro');
+      } else {
+        metaThemeColor.setAttribute('content', '#F7F7F7');
+        console.log('☀️ Aplicando tema claro');
+      }
     }
 
     // 🚀 Ejecutar inmediatamente (ya no necesita DOMContentLoaded)
@@ -504,15 +620,13 @@
 
     // Función que se ejecuta cuando cambian las preferencias
     function manejarCambioTema(e) {
-        console.log('🔄 Las preferencias del sistema cambiaron:', e.matches ? 'oscuro' : 'claro');
-        aplicarTemaSegunSistema();
+      console.log('🔄 Las preferencias del sistema cambiaron:', e.matches ? 'oscuro' : 'claro');
+      aplicarTemaSegunSistema();
     }
 
     // Agregar el listener para cambios
     mediaQuery.addEventListener('change', manejarCambioTema);
   </script>
-
-
 
 </body>
 
