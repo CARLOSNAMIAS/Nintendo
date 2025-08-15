@@ -210,43 +210,46 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('theme', newTheme);
   });
 
+
+
+
   // Lógica de la galería de personajes
   const characterData = {
     mario: {
       name: "Mario",
       description: "El héroe icónico del Reino Champiñón, siempre listo para saltar a la acción y frustrar los planes de Bowser.",
       tag: "Super Mario",
-      img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Mario"
+      img: "./img/mario-bros.png"
     },
     luigi: {
       name: "Luigi",
       description: "El hermano menor, más alto y a menudo temeroso de Mario. A pesar de su naturaleza nerviosa, es muy capaz y siempre ayuda cuando es necesario.",
       tag: "Super Mario",
-      img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Luigi"
+      img: "././img/luigii.png"
     },
     peach: {
       name: "Peach",
       description: "La benevolente y elegante gobernante del Reino Champiñón. A menudo es el objetivo de los planes de secuestro de Bowser.",
       tag: "Super Mario",
-      img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Peach"
+      img: "././img/princesaa.png"
     },
     bowser: {
         name: "Bowser",
         description: "El rey de los Koopas, una tortuga gigante con una coraza con púas. Su objetivo principal es conquistar el Reino Champiñón.",
         tag: "Super Mario",
-        img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Bowser"
+        img: "././img/bower.png"
     },
     link: {
         name: "Link",
         description: "El valiente héroe de Hyrule, destinado a proteger el reino y a la Princesa Zelda del malvado Ganon. Poseedor de la Trifuerza del Valor.",
         tag: "The Legend of Zelda",
-        img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Link"
+        img: "./img/wario.png"
     },
     kirby: {
         name: "Kirby",
         description: "Una adorable criatura rosa del planeta Popstar con la habilidad de inhalar enemigos para copiar sus poderes. Tiene un apetito infinito.",
         tag: "Kirby",
-        img: "https://assets.nintendo.com/image/upload/f_auto/q_auto/dpr_1.0/c_scale,w_400/ncom/en_US/merchandising/character-gallery/Kirby"
+        img: "#"
     }
   };
 
