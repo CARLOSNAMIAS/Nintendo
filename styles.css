@@ -138,8 +138,10 @@ body {
   border-bottom: 1px solid rgba(230, 0, 18, 0.3);
   transition: all var(--transition-base);
   padding: var(--spacing-md) 0;
-padding-top: 0.1rem;    /* Reduce el espacio superior */
-  padding-bottom: 0.1rem; /* Reduce el espacio inferior */
+  padding-top: 0.1rem;
+  /* Reduce el espacio superior */
+  padding-bottom: 0.1rem;
+  /* Reduce el espacio inferior */
 }
 
 /* === LOGO === */
@@ -266,11 +268,11 @@ padding-top: 0.1rem;    /* Reduce el espacio superior */
 }
 
 .carousel-control-prev {
-  background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
 }
 
 .carousel-control-next {
-  background: linear-gradient(-90deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+  background: linear-gradient(-90deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
 }
 
 /* ========================================
@@ -295,14 +297,14 @@ padding-top: 0.1rem;    /* Reduce el espacio superior */
   right: -50%;
   width: 100%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   animation: shimmer 3s infinite;
 }
 
 .discount-banner h3 {
   color: white;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   font-size: var(--font-size-xl);
 }
 
@@ -321,7 +323,7 @@ padding-top: 0.1rem;    /* Reduce el espacio superior */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-xl);
   padding: var(--spacing-xl) 0;
-  
+
 }
 
 /* === TARJETA INDIVIDUAL === */
@@ -393,8 +395,10 @@ padding-top: 0.1rem;    /* Reduce el espacio superior */
 /* En tu archivo styles.css */
 .game-section {
   text-align: center;
-  margin: 0 auto;       /* Centra el contenedor */
-  max-width: 1200px;    /* Opcional: limita el ancho máximo */
+  margin: 0 auto;
+  /* Centra el contenedor */
+  max-width: 1200px;
+  /* Opcional: limita el ancho máximo */
 }
 
 .card-container {
@@ -459,7 +463,7 @@ padding-top: 0.1rem;    /* Reduce el espacio superior */
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
   opacity: 0;
   transition: opacity var(--transition-base);
 }
@@ -622,18 +626,8 @@ padding-top: 0.1rem;    /* Reduce el espacio superior */
 
 
 .btn-close-red {
-    filter: invert(17%) sepia(100%) saturate(3500%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  filter: invert(17%) sepia(100%) saturate(3500%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
-
-
-
-
-
-
-
-
-
-
 
 
 /* ========================================
@@ -646,6 +640,7 @@ padding-top: 0.1rem;    /* Reduce el espacio superior */
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -658,25 +653,36 @@ padding-top: 0.1rem;    /* Reduce el espacio superior */
 
 /* === ANIMACIÓN SHIMMER === */
 @keyframes shimmer {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* === ANIMACIÓN SPIN === */
 @keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 /* === ANIMACIÓN FLOAT (PARTÍCULAS) === */
 @keyframes float {
-  0% { 
-    transform: translateY(0); 
-    opacity: 0.7; 
+  0% {
+    transform: translateY(0);
+    opacity: 0.7;
   }
-  100% { 
-    transform: translateY(-100vh); 
-    opacity: 0; 
+
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
   }
 }
 
@@ -715,6 +721,10 @@ body.light-mode {
   perspective: 1000px;
 }
 
+
+
+
+
 .character-card {
   position: relative;
   cursor: pointer;
@@ -728,14 +738,14 @@ body.light-mode {
 }
 
 .character-card img {
-  width: 100%;
+  width: 80%;
   border-radius: var(--border-radius);
   transition: filter var(--transition-base);
   filter: drop-shadow(5px 5px 10px rgba(64, 255, 0, 0.256));
 }
 
 .character-card:hover img {
-  filter: drop-shadow(10px 15px 20px rgba(0,0,0,0.5)) brightness(1.1);
+  filter: drop-shadow(10px 15px 20px rgba(0, 0, 0, 0.5)) brightness(1.1);
 }
 
 .character-name-plate {
@@ -763,7 +773,7 @@ body.light-mode {
 
 /* === MODAL DE PERSONAJE === */
 .character-modal-content {
-  max-width: 450px;
+  max-width: 400px;
   background: var(--offcanvas-bg);
   border: 2px solid var(--nintendo-red);
   position: relative;
@@ -780,9 +790,12 @@ body.light-mode {
   width: 200px;
   height: auto;
   margin-bottom: var(--spacing-md);
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.358));
-  border-radius: 0 !important; /* Override default modal img style */
-  border: none !important; /* Override default modal img style */
+  filter: drop-shadow(0 10px 20px rgba(255, 43, 1, 0.546));
+  border-radius: 0 !important;
+  /* Override default modal img style */
+  border: none !important;
+  /* Override default modal img style */
+  
 }
 
 .character-modal-title {
@@ -807,6 +820,58 @@ body.light-mode {
   border-radius: var(--border-radius-small);
   font-weight: bold;
 }
+
+
+
+/* 🎆 ESTILOS PARA LAS PARTÍCULAS */
+.click-particle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1000;
+  animation: particleExplosion 0.8s ease-out forwards;
+}
+
+@keyframes particleExplosion {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+
+  20% {
+    transform: translate(calc(var(--dx) * 0.2), calc(var(--dy) * 0.2)) scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Efecto en la tarjeta al hacer clic */
+.character-card.clicked {
+  animation: cardClickEffect 0.4s ease;
+}
+
+@keyframes cardClickEffect {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
 
 /* ========================================
    SECCIÓN DE NOTICIAS
@@ -874,9 +939,17 @@ body.light-mode {
   text-transform: uppercase;
 }
 
-.tag-direct { background-color: var(--nintendo-red); }
-.tag-esports { background-color: var(--nintendo-purple); }
-.tag-update { background-color: var(--nintendo-blue); }
+.tag-direct {
+  background-color: var(--nintendo-red);
+}
+
+.tag-esports {
+  background-color: var(--nintendo-purple);
+}
+
+.tag-update {
+  background-color: var(--nintendo-blue);
+}
 
 .news-card-title {
   font-size: var(--font-size-lg);
@@ -902,9 +975,9 @@ body.light-mode {
 }
 
 .news-card .btn-outline-light:hover {
-    background-color: var(--nintendo-red);
-    color: white;
-    border-color: var(--nintendo-red);
+  background-color: var(--nintendo-red);
+  color: white;
+  border-color: var(--nintendo-red);
 }
 
 
@@ -945,7 +1018,7 @@ body.light-mode .dropdown-item:hover {
   .section-title {
     font-size: var(--font-size-xxl);
   }
-  
+
   .carousel-item img {
     height: 350px;
   }
@@ -957,37 +1030,37 @@ body.light-mode .dropdown-item:hover {
     font-size: var(--font-size-xxl);
     margin-bottom: var(--spacing-md);
   }
-  
+
   .card-container {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
-  
+
   .pokemon-cards {
     grid-template-columns: 1fr;
   }
-  
+
   .discount-banner {
     padding: var(--spacing-lg);
   }
-  
+
   .discount-banner h3 {
     font-size: var(--font-size-lg);
   }
-  
+
   .carousel-item img {
     height: 250px;
   }
-  
+
   .game-section {
     padding: var(--spacing-lg);
     margin: var(--spacing-xl) 0;
   }
-  
+
   .footer {
     padding: var(--spacing-xl) 0 var(--spacing-lg);
   }
-  
+
   .social-icons a {
     margin: 0 var(--spacing-sm);
   }
@@ -999,11 +1072,11 @@ body.light-mode .dropdown-item:hover {
     width: 95%;
     padding: var(--spacing-lg);
   }
-  
+
   .product-card {
     padding: var(--spacing-md);
   }
-  
+
   .discount-banner {
     padding: var(--spacing-md);
   }
@@ -1142,165 +1215,185 @@ body.light-mode .dropdown-item:hover {
 
 /* Clase base: Configuración inicial del botón */
 .super-star {
-  position: relative;  /* Permite posicionar elementos pseudo (::before, ::after) */
-  overflow: hidden;    /* Evita que las partículas se salgan del contenedor */
+  position: relative;
+  /* Permite posicionar elementos pseudo (::before, ::after) */
+  overflow: hidden;
+  /* Evita que las partículas se salgan del contenedor */
 }
 
 /* Estado activo: Se aplica cuando el botón tiene la clase 'active' */
 .super-star.active {
-  animation: superStarGlow 3s ease-in-out;  /* Animación de brillo dorado por 3 segundos */
+  animation: superStarGlow 3s ease-in-out;
+  /* Animación de brillo dorado por 3 segundos */
 }
 
 /* Imagen dentro del botón activo: Anima el icono/imagen */
 .super-star.active img {
-  animation: superStarRotate 3s ease-in-out;  /* Rotación y cambio de colores por 3 segundos */
+  animation: superStarRotate 3s ease-in-out;
+  /* Rotación y cambio de colores por 3 segundos */
 }
 
 /* Partículas brillantes: Crea las estrellitas alrededor del botón */
 .super-star.active::before,
 .super-star.active::after {
-  content: '✨';                              /* Emoji de estrella como contenido */
-  position: absolute;                         /* Posicionamiento absoluto respecto al botón */
-  font-size: 16px;                           /* Tamaño de la estrellita */
-  animation: floatingSparkles 2s ease-out;   /* Animación de flotación por 2 segundos */
-  pointer-events: none;                      /* No interfiere con los clics del mouse */
+  content: '✨';
+  /* Emoji de estrella como contenido */
+  position: absolute;
+  /* Posicionamiento absoluto respecto al botón */
+  font-size: 16px;
+  /* Tamaño de la estrellita */
+  animation: floatingSparkles 2s ease-out;
+  /* Animación de flotación por 2 segundos */
+  pointer-events: none;
+  /* No interfiere con los clics del mouse */
 }
 
 /* Primera partícula: Esquina superior izquierda */
 .super-star.active::before {
-  top: -10px;              /* 10px arriba del borde del botón */
-  left: -10px;             /* 10px a la izquierda del borde del botón */
-  animation-delay: 0.2s;   /* Aparece 0.2 segundos después del inicio */
+  top: -10px;
+  /* 10px arriba del borde del botón */
+  left: -10px;
+  /* 10px a la izquierda del borde del botón */
+  animation-delay: 0.2s;
+  /* Aparece 0.2 segundos después del inicio */
 }
 
 /* Segunda partícula: Esquina inferior derecha */
 .super-star.active::after {
-  bottom: -10px;           /* 10px abajo del borde del botón */
-  right: -10px;            /* 10px a la derecha del borde del botón */
-  animation-delay: 0.8s;   /* Aparece 0.8 segundos después del inicio */
+  bottom: -10px;
+  /* 10px abajo del borde del botón */
+  right: -10px;
+  /* 10px a la derecha del borde del botón */
+  animation-delay: 0.8s;
+  /* Aparece 0.8 segundos después del inicio */
 }
 
 /* ANIMACIÓN 1: Brillo dorado del botón (como la estrella de Mario) */
 @keyframes superStarGlow {
-  
+
   /* Inicio y final: Estado de reposo */
   0%,
   100% {
-    box-shadow: 0 0 10px #ffd700;                    /* Brillo dorado suave */
-    background: rgba(255, 215, 0, 0.1);             /* Fondo dorado muy transparente */
-    transform: scale(1);                             /* Tamaño normal del botón */
+    box-shadow: 0 0 10px #ffd700;
+    /* Brillo dorado suave */
+    background: rgba(255, 215, 0, 0.1);
+    /* Fondo dorado muy transparente */
+    transform: scale(1);
+    /* Tamaño normal del botón */
   }
 
   /* 20%: Primer incremento de poder */
   20% {
-    box-shadow: 0 0 50px #ffd700, 0 0 100px #ffff00; /* Doble brillo: dorado + amarillo */
-    background: rgba(255, 215, 0, 0.3);              /* Fondo más visible */
-    transform: scale(1.05);                          /* Crece 5% */
+    box-shadow: 0 0 50px #ffd700, 0 0 100px #ffff00;
+    /* Doble brillo: dorado + amarillo */
+    background: rgba(255, 215, 0, 0.3);
+    /* Fondo más visible */
+    transform: scale(1.05);
+    /* Crece 5% */
   }
 
   /* 40%: MÁXIMO PODER - Punto culminante del efecto */
   40% {
-    box-shadow: 0 0 70px #ffd700, 0 0 140px #ffff00, 0 0 210px #ffa500; /* Triple brillo intenso */
-    background: rgba(255, 215, 0, 0.2);              /* Fondo balanceado */
-    transform: scale(1.1);                           /* Tamaño máximo: crece 10% */
+    box-shadow: 0 0 70px #ffd700, 0 0 140px #ffff00, 0 0 210px #ffa500;
+    /* Triple brillo intenso */
+    background: rgba(255, 215, 0, 0.2);
+    /* Fondo balanceado */
+    transform: scale(1.1);
+    /* Tamaño máximo: crece 10% */
   }
 
   /* 60%: Segundo incremento (bajada gradual) */
   60% {
-    box-shadow: 0 0 50px #ffd700, 0 0 100px #ffff00; /* Vuelve al doble brillo */
-    background: rgba(255, 215, 0, 0.3);              /* Fondo más visible otra vez */
-    transform: scale(1.05);                          /* Tamaño intermedio */
+    box-shadow: 0 0 50px #ffd700, 0 0 100px #ffff00;
+    /* Vuelve al doble brillo */
+    background: rgba(255, 215, 0, 0.3);
+    /* Fondo más visible otra vez */
+    transform: scale(1.05);
+    /* Tamaño intermedio */
   }
 
   /* 80%: Decrecimiento hacia el estado normal */
   80% {
-    box-shadow: 0 0 30px #ffd700;                    /* Brillo moderado */
-    background: rgba(255, 215, 0, 0.1);             /* Fondo casi transparente */
-    transform: scale(1.02);                          /* Casi el tamaño original */
+    box-shadow: 0 0 30px #ffd700;
+    /* Brillo moderado */
+    background: rgba(255, 215, 0, 0.1);
+    /* Fondo casi transparente */
+    transform: scale(1.02);
+    /* Casi el tamaño original */
   }
 }
 
 /* ANIMACIÓN 2: Rotación y cambio de colores de la imagen */
 @keyframes superStarRotate {
+
   /* Inicio: Estado normal */
   0% {
-    transform: rotate(0deg) scale(1);        /* Sin rotación, tamaño normal */
-    filter: brightness(1) hue-rotate(0deg);  /* Brillo y colores normales */
+    transform: rotate(0deg) scale(1);
+    /* Sin rotación, tamaño normal */
+    filter: brightness(1) hue-rotate(0deg);
+    /* Brillo y colores normales */
   }
 
   /* 25%: Primer cuarto de vuelta */
   25% {
-    transform: rotate(90deg) scale(1.3);     /* Rota 90°, crece 30% */
-    filter: brightness(1.8) hue-rotate(90deg); /* Más brillante, colores cambiados */
+    transform: rotate(90deg) scale(1.3);
+    /* Rota 90°, crece 30% */
+    filter: brightness(1.8) hue-rotate(90deg);
+    /* Más brillante, colores cambiados */
   }
 
   /* 50%: Media vuelta - Punto máximo de transformación */
   50% {
-    transform: rotate(180deg) scale(1.1);    /* Rota 180°, tamaño intermedio */
-    filter: brightness(2) hue-rotate(180deg); /* Máximo brillo y cambio de color */
+    transform: rotate(180deg) scale(1.1);
+    /* Rota 180°, tamaño intermedio */
+    filter: brightness(2) hue-rotate(180deg);
+    /* Máximo brillo y cambio de color */
   }
 
   /* 75%: Tercer cuarto de vuelta */
   75% {
-    transform: rotate(270deg) scale(1.3);    /* Rota 270°, grande otra vez */
-    filter: brightness(1.8) hue-rotate(270deg); /* Alto brillo */
+    transform: rotate(270deg) scale(1.3);
+    /* Rota 270°, grande otra vez */
+    filter: brightness(1.8) hue-rotate(270deg);
+    /* Alto brillo */
   }
 
   /* 100%: Vuelta completa - Regreso al inicio */
   100% {
-    transform: rotate(360deg) scale(1);      /* Vuelta completa, tamaño normal */
-    filter: brightness(1) hue-rotate(360deg); /* Colores y brillo normales */
+    transform: rotate(360deg) scale(1);
+    /* Vuelta completa, tamaño normal */
+    filter: brightness(1) hue-rotate(360deg);
+    /* Colores y brillo normales */
   }
 }
 
 /* ANIMACIÓN 3: Partículas flotantes (estrellitas que suben) */
 @keyframes floatingSparkles {
+
   /* Inicio: Partícula invisible y pequeña */
   0% {
-    opacity: 0;                              /* Completamente transparente */
-    transform: scale(0) translateY(0);       /* Tamaño 0, sin movimiento vertical */
+    opacity: 0;
+    /* Completamente transparente */
+    transform: scale(0) translateY(0);
+    /* Tamaño 0, sin movimiento vertical */
   }
 
   /* Mitad: Máxima visibilidad y tamaño */
   50% {
-    opacity: 1;                              /* Completamente visible */
-    transform: scale(1.2) translateY(-20px); /* 20% más grande, sube 20px */
+    opacity: 1;
+    /* Completamente visible */
+    transform: scale(1.2) translateY(-20px);
+    /* 20% más grande, sube 20px */
   }
 
   /* Final: Se desvanece mientras continúa subiendo */
   100% {
-    opacity: 0;                              /* Vuelve a ser transparente */
-    transform: scale(0.5) translateY(-50px); /* Se hace pequeña, sube 50px en total */
+    opacity: 0;
+    /* Vuelve a ser transparente */
+    transform: scale(0.5) translateY(-50px);
+    /* Se hace pequeña, sube 50px en total */
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

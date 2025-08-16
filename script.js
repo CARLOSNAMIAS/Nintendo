@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const characterData = {
     mario: {
       name: "Mario",
-      description: "El héroe icónico del Reino Champiñón, siempre listo para saltar a la acción y frustrar los planes de Bowser.",
+      description: "Mario es un fontanero valiente y alegre, conocido por su característico traje rojo y azul. Es el héroe del Reino Champiñón y siempre está listo para rescatar a la Princesa Peach de las garras de Bowser.",
       tag: "Super Mario",
       img: "./img/mario-bros.png"
     },
@@ -239,12 +239,15 @@ document.addEventListener('DOMContentLoaded', function () {
         tag: "Super Mario",
         img: "././img/bower.png"
     },
-    link: {
-        name: "Link",
+    wario: {
+        name: "wario",
         description: "El valiente héroe de Hyrule, destinado a proteger el reino y a la Princesa Zelda del malvado Ganon. Poseedor de la Trifuerza del Valor.",
         tag: "The Legend of Zelda",
         img: "./img/wario.png"
     },
+
+
+    // Agrega más personajes aquí
     kirby: {
         name: "Kirby",
         description: "Una adorable criatura rosa del planeta Popstar con la habilidad de inhalar enemigos para copiar sus poderes. Tiene un apetito infinito.",
@@ -295,3 +298,81 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
+
+
+
+
+// 🎆 FUNCIÓN PARA CREAR PARTÍCULAS
+function createClickParticles(element) {
+    const character = element.dataset.character;
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    // Efecto visual en la tarjeta
+    element.classList.add('clicked');
+    setTimeout(() => element.classList.remove('clicked'), 400);
+
+    // Colores por personaje
+    const colors = {
+        mario: ['#E60012', '#FF4444', '#FFD700'],
+        luigi: ['#00AA00', '#44FF44', '#90EE90'],
+        peach: ['#FF69B4', '#FFB6C1', '#FFC0CB'],
+        bowser: ['#8B4513', '#D2691E', '#FF4500'],
+        wario: ['#FFD700', '#FFFF00', '#FFA500'],
+        kirby: ['#FFB6C1', '#FF69B4', '#FF1493']
+    };
+    
+    const particleColors = colors[character] || ['#FFD700', '#FF69B4'];
+    
+    // Crear 12 partículas
+    for (let i = 0; i < 12; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'click-particle';
+        
+        // Posición inicial (centro de la tarjeta)
+        particle.style.left = centerX + 'px';
+        particle.style.top = centerY + 'px';
+        
+        // Calcular dirección
+        const angle = (360 / 12) * i + (Math.random() - 0.5) * 45;
+        const distance = 60 + Math.random() * 30;
+        
+        const radians = angle * Math.PI / 180;
+        const dx = Math.cos(radians) * distance;
+        const dy = Math.sin(radians) * distance;
+        
+        // Variables CSS para la animación
+        particle.style.setProperty('--dx', dx + 'px');
+        particle.style.setProperty('--dy', dy + 'px');
+        
+        // Color aleatorio
+        const randomColor = particleColors[Math.floor(Math.random() * particleColors.length)];
+        particle.style.background = `radial-gradient(circle, ${randomColor}, ${randomColor}aa)`;
+        
+        // Tamaño aleatorio
+        const size = 6 + Math.random() * 8;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        document.body.appendChild(particle);
+        
+        // Limpiar después de 800ms
+        setTimeout(() => particle.remove(), 800);
+    }
+}
+
+// 🎵 FUNCIÓN MEJORADA PARA SONIDO + PARTÍCULAS
+function playCharacterSound(element) {
+    // Reproducir sonido original
+    const soundPath = element.getAttribute('data-sound');
+    if (soundPath) {
+        const audio = new Audio(soundPath);
+        audio.volume = 0.7;
+        audio.play().catch(error => console.log('Error:', error));
+    }
+    
+    // Crear partículas
+    createClickParticles(element);
+}

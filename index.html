@@ -30,7 +30,9 @@
  * Estilos para el modal de notificaciones
  * Inicialmente oculto, se muestra con la clase 'show-modal'
  */
-  #notificationModal {
+ 
+
+ #notificationModal {
     display: none;
     position: fixed;
     inset: 0;
@@ -229,7 +231,11 @@
       </div>
     </section>
 
-    <!-- SECCIÓN DE PRODUCTOS POPULARES -->
+
+
+
+
+     <!-- SECCIÓN DE PRODUCTOS POPULARES -->
     <section class="container game-section">
       <h2 class="section-title fade-in-up">🎮 Juegos más populares</h2>
 
@@ -276,7 +282,9 @@
         </div>
       </div>
 
+
     </section>
+
 
     <!-- SECCIÓN POKÉMON -->
     <section class="container game-section">
@@ -323,7 +331,9 @@
       <h2 class="section-title fade-in-up">⭐ Personajes Icónicos</h2>
       <div class="character-container">
         <!-- Tarjeta de Personaje: Mario -->
-        <div class="character-card fade-in-up" data-character="mario">
+
+        <div class="character-card fade-in-up" data-character="mario" data-sound="./sound/notificacion.mp3"
+          onclick="playCharacterSound(this)">
           <img src="./img/mario-bros.png" alt="Mario">
           <div class="character-name-plate">
             <span>Mario</span>
@@ -331,7 +341,8 @@
         </div>
 
         <!-- Tarjeta de Personaje: Luigi -->
-        <div class="character-card fade-in-up" data-character="luigi">
+        <div class="character-card fade-in-up" data-character="luigi" data-sound="./sound/notificacion.mp3"
+          onclick="playCharacterSound(this)">
           <img src="./img/luigii.png" alt="Luigi">
           <div class="character-name-plate">
             <span>Luigi</span>
@@ -339,7 +350,8 @@
         </div>
 
         <!-- Tarjeta de Personaje: Peach -->
-        <div class="character-card fade-in-up" data-character="peach">
+        <div class="character-card fade-in-up" data-character="peach" data-sound="./sound/notificacion.mp3"
+          onclick="playCharacterSound(this)">
           <img src="./img/princesaa.PNG" alt="Peach">
           <div class="character-name-plate">
             <span>Peach</span>
@@ -347,7 +359,8 @@
         </div>
 
         <!-- Tarjeta de Personaje: Bowser -->
-        <div class="character-card fade-in-up" data-character="bowser">
+        <div class="character-card fade-in-up" data-character="bowser" data-sound="./sound/notificacion.mp3"
+          onclick="playCharacterSound(this)">
           <img src="./img/bower.png" alt="Bowser">
           <div class="character-name-plate">
             <span>Bowser</span>
@@ -355,8 +368,9 @@
         </div>
 
         <!-- Tarjeta de Personaje: Link -->
-        <div class="character-card fade-in-up" data-character="link">
-          <img src="./img/wario.png" alt="Link">
+        <div class="character-card fade-in-up" data-character="wario" data-sound="./sound/notificacion.mp3"
+          onclick="playCharacterSound(this)">
+          <img src="./img/wario.png" alt="wario">
           <div class="character-name-plate">
             <span>Wario</span>
           </div>
@@ -495,7 +509,8 @@
         <div class="col-md-6">
           <p class="mb-0">
             &copy; 2024 Nintendo. Todos los derechos reservados. <br>
-            Los juegos son propiedad de sus respectivos desarrolladores.
+            Los juegos son propiedad de sus respectivos desarrolladores
+            esto es una pagina con fines educativos NO ES LA PAGINA OFICIAL DE NINTENDO.
           </p>
         </div>
         <div class="col-md-6 text-md-end">
@@ -626,6 +641,9 @@
 
     // Agregar el listener para cambios
     mediaQuery.addEventListener('change', manejarCambioTema);
+
+
+
   </script>
 
 </body>
