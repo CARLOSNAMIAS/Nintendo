@@ -25,5 +25,5 @@
 
 body.light-mode .summary-card {
   background-color: #ffffff;
-  border-color: #dee2e6;
+  border-color: var(--border-color-light);
 }

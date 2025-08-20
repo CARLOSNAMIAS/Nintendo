@@ -569,6 +569,10 @@ body {
   border-right: 2px solid var(--nintendo-red);
 }
 
+.offcanvas .form-label {
+  color: var(--text-color);
+}
+
 .offcanvas-header {
   border-bottom: 1px solid rgba(230, 0, 18, 0.3);
 }
@@ -650,6 +654,7 @@ body.light-mode {
   --nintendo-light: #343a40;
   --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
   --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --border-color-light: #dee2e6;
 }
 
 /* ========================================
@@ -754,6 +759,63 @@ body.light-mode {
   padding: var(--spacing-xs) var(--spacing-md);
   border-radius: var(--border-radius-small);
   font-weight: bold;
+}
+
+.character-carousel-wrapper {
+  position: relative;
+  padding: 0 40px; /* Add padding to make space for the buttons */
+}
+
+#character-prev-btn,
+#character-next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+#character-prev-btn {
+  left: 0;
+}
+
+#character-next-btn {
+  right: 0;
+}
+
+.btn-carousel {
+  background-color: rgb(0, 123, 4);
+  border: 1px solid rgba(225, 18, 18, 0.119);
+  color: var(--text-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+
+
+.btn-carousel:hover {
+  background-color: var(--nintendo-red);
+  color: white;
+  border-color: var(--nintendo-red);
+}
+
+.btn-carousel:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.light-mode .btn-carousel {
+    background-color: rgb(0, 249, 33);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .btn-carousel:hover {
+    background-color: var(--nintendo-red);
+    color: white;
+    border-color: var(--nintendo-red);
 }
 
 /* 🎆 ESTILOS PARA LAS PARTÍCULAS */
@@ -1180,4 +1242,201 @@ body.light-mode .toast-notification {
 
 /* ========================================
    FIN DEL ARCHIVO CSS
-   ========================
+   ========================*/
+
+/* ========================================
+   CHATBOT STYLES
+   ======================================== */
+
+#chatbot-container {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: var(--z-tooltip);
+}
+
+#chatbot-toggle-btn {
+  background: transparent;
+  border: none;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all var(--transition-base);
+  /* Añadimos la animación de flotación */
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Keyframes para el efecto de flotación */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+#chatbot-toggle-btn:hover {
+  transform: scale(1.1);
+  /* Pausamos la animación al hacer hover para que el scale funcione correctamente */
+  animation-play-state: paused;
+}
+
+#chatbot-toggle-btn img {
+  width: 60px;
+  height: auto;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+#chatbot-icon-close {
+  font-size: 2rem;
+  color: white;
+  position: absolute;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+#chatbot-window {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 350px;
+  max-width: 90vw;
+  height: 450px;
+  background: var(--product-card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.95) translateY(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all var(--transition-base);
+  border: 1px solid rgba(230, 0, 18, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+
+
+/* Específicamente para modo oscuro */
+body:not(.light-mode) #chatbot-window {
+  background: rgba(33, 37, 41, 0.95);
+  border: 1px solid rgba(230, 0, 18, 0.8);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode #chatbot-window {
+    background: var(--product-card-bg);
+}
+
+#chatbot-container.open #chatbot-toggle-btn {
+  /* Detenemos la animación cuando el chatbot está abierto */
+  animation: none;
+}
+
+#chatbot-container.open #chatbot-toggle-btn img {
+  opacity: 0;
+  transform: scale(0);
+}
+
+#chatbot-container.open #chatbot-toggle-btn #chatbot-icon-close {
+  opacity: 1;
+  transform: scale(1) rotate(90deg);
+}
+
+#chatbot-container.open #chatbot-window {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#chatbot-header {
+  background: var(--gradient-primary);
+  color: rgba(255, 255, 255, 0.874);
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+#chatbot-header h5 {
+  margin: 0;
+  font-weight: bold;
+}
+
+#chatbot-header p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  opacity: 0.9;
+}
+
+#chatbot-messages {
+  flex-grow: 1;
+  padding: var(--spacing-md);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.chatbot-message {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.chatbot-message.user {
+  background: var(--nintendo-red);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: var(--border-radius-small);
+}
+
+.chatbot-message.bot {
+  background: var(--form-control-bg);
+  color: var(--text-color);
+  align-self: flex-start;
+  border-bottom-left-radius: var(--border-radius-small);
+}
+
+#chatbot-input-container {
+  display: flex;
+  padding: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.495);
+}
+
+body.light-mode #chatbot-input-container {
+    border-top: 1px solid #dee2e6bf;
+}
+
+#chatbot-input {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  padding: var(--spacing-sm);
+}
+
+#chatbot-input:focus {
+  outline: none;
+}
+
+#chatbot-send-btn {
+  background: none;
+  border: none;
+  color: var(--nintendo-red);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+#chatbot-send-btn:hover {
+  transform: scale(1.2);
+}

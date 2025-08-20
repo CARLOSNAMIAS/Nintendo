@@ -7,13 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
   //  1. DATOS Y VARIABLES GLOBALES
   // ========================================
 
-  // Variable global para almacenar el estado actual del carrito de compras
-  // Utiliza CartLogic (módulo externo) para obtener el carrito persistente
   let cart = CartLogic.getCart();
 
-  // --- DATOS DE LA APLICACIÓN ---
-  
-  // Array de productos populares con información básica para el catálogo principal
   const popularProductsData = [
     { imgSrc: './img/futbol2.avif', title: 'EA SPORTS FC™ 24', description: 'La experiencia futbolística más auténtica', price: 59.99 },
     { imgSrc: './img/futbol.avif', title: 'EA SPORTS FC™ 25', description: 'Nuevas formas de ganar por el club', price: 69.99 },
@@ -21,76 +16,59 @@ document.addEventListener('DOMContentLoaded', function () {
     { imgSrc: './img/imgc1.avif', title: 'Super Mario Bros. Wonder', description: 'Una nueva aventura llena de sorpresas.', price: 59.99 }
   ];
 
-  // Array de juegos Pokémon con información específica para la sección temática
-  // Incluye texto personalizado para botones de demo y clases CSS específicas
   const pokemonData = [
     { imgSrc: './img/pokemon.avif', title: 'Pokémon™ Violet', text: 'Atrapa, combate y entrena Pokémon en la región de Paldea', demoText: '🎮 Probar Demo', cardClass: '' },
     { imgSrc: './img/pokemon2.avif', title: 'Detective Pikachu™ Returns', text: 'Descifra misterios con un parlanchín Pikachu', demoText: '🕵️ Probar Demo', cardClass: 'pokemon-card-2' },
     { imgSrc: './img/pokemon3.avif', title: 'Pokémon™ Brilliant Diamond', text: '¡Conviértete en el Campeón de la Liga Pokémon!', demoText: '💎 Probar Demo', cardClass: 'pokemon-card-3' }
   ];
 
-  // Array de personajes interactivos con datos completos para modales y efectos
-  // Cada personaje incluye ID único, sonido asociado y descripción detallada
   const characterData = [
     { id: 'mario', name: 'Mario', imgSrc: './img/mario-bros.png', sound: './sound/notificacion.mp3', description: "El héroe icónico del Reino Champiñón, siempre listo para saltar a la acción y frustrar los planes de Bowser.", tag: "Super Mario" },
     { id: 'luigi', name: 'Luigi', imgSrc: './img/luigii.png', sound: './sound/notificacion.mp3', description: "El hermano menor de Mario. Aunque es un poco miedoso, es muy leal y ha salvado el día en más de una ocasión.", tag: "Super Mario" },
     { id: 'peach', name: 'Peach', imgSrc: './img/princesaa.PNG', sound: './sound/notificacion.mp3', description: "La amable y elegante princesa del Reino Champiñón. A menudo es secuestrada por Bowser, pero no duda en unirse a la aventura.", tag: "Super Mario" },
     { id: 'bowser', name: 'Bowser', imgSrc: './img/bower.png', sound: './sound/notificacion.mp3', description: "El rey de los Koopas y archienemigo de Mario. Su principal objetivo es conquistar el Reino Champiñón y casarse con Peach.", tag: "Super Mario" },
-    { id: 'wario', name: 'Wario', imgSrc: './img/wario.png', sound: './sound/notificacion.mp3', description: "El avaro y musculoso rival de Mario. Es el polo opuesto a nuestro héroe, motivado por la codicia y el ajo.", tag: "WarioWare" }
+    { id: 'wario', name: 'Wario', imgSrc: './img/wario.png', sound: './sound/notificacion.mp3', description: "El avaro y musculoso rival de Mario. Es el polo opuesto a nuestro héroe, motivado por la codicia y el ajo.", tag: "WarioWare" },
+    { id: 'zelda', name: 'Zelda', imgSrc: './img/zelda.avif', sound: './sound/notificacion.mp3', description: "La sabia y poderosa princesa de Hyrule, portadora de la Trifuerza de la Sabiduría.", tag: "The Legend of Zelda" },
+    { id: 'link', name: 'Link', imgSrc: './img/carrusel2.avif', sound: './sound/notificacion.mp3', description: "El valiente héroe elegido por la Diosa Hylia, destinado a proteger Hyrule de las fuerzas del mal.", tag: "The Legend of Zelda" }
   ];
 
-  // Array de noticias para la sección informativa
-  // Incluye etiquetas categorizadas con clases CSS específicas
   const newsData = [
     { imgSrc: './img/zelda.avif', tag: 'Nintendo Direct', tagClass: 'tag-direct', title: 'Resumen del Nintendo Direct de Junio 2024', text: 'Un vistazo a todos los anuncios, desde Metroid Prime 4: Beyond hasta The Legend of Zelda: Echoes of Wisdom.' },
     { imgSrc: './img/futbol.avif', tag: 'eSports', tagClass: 'tag-esports', title: '¡El campeonato de Splatoon 3 llega a Nintendo Live!', text: 'Los mejores equipos compiten por la gloria en el torneo más colorido del año. ¡Entérate de los detalles!' },
     { imgSrc: './img/pokemon3.avif', tag: 'Actualización', tagClass: 'tag-update', title: 'Nuevos eventos de Tera-Incursiones en Pokémon', text: 'Prepara a tu equipo para enfrentarte a nuevos y poderosos Pokémon Paradoja en eventos por tiempo limitado.' }
   ];
 
-  // Referencias a elementos del DOM para manipulación dinámica
-  const productContainer = document.getElementById('productContainer');       // Contenedor de productos principales
-  const pokemonContainer = document.getElementById('pokemon-cards-container'); // Contenedor de cartas Pokémon
-  const characterContainer = document.getElementById('character-container');   // Contenedor de personajes interactivos
-  const newsContainer = document.getElementById('news-container');             // Contenedor de noticias
-  const cartCountElement = document.getElementById('cartCount');               // Contador visual del carrito
-  const cartItemsContainer = document.getElementById('cartItemsContainer');    // Lista de productos en el carrito
-  const totalPriceElement = document.getElementById('totalPrice');             // Precio total del carrito
-  const clearCartButton = document.getElementById('clearCart');                // Botón para vaciar carrito
+  const productContainer = document.getElementById('productContainer');
+  const pokemonContainer = document.getElementById('pokemon-cards-container');
+  const characterContainer = document.getElementById('character-container');
+  const newsContainer = document.getElementById('news-container');
+  const cartCountElement = document.getElementById('cartCount');
+  const cartItemsContainer = document.getElementById('cartItemsContainer');
+  const totalPriceElement = document.getElementById('totalPrice');
+  const clearCartButton = document.getElementById('clearCart');
+
+  // --- Variables para el carrusel de personajes ---
+  let characterCurrentPage = 0;
+  const charactersPerPage = 4;
 
   // ========================================
   //  2. RENDERIZADO DINÁMICO
   // ========================================
 
-  /**
-   * Función genérica para renderizar arrays de datos en contenedores del DOM
-   * @param {HTMLElement} container - Elemento contenedor donde insertar el HTML
-   * @param {Array} items - Array de objetos con los datos a renderizar
-   * @param {Function} renderer - Función que convierte cada item en HTML string
-   */
   function renderItems(container, items, renderer) {
-    if (!container) return; // Validación para evitar errores si el contenedor no existe
-    container.innerHTML = items.map(renderer).join(''); // Aplica renderer a cada item y une el HTML
+    if (!container) return;
+    container.innerHTML = items.map(renderer).join('');
   }
 
-  /**
-   * Genera HTML para una tarjeta de producto del catálogo principal
-   * @param {Object} p - Objeto producto con propiedades: imgSrc, title, description, price
-   * @returns {string} HTML string de la tarjeta de producto
-   */
   const productRenderer = (p) => `
     <div class="product-card fade-in-up">
       <img src="${p.imgSrc}" alt="${p.title}">
       <h3 class="product-title">${p.title}</h3>
       <p class="text-light">${p.description}</p>
-      <p class="product-price">$${p.price.toFixed(2)}</p>
+      <p class="product-price">${p.price.toFixed(2)}</p>
       <button class="btn btn-primary add-to-cart-btn">🛒 Agregar al carrito</button>
     </div>`;
 
-  /**
-   * Genera HTML para una tarjeta de juego Pokémon
-   * @param {Object} p - Objeto Pokémon con propiedades: imgSrc, title, text, demoText, cardClass
-   * @returns {string} HTML string de la tarjeta Pokémon
-   */
   const pokemonRenderer = (p) => `
     <div class="pokemon-card ${p.cardClass} fade-in-up">
       <img src="${p.imgSrc}" class="card-img-top" alt="${p.title}">
@@ -101,22 +79,12 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     </div>`;
 
-  /**
-   * Genera HTML para una tarjeta de personaje interactivo
-   * @param {Object} c - Objeto personaje con propiedades: id, imgSrc, name
-   * @returns {string} HTML string de la tarjeta de personaje
-   */
   const characterRenderer = (c) => `
     <div class="character-card fade-in-up" data-character-id="${c.id}">
       <img src="${c.imgSrc}" alt="${c.name}">
       <div class="character-name-plate"><span>${c.name}</span></div>
     </div>`;
 
-  /**
-   * Genera HTML para una tarjeta de noticia
-   * @param {Object} n - Objeto noticia con propiedades: imgSrc, tag, tagClass, title, text
-   * @returns {string} HTML string de la tarjeta de noticia
-   */
   const newsRenderer = (n) => `
     <div class="news-card fade-in-up">
       <div class="news-card-img-container"><img src="${n.imgSrc}" alt="${n.title}"></div>
@@ -127,43 +95,49 @@ document.addEventListener('DOMContentLoaded', function () {
         <a href="#" class="btn btn-outline-light">Leer más <i class="bi bi-arrow-right-short"></i></a>
       </div>
     </div>`;
+    
+  // --- Lógica del carrusel de personajes ---
+  const characterPrevBtn = document.getElementById('character-prev-btn');
+  const characterNextBtn = document.getElementById('character-next-btn');
+
+  function renderCharacterCarousel() {
+    if (!characterContainer) return;
+
+    const totalPages = Math.ceil(characterData.length / charactersPerPage);
+    const startIndex = characterCurrentPage * charactersPerPage;
+    const endIndex = startIndex + charactersPerPage;
+    const charactersToShow = characterData.slice(startIndex, endIndex);
+    
+    renderItems(characterContainer, charactersToShow, characterRenderer);
+
+    characterPrevBtn.disabled = characterCurrentPage === 0;
+    characterNextBtn.disabled = characterCurrentPage >= totalPages - 1;
+  }
 
   // ========================================
   //  3. LÓGICA DEL CARRITO (UI OFFCANVAS)
   // ========================================
   
-  /**
-   * Actualiza la interfaz visual del carrito offcanvas
-   * Sincroniza el estado del carrito con la visualización en pantalla
-   */
   function updateOffcanvasUI() {
-    cart = CartLogic.getCart(); // Obtiene la versión más actualizada del carrito desde el almacenamiento
-    
-    // Actualiza el contador de productos en el icono del carrito
+    cart = CartLogic.getCart();
     cartCountElement.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
-    // Limpia el contenedor antes de re-renderizar
     cartItemsContainer.innerHTML = '';
     
-    // Si el carrito está vacío, muestra mensaje informativo
     if (cart.length === 0) {
       cartItemsContainer.innerHTML = '<div class="text-center p-5"><p>Tu carrito está vacío.</p></div>';
       totalPriceElement.textContent = '$0.00';
       return;
     }
     
-    // Calcula el total y renderiza cada producto del carrito
     let total = 0;
     cart.forEach(item => {
-      total += item.price * item.quantity; // Acumula el precio total
-      
-      // Genera HTML para cada item del carrito con controles de cantidad
+      total += item.price * item.quantity;
       const cartItemHTML = `
         <div class="d-flex align-items-center mb-3 p-2 rounded" style="background-color: rgba(255,255,255,0.05);">
           <img src="${item.image}" alt="${item.name}" width="60" height="60" class="rounded me-3 object-fit-cover">
           <div class="flex-grow-1">
             <p class="mb-0 fw-bold">${item.name}</p>
-            <p class="mb-1 text-muted">$${item.price.toFixed(2)}</p>
+            <p class="mb-1 text-muted">${item.price.toFixed(2)}</p>
             <div class="d-flex align-items-center">
               <button class="btn btn-sm btn-outline-secondary quantity-btn" data-id="${item.id}" data-action="decrease">-</button>
               <span class="mx-2">${item.quantity}</span>
@@ -176,110 +150,94 @@ document.addEventListener('DOMContentLoaded', function () {
       cartItemsContainer.innerHTML += cartItemHTML;
     });
     
-    // Actualiza el precio total mostrado
-    totalPriceElement.textContent = `$${total.toFixed(2)}`;
+    totalPriceElement.textContent = `${total.toFixed(2)}`;
   }
 
   // ========================================
   //  4. MANEJO DE EVENTOS
   // ========================================
 
-  /**
-   * Event listener para el contenedor de productos principales
-   * Maneja clicks en botones "Agregar al carrito"
-   */
   if (productContainer) {
     productContainer.addEventListener('click', (e) => {
-      // Verifica si el click fue en un botón de agregar al carrito
       if (e.target.classList.contains('add-to-cart-btn')) {
-        e.preventDefault(); // Previene comportamiento por defecto del botón
-        
-        // Obtiene información del producto desde el DOM
+        e.preventDefault();
         const productCard = e.target.closest('.product-card');
         const productName = productCard.querySelector('.product-title').textContent;
         const priceText = productCard.querySelector('.product-price').textContent;
         
-        // Crea objeto producto para agregar al carrito
         const product = {
-          id: productName.replace(/\s+/g, '-').toLowerCase(), // Genera ID único basado en el nombre
+          id: productName.replace(/\s+/g, '-').toLowerCase(),
           name: productName,
-          price: parseFloat(priceText.replace(/[^0-9.]/g, '')), // Extrae solo números del precio
+          price: parseFloat(priceText.replace(/[^0-9.]/g, '')),
           image: productCard.querySelector('img').src
         };
         
-        // Agrega al carrito usando CartLogic y actualiza la UI
         cart = CartLogic.addToCart(product);
         updateOffcanvasUI();
-        showNotification(product.name, product.image); // Muestra notificación de confirmación
+        showNotification(product.name, product.image);
       }
     });
   }
 
-  /**
-   * Event listener para el contenedor de items del carrito
-   * Maneja modificación de cantidades y eliminación de productos
-   */
   cartItemsContainer.addEventListener('click', (e) => {
     const target = e.target;
-    const productId = target.closest('[data-id]')?.dataset.id; // Obtiene ID del producto
-    if (!productId) return; // Sale si no encuentra ID
+    const productId = target.closest('[data-id]')?.dataset.id;
+    if (!productId) return;
 
-    // Maneja eliminación completa del producto
     if (target.classList.contains('remove-btn')) { 
       cart = CartLogic.removeFromCart(productId); 
     }
     
-    // Maneja cambios de cantidad (aumentar/disminuir)
     if (target.classList.contains('quantity-btn')) { 
       cart = CartLogic.changeQuantity(productId, target.dataset.action); 
     }
     
-    updateOffcanvasUI(); // Actualiza interfaz después de cualquier cambio
+    updateOffcanvasUI();
   });
 
-  /**
-   * Event listener para el botón de limpiar carrito
-   * Vacía completamente el carrito de compras
-   */
   clearCartButton.addEventListener('click', () => {
     cart = CartLogic.clearCart();
     updateOffcanvasUI();
   });
 
-  /**
-   * Event listener para el contenedor de personajes
-   * Maneja clicks en tarjetas de personajes para mostrar modal y efectos
-   */
   if (characterContainer) {
       characterContainer.addEventListener('click', (e) => {
-          const card = e.target.closest('.character-card'); // Busca la tarjeta clickeada
+          const card = e.target.closest('.character-card');
           if (!card) return;
           
-          const charId = card.dataset.characterId; // Obtiene ID del personaje
-          const char = characterData.find(c => c.id === charId); // Busca datos del personaje
+          const charId = card.dataset.characterId;
+          const char = characterData.find(c => c.id === charId);
           if (!char) return;
           
-          // Ejecuta efectos interactivos
-          playCharacterSound(char.sound);    // Reproduce sonido del personaje
-          createClickParticles(card);        // Crea efecto de partículas
-          showCharacterModal(char);          // Muestra modal con información
+          playCharacterSound(char.sound);
+          createClickParticles(card);
+          showCharacterModal(char);
       });
   }
+
+  characterPrevBtn?.addEventListener('click', () => {
+    if (characterCurrentPage > 0) {
+      characterCurrentPage--;
+      renderCharacterCarousel();
+    }
+  });
+
+  characterNextBtn?.addEventListener('click', () => {
+    const totalPages = Math.ceil(characterData.length / charactersPerPage);
+    if (characterCurrentPage < totalPages - 1) {
+      characterCurrentPage++;
+      renderCharacterCarousel();
+    }
+  });
 
   // ========================================
   //  5. MODALES Y NOTIFICACIONES
   // ========================================
 
-  /**
-   * Muestra una notificación toast cuando se agrega un producto al carrito
-   * @param {string} productName - Nombre del producto agregado
-   * @param {string} productImage - URL de la imagen del producto
-   */
   function showNotification(productName, productImage) {
     const toastContainer = document.getElementById('toast-container');
     if (!toastContainer) return;
     
-    // Crea elemento de notificación
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
     toast.innerHTML = `
@@ -290,28 +248,20 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     `;
     
-    // Añade al DOM y activa animación
     toastContainer.appendChild(toast);
-    requestAnimationFrame(() => { toast.classList.add('show'); }); // Fuerza repaint para animación
+    requestAnimationFrame(() => { toast.classList.add('show'); });
     
-    // Programa eliminación automática después de 3 segundos
     setTimeout(() => {
       toast.classList.remove('show');
-      toast.addEventListener('transitionend', () => toast.remove()); // Limpia DOM después de animación
+      toast.addEventListener('transitionend', () => toast.remove());
     }, 3000);
   }
 
-  // Referencias para el modal de personajes
   const characterModal = document.getElementById('characterModal');
   
-  /**
-   * Muestra modal con información detallada del personaje
-   * @param {Object} character - Objeto con datos del personaje (imgSrc, name, description, tag)
-   */
   function showCharacterModal(character) {
       if (!characterModal) return;
       
-      // Actualiza contenido del modal con datos del personaje
       const characterModalBody = document.getElementById('characterModalBody');
       characterModalBody.innerHTML = `
           <img src="${character.imgSrc}" class="character-modal-img" alt="${character.name}">
@@ -319,24 +269,18 @@ document.addEventListener('DOMContentLoaded', function () {
           <p class="character-modal-description">${character.description}</p>
           <span class="character-modal-tag">${character.tag}</span>`;
       
-      // Muestra modal con animación
       characterModal.style.display = 'flex';
       characterModal.querySelector('.modal-content-modern').classList.add('show');
   }
   
-  /**
-   * Cierra el modal de personaje con animación
-   */
   function closeCharacterModalFunction() {
       const modalContent = characterModal.querySelector('.modal-content-modern');
-      modalContent.classList.remove('show'); // Inicia animación de salida
-      setTimeout(() => { characterModal.style.display = 'none'; }, 300); // Oculta después de animación
+      modalContent.classList.remove('show');
+      setTimeout(() => { characterModal.style.display = 'none'; }, 300);
   }
   
-  // Event listeners para cerrar modal
   document.getElementById('closeCharacterModal')?.addEventListener('click', closeCharacterModalFunction);
   characterModal?.addEventListener('click', (e) => {
-    // Cierra modal si se hace click en el fondo (backdrop)
     if (e.target === characterModal) closeCharacterModalFunction();
   });
 
@@ -349,16 +293,13 @@ document.addEventListener('DOMContentLoaded', function () {
   //  7. EJECUCIÓN INICIAL
   // ========================================
 
-  // Renderiza todos los contenidos dinámicos al cargar la página
-  renderItems(productContainer, popularProductsData, productRenderer);  // Renderiza productos principales
-  renderItems(pokemonContainer, pokemonData, pokemonRenderer);          // Renderiza sección Pokémon
-  renderItems(characterContainer, characterData, characterRenderer);    // Renderiza galería de personajes
-  renderItems(newsContainer, newsData, newsRenderer);                   // Renderiza noticias
+  renderItems(productContainer, popularProductsData, productRenderer);
+  renderItems(pokemonContainer, pokemonData, pokemonRenderer);
+  renderCharacterCarousel(); // <--- Changed this line
+  renderItems(newsContainer, newsData, newsRenderer);
   
-  // Inicializa estado de la interfaz del carrito
   updateOffcanvasUI();
   
-  // Activa observador de animaciones fade-in (función definida externamente)
   observeFadeIn();
 
 });

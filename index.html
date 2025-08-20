@@ -173,8 +173,12 @@
     <!-- SECCIÓN GALERÍA DE PERSONAJES -->
     <section class="container game-section">
       <h2 class="section-title fade-in-up">⭐ Personajes Icónicos</h2>
-      <div id="character-container" class="character-container">
-        <!-- Las tarjetas de personajes se renderizan aquí dinámicamente -->
+      <div class="character-carousel-wrapper">
+        <button class="btn btn-carousel" id="character-prev-btn">&lt;</button>
+        <div id="character-container" class="character-container">
+          <!-- Las tarjetas de personajes se renderizan aquí dinámicamente -->
+        </div>
+        <button class="btn btn-carousel" id="character-next-btn">&gt;</button>
       </div>
     </section>
 
@@ -294,6 +298,30 @@
     </div>
   </div>
 
+  <!-- CHATBOT -->
+  <div id="chatbot-container">
+    <!-- Botón flotante para abrir/cerrar el chat -->
+    <button id="chatbot-toggle-btn">
+      <img src="img/nube.png" alt="Chat" id="chatbot-icon-open">
+      <span id="chatbot-icon-close">&times;</span>
+    </button>
+
+    <!-- Ventana del chat -->
+    <div id="chatbot-window">
+      <div id="chatbot-header">
+        <h5>Asistente Virtual</h5>
+        <p>¡Hola! ¿En qué puedo ayudarte?</p>
+      </div>
+      <div id="chatbot-messages">
+        <!-- Los mensajes del chat se insertarán aquí -->
+      </div>
+      <div id="chatbot-input-container">
+        <input type="text" id="chatbot-input" placeholder="Escribe un mensaje...">
+        <button id="chatbot-send-btn">➤</button>
+      </div>
+    </div>
+  </div>
+
   <!-- SCRIPTS -->
   <script src="logic-cart.js"></script>
   <script src="theme.js"></script>
@@ -301,6 +329,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+  <script src="chatbot.js"></script>
   
 
 

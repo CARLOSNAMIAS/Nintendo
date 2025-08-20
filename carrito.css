@@ -14,6 +14,10 @@
   border: 1px solid rgba(230, 0, 18, 0.2);
 }
 
+.summary-card span {
+  color: var(--text-color);
+}
+
 /* 
  * FILA DE PRODUCTO EN EL CARRITO
  * Cada item del carrito se muestra como una fila horizontal con imagen, detalles y controles
@@ -79,7 +83,7 @@ body.light-mode .summary-card {
   /* Fondo blanco para modo claro */
   background-color: #ffffff;
   /* Borde gris suave característico de Bootstrap para modo claro */
-  border-color: #dee2e6;
+  border-color: var(--border-color-light);
 }
 
 /* 
@@ -88,5 +92,5 @@ body.light-mode .summary-card {
  */
 body.light-mode .cart-item-row {
   /* Línea separadora gris suave para modo claro (mejor contraste que blanco transparente) */
-  border-bottom-color: #dee2e6;
+  border-bottom-color: var(--border-color-light);
 }
