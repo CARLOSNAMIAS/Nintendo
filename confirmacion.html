@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- ========================================
+       META CONFIGURACIÓN Y SEO
+       ======================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmación de Pedido - Nintendo</title>
+  
+  <!-- ========================================
+       HOJAS DE ESTILO EXTERNAS
+       ======================================== -->
+  <!-- Bootstrap 5.3.3 - Framework CSS para diseño responsivo y componentes -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icons - Librería de iconos vectoriales -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- Hoja de estilos personalizada principal -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Favicon personalizado - ícono que aparece en la pestaña del navegador -->
+  <link rel="icon" type="image/png" href="img/mairo-corriendo.png">
+
+  <!-- ========================================
+       ESTILOS CSS ESPECÍFICOS DE LA PÁGINA
+       ======================================== -->
+  <style>
+
+/* ========================================
+   IMPORTACIÓN DE FUENTES
+   ======================================== */
+/* Fuente retro estilo Mario para títulos y botones especiales */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* ========================================
+   RESET CSS GLOBAL
+   ======================================== */
+/* Elimina márgenes y paddings por defecto del navegador */
+/* Establece box-sizing consistente para todos los elementos */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================
+   CONFIGURACIÓN DEL BODY
+   ======================================== */
+/* Elimina espaciado adicional del body para control total del layout */
+body { 
+  margin: 0px;
+  padding: 0px;
+}
+
+/* ========================================
+   CONTENEDOR PRINCIPAL DE CONFIRMACIÓN
+   ======================================== */
+/* Estiliza el área central donde se muestra la confirmación del pedido */
+main.container {
+  background: rgba(255, 255, 255, 0);        /* Fondo transparente para efecto glassmorphism */
+  border-radius: 20px;                        /* Bordes redondeados modernos */
+  padding: 15px 20px;                         /* Espaciado interno reducido para vista compacta */
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0);  /* Sin sombra para diseño minimalista */
+  animation: fadeIn 1s ease-out;              /* Animación de entrada suave */
+  backdrop-filter: blur(6px);                 /* Efecto de desenfoque de fondo */
+  max-width: 1000px;                          /* Ancho máximo para mantener legibilidad */
+  margin: 20px auto;                          /* Centrado horizontal con espacio vertical */
+  text-align: center;                         /* Alineación centrada del contenido */
+}
+
+/* ========================================
+   IMAGEN DE CONFIRMACIÓN (MARIO)
+   ======================================== */
+/* Estiliza la imagen de Mario que aparece en la confirmación */
+main img{
+  margin-bottom: 10px;                                        /* Espacio inferior */
+  animation: float 3s ease-in-out infinite;                   /* Animación flotante continua */
+  filter: drop-shadow(0px 4px 8px rgba(20, 255, 4, 0.909));  /* Sombra verde brillante */
+}
+
+/* ========================================
+   TÍTULO PRINCIPAL RETRO
+   ======================================== */
+/* Estilo de título principal con estética retro de videojuegos */
+h1 {
+  font-family: 'Press Start 2P', cursive;    /* Fuente pixelada estilo arcade */
+  color: #ff0000;                             /* Color rojo característico de Mario */
+  text-shadow: 3px 3px #fff, 6px 6px #000;   /* Sombra doble para efecto 3D retro */
+  font-size: 2rem;                            /* Tamaño grande pero legible */
+  margin-bottom: 10px;                        /* Espaciado inferior */
+}
+
+/* ========================================
+   PÁRRAFOS DE CONTENIDO
+   ======================================== */
+/* Estiliza el texto de contenido para óptima legibilidad */
+p {
+  font-size: 0.95rem;   /* Tamaño de fuente ligeramente reducido */
+  margin-bottom: 8px;   /* Espaciado entre párrafos */
+}
+
+/* ========================================
+   TARJETA DE RESUMEN
+   ======================================== */
+/* Estiliza la tarjeta que contiene el resumen del pedido */
+.card {
+  margin-top: 10px;     /* Espacio superior para separación */
+  border-radius: 15px;  /* Bordes redondeados consistentes con el diseño */
+}
+
+/* ========================================
+   BOTÓN ESTILO NINTENDO
+   ======================================== */
+/* Botón principal con estética retro Nintendo */
+.btn-danger {
+  background: linear-gradient(45deg, #ff0000, #c70039);  /* Gradiente rojo Nintendo */
+  border: 3px solid #000;                                /* Borde negro grueso retro */
+  border-radius: 15px;                                   /* Bordes redondeados */
+  font-family: 'Press Start 2P', cursive;               /* Fuente pixelada */
+  text-transform: uppercase;                             /* Texto en mayúsculas */
+  letter-spacing: 1px;                                   /* Espaciado entre letras */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
+  padding: 10px 20px;                                    /* Espaciado interno */
+  box-shadow: 4px 4px 0px #080808;                       /* Sombra sólida estilo retro */
+}
+
+  </style>
+
+</head>
+<body>
+
+  <!-- ========================================
+       ELEMENTO CANVAS PARA EFECTOS VISUALES
+       ======================================== -->
+  <!-- Canvas para animaciones de partículas temáticas de Mario -->
+  <canvas id="marioParticles"></canvas>
+
+  <!-- ========================================
+       HEADER CON NAVEGACIÓN
+       ======================================== -->
+  <header>
+    <!-- Barra de navegación fija en la parte superior -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container-fluid">
+        
+        <!-- ========================================
+             LOGO NINTENDO
+             ======================================== -->
+        <!-- Logo principal que también funciona como enlace al home -->
+        <a class="navbar-brand" href="index.html">
+          <img src="./img/Nintendo-Logo-1970-1975.png" alt="Nintendo Logo" width="120" height="60">
+        </a>
+        
+        <!-- ========================================
+             CONTROLES DE NAVEGACIÓN
+             ======================================== -->
+        <!-- Contenedor colapsible para elementos de navegación -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Lista de elementos de navegación alineados a la derecha -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+            
+            <!-- ========================================
+                 BOTÓN CAMBIO DE TEMA
+                 ======================================== -->
+            <!-- Botón interactivo para alternar entre temas claro/oscuro -->
+            <li class="nav-item">
+              <button class="btn nav-link" id="theme-toggle" title="Cambiar tema">
+                <i class="bi bi-nintendo-switch"></i>
+              </button>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ========================================
+       CONTENIDO PRINCIPAL DE CONFIRMACIÓN
+       ======================================== -->
+  <!-- Área principal que contiene toda la información de confirmación -->
+  <main class="container text-center mt-5 pt-5">
+    <div class="py-5">
+      
+      <!-- ========================================
+           IMAGEN DE CONFIRMACIÓN
+           ======================================== -->
+      <!-- Mario celebrando - elemento visual que refuerza el mensaje positivo -->
+      <img src="./img/mario-bros.png" alt="Mario Feliz" width="150" class="mb-4">
+      
+      <!-- ========================================
+           TÍTULO DE CONFIRMACIÓN
+           ======================================== -->
+      <!-- Mensaje principal de agradecimiento con estilo retro -->
+      <h1 class="display-5 fw-bold text-danger">¡Gracias por tu compra!</h1>
+      
+      <!-- ========================================
+           CONTENEDOR DE INFORMACIÓN
+           ======================================== -->
+      <!-- Área centrada que contiene todos los detalles del pedido -->
+      <div class="col-lg-6 mx-auto">
+        
+        <!-- ========================================
+             MENSAJE DE CONFIRMACIÓN
+             ======================================== -->
+        <!-- Párrafo informativo sobre el estado del pedido -->
+        <p class="lead mb-4">Tu pedido ha sido procesado exitosamente.</p>
+        
+        <!-- ========================================
+             NÚMERO DE ORDEN
+             ======================================== -->
+        <!-- Muestra el número único de identificación del pedido -->
+        <!-- El JavaScript insertará dinámicamente el número generado -->
+        <p>Tu número de orden es: <strong id="order-number"></strong></p>
+        
+        <!-- ========================================
+             TARJETA DE RESUMEN DEL PEDIDO
+             ======================================== -->
+        <!-- Contenedor estructurado para mostrar los detalles de la compra -->
+        <div class="card my-4 text-start">
+          <!-- Header de la tarjeta con título descriptivo -->
+          <div class="card-header">Resumen del Pedido</div>
+          
+          <!-- Cuerpo de la tarjeta donde se insertan los productos -->
+          <!-- El JavaScript poblará dinámicamente este contenedor -->
+          <div class="card-body" id="confirmation-summary">
+            <!-- El resumen del pedido se insertará aquí vía JavaScript -->
+          </div>
+        </div>
+
+        <!-- ========================================
+             BOTÓN DE NAVEGACIÓN
+             ======================================== -->
+        <!-- Botón call-to-action para regresar a la tienda -->
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a href="index.html" type="button" class="btn btn-danger btn-lg px-4 gap-3">Volver a la tienda</a>
+        </div>
+        
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================
+       SCRIPTS JAVASCRIPT
+       ======================================== -->
+  
+  <!-- Script de lógica del carrito de compras -->
+  <!-- Contiene las funciones para manipular el estado del carrito -->
+  <script src="logic-cart.js"></script>
+  
+  <!-- Script para manejo de temas (claro/oscuro) -->
+  <!-- Permite alternar entre diferentes esquemas de colores -->
+  <script src="theme.js"></script>
+  
+  <!-- Script específico de la página de confirmación -->
+  <!-- Maneja la lógica de mostrar resumen y limpiar carrito -->
+  <script src="confirmacion.js"></script>
+
+</body>
+</html>

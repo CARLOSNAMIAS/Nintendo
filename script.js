@@ -1,378 +1,446 @@
+// ========================================
+//  INICIALIZACIÓN DEL SISTEMA AL CARGAR EL DOM
+// ========================================
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Animaciones fade-in
-  const fadeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        fadeObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  // ========================================
+  //  1. DATOS Y VARIABLES GLOBALES
+  // ========================================
 
-  document.querySelectorAll('.fade-in-up').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'all 0.8s ease';
-    fadeObserver.observe(el);
-  });
+  // Variable global para almacenar el estado actual del carrito de compras
+  // Utiliza CartLogic (módulo externo) para obtener el carrito persistente
+  let cart = CartLogic.getCart();
 
-  // Variables del carrito
-  let cart = [];
+  // --- DATOS DE LA APLICACIÓN ---
+  
+  // Array de productos populares con información básica para el catálogo principal
+  const popularProductsData = [
+    { imgSrc: './img/futbol2.avif', title: 'EA SPORTS FC™ 24', description: 'La experiencia futbolística más auténtica', price: 59.99 },
+    { imgSrc: './img/futbol.avif', title: 'EA SPORTS FC™ 25', description: 'Nuevas formas de ganar por el club', price: 69.99 },
+    { imgSrc: './img/NBA202.avif', title: 'NBA 2K25', description: 'Acumula victorias y haz historia', price: 59.99 },
+    { imgSrc: './img/imgc1.avif', title: 'Super Mario Bros. Wonder', description: 'Una nueva aventura llena de sorpresas.', price: 59.99 }
+  ];
 
-  function updateCartUI() {
-    const cartCountElement = document.getElementById('cartCount');
-    const cartItemsElement = document.getElementById('cartItems');
-    const totalPriceElement = document.getElementById('totalPrice');
+  // Array de juegos Pokémon con información específica para la sección temática
+  // Incluye texto personalizado para botones de demo y clases CSS específicas
+  const pokemonData = [
+    { imgSrc: './img/pokemon.avif', title: 'Pokémon™ Violet', text: 'Atrapa, combate y entrena Pokémon en la región de Paldea', demoText: '🎮 Probar Demo', cardClass: '' },
+    { imgSrc: './img/pokemon2.avif', title: 'Detective Pikachu™ Returns', text: 'Descifra misterios con un parlanchín Pikachu', demoText: '🕵️ Probar Demo', cardClass: 'pokemon-card-2' },
+    { imgSrc: './img/pokemon3.avif', title: 'Pokémon™ Brilliant Diamond', text: '¡Conviértete en el Campeón de la Liga Pokémon!', demoText: '💎 Probar Demo', cardClass: 'pokemon-card-3' }
+  ];
 
-    cartCountElement.textContent = cart.length;
+  // Array de personajes interactivos con datos completos para modales y efectos
+  // Cada personaje incluye ID único, sonido asociado y descripción detallada
+  const characterData = [
+    { id: 'mario', name: 'Mario', imgSrc: './img/mario-bros.png', sound: './sound/notificacion.mp3', description: "El héroe icónico del Reino Champiñón, siempre listo para saltar a la acción y frustrar los planes de Bowser.", tag: "Super Mario" },
+    { id: 'luigi', name: 'Luigi', imgSrc: './img/luigii.png', sound: './sound/notificacion.mp3', description: "El hermano menor de Mario. Aunque es un poco miedoso, es muy leal y ha salvado el día en más de una ocasión.", tag: "Super Mario" },
+    { id: 'peach', name: 'Peach', imgSrc: './img/princesaa.PNG', sound: './sound/notificacion.mp3', description: "La amable y elegante princesa del Reino Champiñón. A menudo es secuestrada por Bowser, pero no duda en unirse a la aventura.", tag: "Super Mario" },
+    { id: 'bowser', name: 'Bowser', imgSrc: './img/bower.png', sound: './sound/notificacion.mp3', description: "El rey de los Koopas y archienemigo de Mario. Su principal objetivo es conquistar el Reino Champiñón y casarse con Peach.", tag: "Super Mario" },
+    { id: 'wario', name: 'Wario', imgSrc: './img/wario.png', sound: './sound/notificacion.mp3', description: "El avaro y musculoso rival de Mario. Es el polo opuesto a nuestro héroe, motivado por la codicia y el ajo.", tag: "WarioWare" }
+  ];
 
+  // Array de noticias para la sección informativa
+  // Incluye etiquetas categorizadas con clases CSS específicas
+  const newsData = [
+    { imgSrc: './img/zelda.avif', tag: 'Nintendo Direct', tagClass: 'tag-direct', title: 'Resumen del Nintendo Direct de Junio 2024', text: 'Un vistazo a todos los anuncios, desde Metroid Prime 4: Beyond hasta The Legend of Zelda: Echoes of Wisdom.' },
+    { imgSrc: './img/futbol.avif', tag: 'eSports', tagClass: 'tag-esports', title: '¡El campeonato de Splatoon 3 llega a Nintendo Live!', text: 'Los mejores equipos compiten por la gloria en el torneo más colorido del año. ¡Entérate de los detalles!' },
+    { imgSrc: './img/pokemon3.avif', tag: 'Actualización', tagClass: 'tag-update', title: 'Nuevos eventos de Tera-Incursiones en Pokémon', text: 'Prepara a tu equipo para enfrentarte a nuevos y poderosos Pokémon Paradoja en eventos por tiempo limitado.' }
+  ];
+
+  // Referencias a elementos del DOM para manipulación dinámica
+  const productContainer = document.getElementById('productContainer');       // Contenedor de productos principales
+  const pokemonContainer = document.getElementById('pokemon-cards-container'); // Contenedor de cartas Pokémon
+  const characterContainer = document.getElementById('character-container');   // Contenedor de personajes interactivos
+  const newsContainer = document.getElementById('news-container');             // Contenedor de noticias
+  const cartCountElement = document.getElementById('cartCount');               // Contador visual del carrito
+  const cartItemsContainer = document.getElementById('cartItemsContainer');    // Lista de productos en el carrito
+  const totalPriceElement = document.getElementById('totalPrice');             // Precio total del carrito
+  const clearCartButton = document.getElementById('clearCart');                // Botón para vaciar carrito
+
+  // ========================================
+  //  2. RENDERIZADO DINÁMICO
+  // ========================================
+
+  /**
+   * Función genérica para renderizar arrays de datos en contenedores del DOM
+   * @param {HTMLElement} container - Elemento contenedor donde insertar el HTML
+   * @param {Array} items - Array de objetos con los datos a renderizar
+   * @param {Function} renderer - Función que convierte cada item en HTML string
+   */
+  function renderItems(container, items, renderer) {
+    if (!container) return; // Validación para evitar errores si el contenedor no existe
+    container.innerHTML = items.map(renderer).join(''); // Aplica renderer a cada item y une el HTML
+  }
+
+  /**
+   * Genera HTML para una tarjeta de producto del catálogo principal
+   * @param {Object} p - Objeto producto con propiedades: imgSrc, title, description, price
+   * @returns {string} HTML string de la tarjeta de producto
+   */
+  const productRenderer = (p) => `
+    <div class="product-card fade-in-up">
+      <img src="${p.imgSrc}" alt="${p.title}">
+      <h3 class="product-title">${p.title}</h3>
+      <p class="text-light">${p.description}</p>
+      <p class="product-price">$${p.price.toFixed(2)}</p>
+      <button class="btn btn-primary add-to-cart-btn">🛒 Agregar al carrito</button>
+    </div>`;
+
+  /**
+   * Genera HTML para una tarjeta de juego Pokémon
+   * @param {Object} p - Objeto Pokémon con propiedades: imgSrc, title, text, demoText, cardClass
+   * @returns {string} HTML string de la tarjeta Pokémon
+   */
+  const pokemonRenderer = (p) => `
+    <div class="pokemon-card ${p.cardClass} fade-in-up">
+      <img src="${p.imgSrc}" class="card-img-top" alt="${p.title}">
+      <div class="card-body text-center p-4">
+        <h5 class="card-title">${p.title}</h5>
+        <p class="card-text">${p.text}</p>
+        <a href="#" class="btn btn-primary">${p.demoText}</a>
+      </div>
+    </div>`;
+
+  /**
+   * Genera HTML para una tarjeta de personaje interactivo
+   * @param {Object} c - Objeto personaje con propiedades: id, imgSrc, name
+   * @returns {string} HTML string de la tarjeta de personaje
+   */
+  const characterRenderer = (c) => `
+    <div class="character-card fade-in-up" data-character-id="${c.id}">
+      <img src="${c.imgSrc}" alt="${c.name}">
+      <div class="character-name-plate"><span>${c.name}</span></div>
+    </div>`;
+
+  /**
+   * Genera HTML para una tarjeta de noticia
+   * @param {Object} n - Objeto noticia con propiedades: imgSrc, tag, tagClass, title, text
+   * @returns {string} HTML string de la tarjeta de noticia
+   */
+  const newsRenderer = (n) => `
+    <div class="news-card fade-in-up">
+      <div class="news-card-img-container"><img src="${n.imgSrc}" alt="${n.title}"></div>
+      <div class="news-card-body">
+        <span class="news-card-tag ${n.tagClass}">${n.tag}</span>
+        <h3 class="news-card-title">${n.title}</h3>
+        <p class="news-card-text">${n.text}</p>
+        <a href="#" class="btn btn-outline-light">Leer más <i class="bi bi-arrow-right-short"></i></a>
+      </div>
+    </div>`;
+
+  // ========================================
+  //  3. LÓGICA DEL CARRITO (UI OFFCANVAS)
+  // ========================================
+  
+  /**
+   * Actualiza la interfaz visual del carrito offcanvas
+   * Sincroniza el estado del carrito con la visualización en pantalla
+   */
+  function updateOffcanvasUI() {
+    cart = CartLogic.getCart(); // Obtiene la versión más actualizada del carrito desde el almacenamiento
+    
+    // Actualiza el contador de productos en el icono del carrito
+    cartCountElement.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    // Limpia el contenedor antes de re-renderizar
+    cartItemsContainer.innerHTML = '';
+    
+    // Si el carrito está vacío, muestra mensaje informativo
     if (cart.length === 0) {
-      cartItemsElement.innerHTML = '<span class="dropdown-item-text">Carrito vacío</span>';
-      totalPriceElement.textContent = 'Total: $0.00';
-    } else {
-      let total = 0;
-      cartItemsElement.innerHTML = '';
-
-      cart.forEach((item, index) => {
-        total += item.price;
-        const cartItem = document.createElement('li');
-        cartItem.innerHTML = `
-          <div class="dropdown-item d-flex justify-content-between align-items-center">
-            <span>${item.name}</span>
-            <div>
-              <span class="text-success me-2">$${item.price.toFixed(2)}</span>
-              <button class="btn btn-sm btn-outline-danger remove-btn" data-index="${index}">×</button>
+      cartItemsContainer.innerHTML = '<div class="text-center p-5"><p>Tu carrito está vacío.</p></div>';
+      totalPriceElement.textContent = '$0.00';
+      return;
+    }
+    
+    // Calcula el total y renderiza cada producto del carrito
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.quantity; // Acumula el precio total
+      
+      // Genera HTML para cada item del carrito con controles de cantidad
+      const cartItemHTML = `
+        <div class="d-flex align-items-center mb-3 p-2 rounded" style="background-color: rgba(255,255,255,0.05);">
+          <img src="${item.image}" alt="${item.name}" width="60" height="60" class="rounded me-3 object-fit-cover">
+          <div class="flex-grow-1">
+            <p class="mb-0 fw-bold">${item.name}</p>
+            <p class="mb-1 text-muted">$${item.price.toFixed(2)}</p>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-sm btn-outline-secondary quantity-btn" data-id="${item.id}" data-action="decrease">-</button>
+              <span class="mx-2">${item.quantity}</span>
+              <button class="btn btn-sm btn-outline-secondary quantity-btn" data-id="${item.id}" data-action="increase">+</button>
             </div>
           </div>
-        `;
-        cartItemsElement.appendChild(cartItem);
+          <button class="btn btn-sm btn-outline-danger remove-btn" data-id="${item.id}">×</button>
+        </div>
+      `;
+      cartItemsContainer.innerHTML += cartItemHTML;
+    });
+    
+    // Actualiza el precio total mostrado
+    totalPriceElement.textContent = `$${total.toFixed(2)}`;
+  }
+
+  // ========================================
+  //  4. MANEJO DE EVENTOS
+  // ========================================
+
+  /**
+   * Event listener para el contenedor de productos principales
+   * Maneja clicks en botones "Agregar al carrito"
+   */
+  if (productContainer) {
+    productContainer.addEventListener('click', (e) => {
+      // Verifica si el click fue en un botón de agregar al carrito
+      if (e.target.classList.contains('add-to-cart-btn')) {
+        e.preventDefault(); // Previene comportamiento por defecto del botón
+        
+        // Obtiene información del producto desde el DOM
+        const productCard = e.target.closest('.product-card');
+        const productName = productCard.querySelector('.product-title').textContent;
+        const priceText = productCard.querySelector('.product-price').textContent;
+        
+        // Crea objeto producto para agregar al carrito
+        const product = {
+          id: productName.replace(/\s+/g, '-').toLowerCase(), // Genera ID único basado en el nombre
+          name: productName,
+          price: parseFloat(priceText.replace(/[^0-9.]/g, '')), // Extrae solo números del precio
+          image: productCard.querySelector('img').src
+        };
+        
+        // Agrega al carrito usando CartLogic y actualiza la UI
+        cart = CartLogic.addToCart(product);
+        updateOffcanvasUI();
+        showNotification(product.name, product.image); // Muestra notificación de confirmación
+      }
+    });
+  }
+
+  /**
+   * Event listener para el contenedor de items del carrito
+   * Maneja modificación de cantidades y eliminación de productos
+   */
+  cartItemsContainer.addEventListener('click', (e) => {
+    const target = e.target;
+    const productId = target.closest('[data-id]')?.dataset.id; // Obtiene ID del producto
+    if (!productId) return; // Sale si no encuentra ID
+
+    // Maneja eliminación completa del producto
+    if (target.classList.contains('remove-btn')) { 
+      cart = CartLogic.removeFromCart(productId); 
+    }
+    
+    // Maneja cambios de cantidad (aumentar/disminuir)
+    if (target.classList.contains('quantity-btn')) { 
+      cart = CartLogic.changeQuantity(productId, target.dataset.action); 
+    }
+    
+    updateOffcanvasUI(); // Actualiza interfaz después de cualquier cambio
+  });
+
+  /**
+   * Event listener para el botón de limpiar carrito
+   * Vacía completamente el carrito de compras
+   */
+  clearCartButton.addEventListener('click', () => {
+    cart = CartLogic.clearCart();
+    updateOffcanvasUI();
+  });
+
+  /**
+   * Event listener para el contenedor de personajes
+   * Maneja clicks en tarjetas de personajes para mostrar modal y efectos
+   */
+  if (characterContainer) {
+      characterContainer.addEventListener('click', (e) => {
+          const card = e.target.closest('.character-card'); // Busca la tarjeta clickeada
+          if (!card) return;
+          
+          const charId = card.dataset.characterId; // Obtiene ID del personaje
+          const char = characterData.find(c => c.id === charId); // Busca datos del personaje
+          if (!char) return;
+          
+          // Ejecuta efectos interactivos
+          playCharacterSound(char.sound);    // Reproduce sonido del personaje
+          createClickParticles(card);        // Crea efecto de partículas
+          showCharacterModal(char);          // Muestra modal con información
       });
-
-      totalPriceElement.textContent = `Total: $${total.toFixed(2)}`;
-    }
   }
 
-  function addToCart(name, price, image) {
-    cart.push({ name, price, image });
-    updateCartUI();
-    showNotification(name, image);
-  }
+  // ========================================
+  //  5. MODALES Y NOTIFICACIONES
+  // ========================================
 
-  function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCartUI();
-  }
-
-  function clearCart() {
-    cart = [];
-    updateCartUI();
-  }
-
-  // Modal
+  /**
+   * Muestra una notificación toast cuando se agrega un producto al carrito
+   * @param {string} productName - Nombre del producto agregado
+   * @param {string} productImage - URL de la imagen del producto
+   */
   function showNotification(productName, productImage) {
-    const modal = document.getElementById('notificationModal');
-    document.getElementById('addedProductTitle').textContent = productName;
-    document.getElementById('addedProductImage').src = productImage;
-    modal.classList.add('show-modal');
-  }
-
-  function closeNotification() {
-    document.getElementById('notificationModal').classList.remove('show-modal');
-  }
-
-  // Event Listeners
-  document.getElementById('cartItems').addEventListener('click', (e) => {
-    if (e.target.classList.contains('remove-btn')) {
-      removeFromCart(parseInt(e.target.dataset.index, 10));
-    }
-  });
-
-  document.getElementById('clearCart')?.addEventListener('click', clearCart);
-  document.getElementById('closeModal')?.addEventListener('click', closeNotification);
-  document.getElementById('continueShopping')?.addEventListener('click', closeNotification);
-
-  // Botones de productos
-  document.querySelectorAll('.product-card .btn-primary').forEach(button => {
-    const productCard = button.closest('.product-card');
-    const productName = productCard.querySelector('.product-title').textContent;
-    const priceText = productCard.querySelector('.product-price').textContent;
-    const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
-    const image = productCard.querySelector('img').src;
-
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      addToCart(productName, price, image);
-    });
-  });
-
-  // Parallax solo en banner y sección segura
-  let ticking = false;
-  function updateParallax() {
-    const scrolled = window.pageYOffset;
-    document.querySelectorAll('.discount-banner').forEach(element => {
-      const speed = 0.5;
-      const yPos = -(scrolled * speed);
-      element.style.transform = `translateY(${yPos}px)`;
-    });
-    ticking = false;
-  }
-
-  function requestTick() {
-    if (!ticking) {
-      requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  }
-  window.addEventListener('scroll', requestTick, { passive: true });
-
-  // Efecto typing
-  function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    function type() {
-      if (i < text.length) {
-        element.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(type, speed);
-      }
-    }
-    type();
-  }
-
-  const typingObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        typeWriter(entry.target, entry.target.dataset.originalText, 50);
-        typingObserver.unobserve(entry.target);
-      }
-    });
-  });
-
-  document.querySelectorAll('.section-title').forEach(title => {
-    title.dataset.originalText = title.textContent;
-    typingObserver.observe(title);
-  });
-
-  // Partículas
-  function createParticle() {
-    const particle = document.createElement('div');
-    particle.style.cssText = `
-      position: fixed;
-      width: 4px;
-      height: 4px;
-      background: linear-gradient(45deg, var(--nintendo-red), var(--nintendo-yellow));
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: -1;
-      opacity: 0.7;
-      animation: float 6s linear infinite;
+    const toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) return;
+    
+    // Crea elemento de notificación
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.innerHTML = `
+      <img src="${productImage}" alt="${productName}">
+      <div class="toast-notification-content">
+        <p>${productName}</p>
+        <span>Se agregó a tu carrito.</span>
+      </div>
     `;
-    particle.style.left = Math.random() * window.innerWidth + 'px';
-    particle.style.top = window.innerHeight + 'px';
-    document.body.appendChild(particle);
-    setTimeout(() => particle.remove(), 6000);
-  }
-
-  let particleInterval = setInterval(createParticle, 3000);
-
-  // Iniciar carrito
-  updateCartUI();
-
-  // Theme switcher logic
-  const themeToggle = document.getElementById('theme-toggle');
-  const body = document.body;
-  const icon = themeToggle.querySelector('i');
-
-  function applyTheme(theme, isInitial) {
-    if (theme === 'light') {
-      body.classList.add('light-mode');
-      icon.classList.remove('bi-sun-fill');
-      icon.classList.add('bi-moon-fill');
-    } else {
-      body.classList.remove('light-mode');
-      icon.classList.remove('bi-moon-fill');
-      icon.classList.add('bi-sun-fill');
-    }
-    if (!isInitial) {
-        body.style.transition = 'background 0.5s ease, color 0.5s ease';
-    }
-  }
-
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  applyTheme(savedTheme, true);
-
-  themeToggle.addEventListener('click', () => {
-    const isLight = body.classList.contains('light-mode');
-    const newTheme = isLight ? 'dark' : 'light';
-    applyTheme(newTheme, false);
-    localStorage.setItem('theme', newTheme);
-  });
-
-
-
-
-  // Lógica de la galería de personajes
-  const characterData = {
-    mario: {
-      name: "Mario",
-      description: "Mario es un fontanero valiente y alegre, conocido por su característico traje rojo y azul. Es el héroe del Reino Champiñón y siempre está listo para rescatar a la Princesa Peach de las garras de Bowser.",
-      tag: "Super Mario",
-      img: "./img/mario-bros.png"
-    },
-    luigi: {
-      name: "Luigi",
-      description: "El hermano menor, más alto y a menudo temeroso de Mario. A pesar de su naturaleza nerviosa, es muy capaz y siempre ayuda cuando es necesario.",
-      tag: "Super Mario",
-      img: "././img/luigii.png"
-    },
-    peach: {
-      name: "Peach",
-      description: "La benevolente y elegante gobernante del Reino Champiñón. A menudo es el objetivo de los planes de secuestro de Bowser.",
-      tag: "Super Mario",
-      img: "././img/princesaa.png"
-    },
-    bowser: {
-        name: "Bowser",
-        description: "El rey de los Koopas, una tortuga gigante con una coraza con púas. Su objetivo principal es conquistar el Reino Champiñón.",
-        tag: "Super Mario",
-        img: "././img/bower.png"
-    },
-    wario: {
-        name: "wario",
-        description: "El valiente héroe de Hyrule, destinado a proteger el reino y a la Princesa Zelda del malvado Ganon. Poseedor de la Trifuerza del Valor.",
-        tag: "The Legend of Zelda",
-        img: "./img/wario.png"
-    },
-
-
-    // Agrega más personajes aquí
-    kirby: {
-        name: "Kirby",
-        description: "Una adorable criatura rosa del planeta Popstar con la habilidad de inhalar enemigos para copiar sus poderes. Tiene un apetito infinito.",
-        tag: "Kirby",
-        img: "#"
-    }
-  };
-
-  const characterModal = document.getElementById('characterModal');
-  const characterModalBody = document.getElementById('characterModalBody');
-  const closeCharacterModal = document.getElementById('closeCharacterModal');
-
-  document.querySelectorAll('.character-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const characterId = card.dataset.character;
-      const data = characterData[characterId];
-
-      if (data) {
-        characterModalBody.innerHTML = `
-          <img src="${data.img}" class="character-modal-img" alt="${data.name}">
-          <h2 class="character-modal-title">${data.name}</h2>
-          <p class="character-modal-description">${data.description}</p>
-          <span class="character-modal-tag">${data.tag}</span>
-        `;
-        characterModal.style.display = 'flex';
-        // Forzar un reflow para aplicar la animación de entrada
-        characterModal.querySelector('.modal-content-modern').classList.add('show');
-      }
-    });
-  });
-
-  function closeCharacterModalFunction() {
-    const modalContent = characterModal.querySelector('.modal-content-modern');
-    modalContent.classList.remove('show');
-    // Esperar a que la animación de salida termine para ocultar el overlay
+    
+    // Añade al DOM y activa animación
+    toastContainer.appendChild(toast);
+    requestAnimationFrame(() => { toast.classList.add('show'); }); // Fuerza repaint para animación
+    
+    // Programa eliminación automática después de 3 segundos
     setTimeout(() => {
-        characterModal.style.display = 'none';
-    }, 300); // Debe coincidir con la duración de la transición en CSS
+      toast.classList.remove('show');
+      toast.addEventListener('transitionend', () => toast.remove()); // Limpia DOM después de animación
+    }, 3000);
   }
 
-  closeCharacterModal.addEventListener('click', closeCharacterModalFunction);
-
-  // Cierra el modal si se hace clic fuera del contenido
-  characterModal.addEventListener('click', (e) => {
-    if (e.target === characterModal) {
-        closeCharacterModalFunction();
-    }
+  // Referencias para el modal de personajes
+  const characterModal = document.getElementById('characterModal');
+  
+  /**
+   * Muestra modal con información detallada del personaje
+   * @param {Object} character - Objeto con datos del personaje (imgSrc, name, description, tag)
+   */
+  function showCharacterModal(character) {
+      if (!characterModal) return;
+      
+      // Actualiza contenido del modal con datos del personaje
+      const characterModalBody = document.getElementById('characterModalBody');
+      characterModalBody.innerHTML = `
+          <img src="${character.imgSrc}" class="character-modal-img" alt="${character.name}">
+          <h2 class="character-modal-title">${character.name}</h2>
+          <p class="character-modal-description">${character.description}</p>
+          <span class="character-modal-tag">${character.tag}</span>`;
+      
+      // Muestra modal con animación
+      characterModal.style.display = 'flex';
+      characterModal.querySelector('.modal-content-modern').classList.add('show');
+  }
+  
+  /**
+   * Cierra el modal de personaje con animación
+   */
+  function closeCharacterModalFunction() {
+      const modalContent = characterModal.querySelector('.modal-content-modern');
+      modalContent.classList.remove('show'); // Inicia animación de salida
+      setTimeout(() => { characterModal.style.display = 'none'; }, 300); // Oculta después de animación
+  }
+  
+  // Event listeners para cerrar modal
+  document.getElementById('closeCharacterModal')?.addEventListener('click', closeCharacterModalFunction);
+  characterModal?.addEventListener('click', (e) => {
+    // Cierra modal si se hace click en el fondo (backdrop)
+    if (e.target === characterModal) closeCharacterModalFunction();
   });
+
+  // ========================================
+  //  6. OTRAS FUNCIONALIDADES
+  // ========================================
+  // Sección reservada para funcionalidades adicionales futuras
+
+  // ========================================
+  //  7. EJECUCIÓN INICIAL
+  // ========================================
+
+  // Renderiza todos los contenidos dinámicos al cargar la página
+  renderItems(productContainer, popularProductsData, productRenderer);  // Renderiza productos principales
+  renderItems(pokemonContainer, pokemonData, pokemonRenderer);          // Renderiza sección Pokémon
+  renderItems(characterContainer, characterData, characterRenderer);    // Renderiza galería de personajes
+  renderItems(newsContainer, newsData, newsRenderer);                   // Renderiza noticias
+  
+  // Inicializa estado de la interfaz del carrito
+  updateOffcanvasUI();
+  
+  // Activa observador de animaciones fade-in (función definida externamente)
+  observeFadeIn();
 
 });
 
+// ========================================
+//  FUNCIONES GLOBALES (fuera del scope del DOMContentLoaded)
+// ========================================
 
+/**
+ * Activa efecto visual de estrella en un botón
+ * @param {HTMLElement} button - Elemento botón al que aplicar el efecto
+ */
+function activateStarEffect(button) {
+  button.classList.remove('active');  // Remueve clase activa previa
+  void button.offsetWidth;           // Fuerza reflow para reiniciar animación
+  button.classList.add('active');    // Añade clase que activa la animación CSS
+  
+  // Remueve la clase después de 3 segundos para permitir repetir efecto
+  setTimeout(() => {
+    button.classList.remove('active');
+  }, 3000);
+}
 
-
-
-// 🎆 FUNCIÓN PARA CREAR PARTÍCULAS
-function createClickParticles(element) {
-    const character = element.dataset.character;
-    const rect = element.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    // Efecto visual en la tarjeta
-    element.classList.add('clicked');
-    setTimeout(() => element.classList.remove('clicked'), 400);
-
-    // Colores por personaje
-    const colors = {
-        mario: ['#E60012', '#FF4444', '#FFD700'],
-        luigi: ['#00AA00', '#44FF44', '#90EE90'],
-        peach: ['#FF69B4', '#FFB6C1', '#FFC0CB'],
-        bowser: ['#8B4513', '#D2691E', '#FF4500'],
-        wario: ['#FFD700', '#FFFF00', '#FFA500'],
-        kirby: ['#FFB6C1', '#FF69B4', '#FF1493']
-    };
-    
-    const particleColors = colors[character] || ['#FFD700', '#FF69B4'];
-    
-    // Crear 12 partículas
-    for (let i = 0; i < 12; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'click-particle';
+/**
+ * Reproduce sonido asociado a un personaje
+ * @param {string} soundPath - Ruta del archivo de audio a reproducir
+ */
+function playCharacterSound(soundPath) { 
+    if (soundPath) {
+        const audio = new Audio(soundPath);
+        audio.volume = 0.7; // Establece volumen al 70%
         
-        // Posición inicial (centro de la tarjeta)
-        particle.style.left = centerX + 'px';
-        particle.style.top = centerY + 'px';
-        
-        // Calcular dirección
-        const angle = (360 / 12) * i + (Math.random() - 0.5) * 45;
-        const distance = 60 + Math.random() * 30;
-        
-        const radians = angle * Math.PI / 180;
-        const dx = Math.cos(radians) * distance;
-        const dy = Math.sin(radians) * distance;
-        
-        // Variables CSS para la animación
-        particle.style.setProperty('--dx', dx + 'px');
-        particle.style.setProperty('--dy', dy + 'px');
-        
-        // Color aleatorio
-        const randomColor = particleColors[Math.floor(Math.random() * particleColors.length)];
-        particle.style.background = `radial-gradient(circle, ${randomColor}, ${randomColor}aa)`;
-        
-        // Tamaño aleatorio
-        const size = 6 + Math.random() * 8;
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        
-        document.body.appendChild(particle);
-        
-        // Limpiar después de 800ms
-        setTimeout(() => particle.remove(), 800);
+        // Reproduce audio con manejo de errores
+        audio.play().catch(error => console.log('Error al reproducir sonido:', error));
     }
 }
 
-// 🎵 FUNCIÓN MEJORADA PARA SONIDO + PARTÍCULAS
-function playCharacterSound(element) {
-    // Reproducir sonido original
-    const soundPath = element.getAttribute('data-sound');
-    if (soundPath) {
-        const audio = new Audio(soundPath);
-        audio.volume = 0.7;
-        audio.play().catch(error => console.log('Error:', error));
-    }
+/**
+ * Crea efecto visual de partículas al hacer click en un personaje
+ * @param {HTMLElement} element - Elemento sobre el cual crear las partículas
+ */
+function createClickParticles(element) {
+  const characterId = element.dataset.characterId;
+  const rect = element.getBoundingClientRect(); // Obtiene posición del elemento en pantalla
+  
+  // Define colores específicos para cada personaje
+  const colors = {
+    mario: ['#E60012', '#FFD700'],      // Rojo y dorado
+    luigi: ['#00AA00', '#90EE90'],      // Verde y verde claro
+    peach: ['#FF69B4', '#FFC0CB'],      // Rosa y rosa claro
+    bowser: ['#8B4513', '#FF4500'],     // Marrón y naranja
+    wario: ['#FFD700', '#FFA500']       // Dorado y naranja
+  };
+  
+  const particleColors = colors[characterId] || ['#FFD700']; // Color por defecto: dorado
+  
+  // Crea 12 partículas distribuidas en círculo
+  for (let i = 0; i < 12; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'click-particle';
     
-    // Crear partículas
-    createClickParticles(element);
+    // Posiciona partícula en el centro del elemento clickeado
+    particle.style.left = (rect.left + rect.width / 2) + 'px';
+    particle.style.top = (rect.top + rect.height / 2) + 'px';
+    
+    // Calcula dirección de movimiento (distribución circular)
+    const angle = (360 / 12) * i;  // Divide círculo en 12 partes iguales
+    const distance = 60 + Math.random() * 30; // Distancia aleatoria entre 60-90px
+    const dx = Math.cos(angle * Math.PI / 180) * distance; // Componente X del movimiento
+    const dy = Math.sin(angle * Math.PI / 180) * distance; // Componente Y del movimiento
+    
+    // Establece variables CSS para la animación
+    particle.style.setProperty('--dx', dx + 'px');
+    particle.style.setProperty('--dy', dy + 'px');
+    
+    // Asigna color aleatorio del array de colores del personaje
+    particle.style.background = particleColors[Math.floor(Math.random() * particleColors.length)];
+    
+    // Añade partícula al DOM
+    document.body.appendChild(particle);
+    
+    // Elimina partícula después de la animación (800ms)
+    setTimeout(() => particle.remove(), 800);
+  }
 }

@@ -1,0 +1,29 @@
+/* Estilos para la página de checkout */
+
+.summary-card {
+  background-color: var(--product-card-bg);
+  border: 1px solid rgba(230, 0, 18, 0.2);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.summary-item .item-info {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.summary-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--border-radius-small);
+}
+
+body.light-mode .summary-card {
+  background-color: #ffffff;
+  border-color: #dee2e6;
+}

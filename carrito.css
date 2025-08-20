@@ -1,0 +1,92 @@
+/* =========================================
+   ESTILOS PARA LA PÁGINA DEL CARRITO
+   ========================================= */
+
+/* 
+ * TARJETA DE RESUMEN DEL PEDIDO
+ * Contenedor principal que muestra el resumen de precios, subtotal y total
+ * Utiliza variables CSS para mantener consistencia con el tema general
+ */
+.summary-card {
+  /* Color de fondo basado en la variable del tema (modo oscuro por defecto) */
+  background-color: var(--product-card-bg);
+  /* Borde sutil con el color rojo característico de Nintendo con transparencia */
+  border: 1px solid rgba(230, 0, 18, 0.2);
+}
+
+/* 
+ * FILA DE PRODUCTO EN EL CARRITO
+ * Cada item del carrito se muestra como una fila horizontal con imagen, detalles y controles
+ */
+.cart-item-row {
+  /* Layout flexbox para alinear horizontalmente todos los elementos */
+  display: flex;
+  /* Centra verticalmente todos los elementos de la fila */
+  align-items: center;
+  /* Espacio entre elementos (imagen, detalles, precio, controles) */
+  gap: 1rem;
+  /* Espaciado interno superior e inferior */
+  padding: 1rem 0;
+  /* Línea separadora entre productos con transparencia para modo oscuro */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 
+ * IMAGEN DEL PRODUCTO EN EL CARRITO
+ * Miniatura cuadrada del producto con esquinas redondeadas
+ */
+.cart-item-row img {
+  /* Dimensiones fijas para mantener consistencia visual */
+  width: 100px;
+  height: 100px;
+  /* Mantiene las proporciones de la imagen sin distorsión */
+  object-fit: cover;
+  /* Esquinas redondeadas usando variable CSS del tema */
+  border-radius: var(--border-radius-small);
+}
+
+/* 
+ * CONTENEDOR DE DETALLES DEL PRODUCTO
+ * Área que contiene nombre, descripción y precio del producto
+ */
+.cart-item-details {
+  /* Ocupa todo el espacio disponible entre imagen y controles */
+  flex-grow: 1;
+}
+
+/* 
+ * CONTROLES DE CANTIDAD
+ * Botones para aumentar/disminuir cantidad y campo de input numérico
+ */
+.quantity-controls {
+  /* Layout horizontal para los controles de cantidad */
+  display: flex;
+  /* Centra verticalmente los botones y el input */
+  align-items: center;
+  /* Pequeño espacio entre botón (-), input numérico y botón (+) */
+  gap: 0.5rem;
+}
+
+/* =========================================
+   ESTILOS PARA MODO CLARO (LIGHT MODE)
+   ========================================= */
+
+/* 
+ * ADAPTACIÓN DE LA TARJETA DE RESUMEN PARA TEMA CLARO
+ * Sobrescribe los estilos cuando el body tiene la clase 'light-mode'
+ */
+body.light-mode .summary-card {
+  /* Fondo blanco para modo claro */
+  background-color: #ffffff;
+  /* Borde gris suave característico de Bootstrap para modo claro */
+  border-color: #dee2e6;
+}
+
+/* 
+ * ADAPTACIÓN DE LAS FILAS DE PRODUCTOS PARA TEMA CLARO
+ * Cambia el color del borde separador para mejor contraste en fondo claro
+ */
+body.light-mode .cart-item-row {
+  /* Línea separadora gris suave para modo claro (mejor contraste que blanco transparente) */
+  border-bottom-color: #dee2e6;
+}

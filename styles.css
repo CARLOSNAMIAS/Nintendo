@@ -8,7 +8,7 @@
  * 
  * Autor: [Carlos Gómez]
  * Versión: 2.0
- * Fecha: Diciembre 2024
+ * Fecha: Julio 2025
  * 
  * Índice de contenido:
  * 1. Reset y configuración base
@@ -139,9 +139,7 @@ body {
   transition: all var(--transition-base);
   padding: var(--spacing-md) 0;
   padding-top: 0.1rem;
-  /* Reduce el espacio superior */
   padding-bottom: 0.1rem;
-  /* Reduce el espacio inferior */
 }
 
 /* === LOGO === */
@@ -166,7 +164,6 @@ body {
   overflow: hidden;
 }
 
-/* Efecto hover con pseudo-elemento */
 .navbar-nav .nav-link::before {
   content: '';
   position: absolute;
@@ -202,7 +199,6 @@ body {
   overflow: hidden;
 }
 
-/* Efecto ripple en botón del carrito */
 .btn-cart::before {
   content: '';
   position: absolute;
@@ -261,7 +257,6 @@ body {
   transform: scale(1.02);
 }
 
-/* === CONTROLES DEL CARRUSEL === */
 .carousel-control-prev,
 .carousel-control-next {
   width: 5%;
@@ -289,7 +284,6 @@ body {
   overflow: hidden;
 }
 
-/* Efecto shimmer animado */
 .discount-banner::before {
   content: '';
   position: absolute;
@@ -317,16 +311,13 @@ body {
    7. TARJETAS DE PRODUCTOS
    ======================================== */
 
-/* === CONTENEDOR DE PRODUCTOS === */
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-xl);
   padding: var(--spacing-xl) 0;
-
 }
 
-/* === TARJETA INDIVIDUAL === */
 .product-card {
   background: var(--product-card-bg);
   border: 1px solid rgba(230, 0, 18, 0.3);
@@ -339,7 +330,6 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Efecto de barrido luminoso */
 .product-card::before {
   content: '';
   position: absolute;
@@ -361,7 +351,6 @@ body {
   border-color: var(--nintendo-red);
 }
 
-/* === IMAGEN DEL PRODUCTO === */
 .product-card img {
   width: 100%;
   height: 200px;
@@ -374,7 +363,6 @@ body {
   transform: scale(1.05);
 }
 
-/* === TEXTO DEL PRODUCTO === */
 .product-title {
   color: var(--nintendo-red);
   font-weight: bold;
@@ -392,13 +380,10 @@ body {
 /* ========================================
    8. SECCIONES DE JUEGOS
    ======================================== */
-/* En tu archivo styles.css */
 .game-section {
   text-align: center;
   margin: 0 auto;
-  /* Centra el contenedor */
   max-width: 1200px;
-  /* Opcional: limita el ancho máximo */
 }
 
 .card-container {
@@ -408,7 +393,6 @@ body {
   gap: 1.5rem;
 }
 
-/* === TÍTULO DE SECCIÓN === */
 .section-title {
   color: var(--nintendo-red);
   font-weight: bold;
@@ -420,7 +404,6 @@ body {
   position: relative;
 }
 
-/* Línea decorativa debajo del título */
 .section-title::after {
   content: '';
   position: absolute;
@@ -437,7 +420,6 @@ body {
    9. TARJETAS POKÉMON ESPECIALES
    ======================================== */
 
-/* === CONTENEDOR DE TARJETAS POKÉMON === */
 .pokemon-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, 320px);
@@ -446,7 +428,6 @@ body {
   justify-content: center;
 }
 
-/* === TARJETA POKÉMON BASE === */
 .pokemon-card {
   background: linear-gradient(145deg, #6a0dad 0%, #4b0082 100%);
   border-radius: var(--border-radius);
@@ -455,7 +436,6 @@ body {
   position: relative;
 }
 
-/* Efecto de brillo en hover */
 .pokemon-card::before {
   content: '';
   position: absolute;
@@ -477,7 +457,6 @@ body {
   box-shadow: 0 20px 40px rgba(106, 13, 173, 0.4);
 }
 
-/* === VARIANTES DE TARJETAS POKÉMON === */
 .pokemon-card-2 {
   background: linear-gradient(145deg, #FFD700 0%, #FFA500 100%);
 }
@@ -486,7 +465,6 @@ body {
   background: linear-gradient(145deg, #0066CC 0%, #003d7a 100%);
 }
 
-/* === TEXTO EN TARJETAS POKÉMON === */
 .pokemon-card .card-title,
 .pokemon-card .card-text {
   color: white;
@@ -527,7 +505,6 @@ body {
   color: var(--nintendo-red);
 }
 
-/* === ICONOS SOCIALES === */
 .social-icons a {
   display: inline-block;
   margin: 0 var(--spacing-md);
@@ -544,7 +521,6 @@ body {
    11. MODALES
    ======================================== */
 
-/* === OVERLAY DEL MODAL === */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -559,7 +535,6 @@ body {
   justify-content: center;
 }
 
-/* === CONTENIDO DEL MODAL === */
 .modal-content-modern {
   background: var(--gradient-primary);
   border-radius: var(--border-radius);
@@ -603,7 +578,6 @@ body {
   font-weight: bold;
 }
 
-/* === FORMULARIOS === */
 .form-control {
   background: var(--form-control-bg);
   border: 1px solid rgba(230, 0, 18, 0.3);
@@ -624,66 +598,36 @@ body {
   color: var(--form-placeholder-color);
 }
 
-
 .btn-close-red {
   filter: invert(17%) sepia(100%) saturate(3500%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
-
 
 /* ========================================
    13. ANIMACIONES
    ======================================== */
 
-/* === ANIMACIÓN FADE IN UP === */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .fade-in-up {
   animation: fadeInUp 0.8s ease forwards;
 }
 
-/* === ANIMACIÓN SHIMMER === */
 @keyframes shimmer {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-/* === ANIMACIÓN SPIN === */
 @keyframes spin {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* === ANIMACIÓN FLOAT (PARTÍCULAS) === */
 @keyframes float {
-  0% {
-    transform: translateY(0);
-    opacity: 0.7;
-  }
-
-  100% {
-    transform: translateY(-100vh);
-    opacity: 0;
-  }
+  0% { transform: translateY(0); opacity: 0.7; }
+  100% { transform: translateY(-100vh); opacity: 0; }
 }
 
 /* ========================================
@@ -691,7 +635,6 @@ body {
    ======================================== */
 
 body.light-mode {
-  /* === VARIABLES PARA TEMA CLARO === */
   --body-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   --text-color: #343a40;
   --navbar-bg: rgba(255, 255, 255, 0.9);
@@ -720,10 +663,6 @@ body.light-mode {
   padding: var(--spacing-xl) 0;
   perspective: 1000px;
 }
-
-
-
-
 
 .character-card {
   position: relative;
@@ -771,7 +710,6 @@ body.light-mode {
   box-shadow: 0 0 15px var(--nintendo-red);
 }
 
-/* === MODAL DE PERSONAJE === */
 .character-modal-content {
   max-width: 400px;
   background: var(--offcanvas-bg);
@@ -792,10 +730,7 @@ body.light-mode {
   margin-bottom: var(--spacing-md);
   filter: drop-shadow(0 10px 20px rgba(255, 43, 1, 0.546));
   border-radius: 0 !important;
-  /* Override default modal img style */
   border: none !important;
-  /* Override default modal img style */
-  
 }
 
 .character-modal-title {
@@ -821,8 +756,6 @@ body.light-mode {
   font-weight: bold;
 }
 
-
-
 /* 🎆 ESTILOS PARA LAS PARTÍCULAS */
 .click-particle {
   position: fixed;
@@ -835,43 +768,20 @@ body.light-mode {
 }
 
 @keyframes particleExplosion {
-  0% {
-    transform: translate(0, 0) scale(0);
-    opacity: 1;
-  }
-
-  20% {
-    transform: translate(calc(var(--dx) * 0.2), calc(var(--dy) * 0.2)) scale(1.2);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(var(--dx), var(--dy)) scale(0);
-    opacity: 0;
-  }
+  0% { transform: translate(0, 0) scale(0); opacity: 1; }
+  20% { transform: translate(calc(var(--dx) * 0.2), calc(var(--dy) * 0.2)) scale(1.2); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
 }
 
-/* Efecto en la tarjeta al hacer clic */
 .character-card.clicked {
   animation: cardClickEffect 0.4s ease;
 }
 
 @keyframes cardClickEffect {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-  }
-
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
+  100% { transform: scale(1); }
 }
-
-
 
 /* ========================================
    SECCIÓN DE NOTICIAS
@@ -939,17 +849,9 @@ body.light-mode {
   text-transform: uppercase;
 }
 
-.tag-direct {
-  background-color: var(--nintendo-red);
-}
-
-.tag-esports {
-  background-color: var(--nintendo-purple);
-}
-
-.tag-update {
-  background-color: var(--nintendo-blue);
-}
+.tag-direct { background-color: var(--nintendo-red); }
+.tag-esports { background-color: var(--nintendo-purple); }
+.tag-update { background-color: var(--nintendo-blue); }
 
 .news-card-title {
   font-size: var(--font-size-lg);
@@ -980,231 +882,111 @@ body.light-mode {
   border-color: var(--nintendo-red);
 }
 
-
-
 /* === OVERRIDES ESPECÍFICOS PARA TEMA CLARO === */
-body.light-mode .product-price {
-  color: var(--nintendo-red);
-}
-
-body.light-mode .product-card .text-light {
-  color: var(--text-color) !important;
-}
-
-body.light-mode .navbar-nav .nav-link:hover {
-  color: var(--nintendo-light) !important;
-}
-
-body.light-mode .dropdown-menu {
-  background: #ffffff;
-  border-color: #dee2e6;
-}
-
-body.light-mode .dropdown-item {
-  color: #212529;
-}
-
-body.light-mode .dropdown-item:hover {
-  background: var(--nintendo-red);
-  color: white;
-}
+body.light-mode .product-price { color: var(--nintendo-red); }
+body.light-mode .product-card .text-light { color: var(--text-color) !important; }
+body.light-mode .navbar-nav .nav-link:hover { color: var(--nintendo-light) !important; }
+body.light-mode .dropdown-menu { background: #ffffff; border-color: #dee2e6; }
+body.light-mode .dropdown-item { color: #212529; }
+body.light-mode .dropdown-item:hover { background: var(--nintendo-red); color: white; }
 
 /* ========================================
    15. MEDIA QUERIES (RESPONSIVE)
    ======================================== */
 
-/* === TABLETS === */
 @media (max-width: 992px) {
-  .section-title {
-    font-size: var(--font-size-xxl);
-  }
-
-  .carousel-item img {
-    height: 350px;
-  }
+  .section-title { font-size: var(--font-size-xxl); }
+  .carousel-item img { height: 350px; }
 }
 
-/* === MÓVILES === */
 @media (max-width: 768px) {
-  .section-title {
-    font-size: var(--font-size-xxl);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .card-container {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
-  }
-
-  .pokemon-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .discount-banner {
-    padding: var(--spacing-lg);
-  }
-
-  .discount-banner h3 {
-    font-size: var(--font-size-lg);
-  }
-
-  .carousel-item img {
-    height: 250px;
-  }
-
-  .game-section {
-    padding: var(--spacing-lg);
-    margin: var(--spacing-xl) 0;
-  }
-
-  .footer {
-    padding: var(--spacing-xl) 0 var(--spacing-lg);
-  }
-
-  .social-icons a {
-    margin: 0 var(--spacing-sm);
-  }
+  .section-title { font-size: var(--font-size-xxl); margin-bottom: var(--spacing-md); }
+  .card-container, .pokemon-cards, .news-container { grid-template-columns: 1fr; gap: var(--spacing-md); }
+  .discount-banner { padding: var(--spacing-lg); }
+  .discount-banner h3 { font-size: var(--font-size-lg); }
+  .carousel-item img { height: 250px; }
+  .game-section { padding: var(--spacing-lg); margin: var(--spacing-xl) 0; }
+  .footer { padding: var(--spacing-xl) 0 var(--spacing-lg); }
+  .social-icons a { margin: 0 var(--spacing-sm); }
 }
 
-/* === MÓVILES PEQUEÑOS === */
 @media (max-width: 480px) {
-  .modal-content-modern {
-    width: 95%;
-    padding: var(--spacing-lg);
-  }
-
-  .product-card {
-    padding: var(--spacing-md);
-  }
-
-  .discount-banner {
-    padding: var(--spacing-md);
-  }
+  .modal-content-modern { width: 95%; padding: var(--spacing-lg); }
+  .product-card, .discount-banner { padding: var(--spacing-md); }
 }
 
 /* ========================================
    16. UTILIDADES Y HELPERS
    ======================================== */
 
-/* === BOTONES === */
-.btn-primary {
-  background: var(--gradient-secondary);
-  border: none;
+/* ... (otros helpers) ... */
+
+.navbar-toggler { border: none; background: transparent; padding: 0; }
+.navbar-toggler:focus { box-shadow: none; }
+
+/* ========================================
+   ESTILOS ADICIONALES PARA CARRITO Y TOASTS
+   ======================================== */
+
+.offcanvas-footer {
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(230, 0, 18, 0.3);
+}
+
+.quantity-btn, .remove-btn {
+  line-height: 1;
+  padding: 0.2rem 0.5rem;
+}
+
+.object-fit-cover { object-fit: cover; }
+
+body.light-mode .offcanvas-footer {
+    background: rgba(0, 0, 0, 0.05);
+    border-top: 1px solid #dee2e6;
+}
+
+.toast-container {
+  z-index: var(--z-tooltip);
+}
+
+.toast-notification {
+  background: linear-gradient(135deg, var(--nintendo-dark) 0%, var(--nintendo-purple) 100%);
   color: white;
-  padding: 0.75rem var(--spacing-xl);
-  border-radius: var(--border-radius-large);
-  font-weight: bold;
-  transition: all var(--transition-base);
-  box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
-  width: 100%;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 102, 204, 0.5);
-}
-
-.btn-danger {
-  background: var(--gradient-primary);
-  border: none;
-  border-radius: var(--border-radius-large);
-  padding: 0.75rem var(--spacing-lg);
-  font-weight: bold;
-  transition: all var(--transition-base);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-danger::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transition: all var(--transition-base);
-  transform: translate(-50%, -50%);
-}
-
-.btn-danger:hover::before {
-  width: 300px;
-  height: 300px;
-}
-
-.btn-danger:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
-}
-
-/* === ACCESIBILIDAD === */
-:focus-visible {
-  outline: 2px solid var(--nintendo-yellow);
-  outline-offset: 2px;
-}
-
-/* === ESTADOS DE CARGA === */
-.loading {
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--nintendo-red);
-  border-top: 2px solid transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  transform: translate(-50%, -50%);
-}
-
-/* === DROPDOWN MENUS === */
-.dropdown-menu {
-  background: var(--nintendo-dark);
-  border: 1px solid var(--nintendo-red);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-md);
-  box-shadow: var(--shadow-soft);
-}
-
-.dropdown-item {
-  color: var(--nintendo-light);
-  transition: all var(--transition-base);
-  padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--border-radius-small);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--nintendo-red);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.dropdown-item:hover {
-  background: var(--nintendo-red);
-  color: white;
+.toast-notification.show {
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.dropdown-divider {
-  border-color: rgba(230, 0, 18, 0.3);
+.toast-notification img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--nintendo-red);
 }
 
-/* === UTILIDADES DE TEXTO === */
-.text-gradient {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.toast-notification-content p { margin: 0; font-weight: bold; }
+.toast-notification-content span { font-size: 0.875rem; opacity: 0.8; }
+
+body.light-mode .toast-notification {
+    background: linear-gradient(135deg, #ffffff 0%, #e9ecef 100%);
+    color: var(--text-color);
+    border-color: #dee2e6;
 }
 
-/* === UTILIDADES DE ESPACIADO === */
-.section-spacing {
-  margin: var(--spacing-xxl) 0;
-}
-
-.content-spacing {
-  padding: var(--spacing-xl) 0;
-}
 
 
 
@@ -1396,11 +1178,6 @@ body.light-mode .dropdown-item:hover {
 }
 
 
-
-
-
-
-
 /* ========================================
    FIN DEL ARCHIVO CSS
-   ======================================== */
+   ========================
