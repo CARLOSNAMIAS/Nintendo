@@ -5,11 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const messagesContainer = document.getElementById('chatbot-messages');
     const inputField = document.getElementById('chatbot-input');
     const sendButton = document.getElementById('chatbot-send-btn');
+    const overlay = document.getElementById('chatbot-overlay'); // Get the overlay element
 
     // --- Lógica para abrir/cerrar el chatbot ---
-    toggleButton.addEventListener('click', () => {
+    const toggleChat = () => {
         chatbotContainer.classList.toggle('open');
-    });
+        overlay.classList.toggle('visible');
+    };
+
+    toggleButton.addEventListener('click', toggleChat);
+    overlay.addEventListener('click', toggleChat); // Close chat when overlay is clicked
 
     // --- Lógica para enviar mensajes ---
     const sendMessage = () => {

@@ -2,41 +2,61 @@
  * ========================================
  * NINTENDO WEBSITE STYLES
  * ========================================
- * 
- * Archivo CSS principal para el sitio web de Nintendo
- * Incluye estilos para tema oscuro y claro
- * 
- * Autor: [Carlos Gómez]
- * Versión: 2.0
- * Fecha: Julio 2025
- * 
- * Índice de contenido:
- * 1. Reset y configuración base
- * 2. Variables CSS (Custom Properties)
- * 3. Estilos base del body
- * 4. Header y navegación
- * 5. Carrusel principal
- * 6. Banner de descuentos
- * 7. Tarjetas de productos
- * 8. Secciones de juegos
- * 9. Tarjetas Pokémon especiales
- * 10. Footer
+ *
+ * Archivo CSS principal para el sitio web de Nintendo.
+ * Contiene toda la estilización, incluyendo un sistema de diseño basado en variables,
+ * estilos para componentes de Bootstrap personalizados, y modos de tema claro y oscuro.
+ *
+ * @autor: [Carlos Gómez]
+ * @version: 2.1 (Comentado)
+ * @fecha: Agosto 2025
+ *
+ * ========================================
+ * ÍNDICE DE CONTENIDO
+ * ========================================
+ *
+ * 1.  Reset y Configuración Base
+ * 2.  Variables CSS (Custom Properties)
+ * 3.  Estilos Base del Body
+ * 4.  Header y Navegación
+ * 5.  Carrusel Principal
+ * 6.  Banner de Descuentos
+ * 7.  Tarjetas de Productos
+ * 8.  Secciones de Juegos
+ * 9.  Tarjetas Pokémon Especiales
+ * 10. Footer (Pie de Página)
  * 11. Modales
- * 12. Offcanvas
- * 13. Animaciones
- * 14. Tema claro (Light mode)
- * 15. Media queries (Responsive)
- * 16. Utilidades y helpers
+ * 12. Offcanvas (Menú Lateral)
+ * 13. Animaciones Globales
+ * 14. Tema Claro (Light Mode)
+ * 15. Galería de Personajes
+ * 16. Partículas de Clic
+ * 17. Sección de Noticias
+ * 18. Media Queries (Diseño Responsivo)
+ * 19. Utilidades y Helpers
+ * 20. Estilos Adicionales (Carrito, Toasts)
+ * 21. Efecto Super Estrella
+ * 22. Chatbot
+ *
  */
 
 /* ========================================
    1. RESET Y CONFIGURACIÓN BASE
    ======================================== */
 
+/*
+ * Reseteo universal para un comportamiento consistente entre navegadores.
+ * Se aplica a todos los elementos (*), incluyendo sus pseudoelementos.
+ */
 *,
 *::before,
 *::after {
+  /*
+   * Cambia el modelo de caja. `border-box` asegura que el padding y el borde
+   * se incluyan dentro del ancho y alto total del elemento, evitando cálculos complejos.
+   */
   box-sizing: border-box;
+  /* Elimina márgenes y paddings por defecto de todos los elementos. */
   margin: 0;
   padding: 0;
 }
@@ -45,8 +65,12 @@
    2. VARIABLES CSS (CUSTOM PROPERTIES)
    ======================================== */
 
+/*
+ * El pseudoelemento :root define variables CSS globales que pueden ser reutilizadas
+ * en todo el documento. Facilita el mantenimiento y la consistencia del diseño.
+ */
 :root {
-  /* === COLORES PRINCIPALES === */
+  /* === PALETA DE COLORES CORPORATIVOS === */
   --nintendo-red: #E60012;
   --nintendo-blue: #0066CC;
   --nintendo-dark: #0F0F23;
@@ -61,22 +85,30 @@
 
   /* === SOMBRAS === */
   --shadow-soft: 0 10px 40px rgba(230, 0, 18, 0.15);
+  /* Sombra sutil para elevación. */
   --shadow-hover: 0 20px 60px rgba(230, 0, 18, 0.25);
+  /* Sombra más pronunciada para interacciones. */
 
   /* === BORDES === */
   --border-radius: 20px;
   --border-radius-small: 10px;
   --border-radius-large: 50px;
 
-  /* === ESPACIADO === */
+  /* === SISTEMA DE ESPACIADO === */
   --spacing-xs: 0.25rem;
+  /* 4px */
   --spacing-sm: 0.5rem;
+  /* 8px */
   --spacing-md: 1rem;
+  /* 16px */
   --spacing-lg: 1.5rem;
+  /* 24px */
   --spacing-xl: 2rem;
+  /* 32px */
   --spacing-xxl: 3rem;
+  /* 48px */
 
-  /* === TIPOGRAFÍA === */
+  /* === JERARQUÍA TIPOGRÁFICA === */
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
@@ -89,7 +121,7 @@
   --transition-base: 0.3s ease;
   --transition-slow: 0.5s ease;
 
-  /* === VARIABLES TEMÁTICAS (TEMA OSCURO) === */
+  /* === VARIABLES PARA EL TEMA (Oscuro por defecto) === */
   --body-bg: linear-gradient(135deg, #0F0F23 0%, #1a1a3a 50%, #0F0F23 100%);
   --text-color: var(--nintendo-light);
   --navbar-bg: rgba(15, 15, 35, 0.95);
@@ -102,7 +134,7 @@
   --form-control-color: white;
   --form-placeholder-color: rgba(255, 255, 255, 0.6);
 
-  /* === Z-INDEX SCALE === */
+  /* === ESCALA DE Z-INDEX (Capas de apilamiento) === */
   --z-dropdown: 1000;
   --z-sticky: 1020;
   --z-fixed: 1030;
@@ -120,9 +152,12 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: var(--font-size-base);
   line-height: 1.6;
+  /* Mejora la legibilidad del texto. */
   background: var(--body-bg);
   color: var(--text-color);
   overflow-x: hidden;
+  /* Previene el scroll horizontal. */
+  /* Transición suave para el cambio entre tema claro y oscuro. */
   transition: background var(--transition-slow), color var(--transition-slow);
 }
 
@@ -130,9 +165,13 @@ body {
    4. HEADER Y NAVEGACIÓN
    ======================================== */
 
-/* === NAVBAR PRINCIPAL === */
 .navbar {
   background: var(--navbar-bg) !important;
+  /* `!important` para sobreescribir estilos de Bootstrap. */
+  /*
+   * `backdrop-filter` crea un efecto "vidrio esmerilado" en el fondo de la navbar,
+   * desenfocando el contenido que se encuentra detrás. Mejora la legibilidad.
+   */
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(230, 0, 18, 0.3);
@@ -142,17 +181,17 @@ body {
   padding-bottom: 0.1rem;
 }
 
-/* === LOGO === */
 .navbar-brand img {
   filter: brightness(1.2);
+  /* Aumenta ligeramente el brillo del logo. */
   transition: transform var(--transition-base);
 }
 
 .navbar-brand img:hover {
   transform: scale(1.1);
+  /* Efecto de zoom al pasar el mouse. */
 }
 
-/* === ENLACES DE NAVEGACIÓN === */
 .navbar-nav .nav-link {
   color: var(--nintendo-light) !important;
   font-weight: 500;
@@ -161,31 +200,40 @@ body {
   border-radius: var(--border-radius);
   transition: all var(--transition-base);
   position: relative;
+  /* Necesario para posicionar el pseudoelemento ::before. */
   overflow: hidden;
+  /* Oculta el gradiente del pseudoelemento fuera del botón. */
 }
 
+/*
+ * El pseudoelemento `::before` se usa para crear un efecto de "barrido" de color
+ * al pasar el mouse sobre los enlaces de navegación.
+ */
 .navbar-nav .nav-link::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
+  /* Inicialmente, el gradiente está fuera del enlace, a la izquierda. */
   width: 100%;
   height: 100%;
   background: var(--gradient-primary);
   transition: left var(--transition-base);
   z-index: -1;
+  /* Se coloca detrás del texto del enlace. */
 }
 
 .navbar-nav .nav-link:hover::before {
   left: 0;
+  /* Al hacer hover, el gradiente se desliza hacia la derecha, cubriendo el fondo. */
 }
 
 .navbar-nav .nav-link:hover {
   color: white !important;
   transform: translateY(-2px);
+  /* Eleva ligeramente el enlace. */
 }
 
-/* === BOTÓN DEL CARRITO === */
 .btn-cart {
   background: var(--gradient-primary);
   border: none;
@@ -199,6 +247,9 @@ body {
   overflow: hidden;
 }
 
+/*
+ * Efecto de "onda expansiva" en el botón del carrito al pasar el mouse.
+ */
 .btn-cart::before {
   content: '';
   position: absolute;
@@ -214,6 +265,7 @@ body {
 
 .btn-cart:hover::before {
   width: 300px;
+  /* La onda se expande. */
   height: 300px;
 }
 
@@ -222,7 +274,6 @@ body {
   box-shadow: var(--shadow-hover);
 }
 
-/* === BADGE DEL CARRITO === */
 .cart-badge {
   background: var(--nintendo-yellow);
   color: var(--nintendo-dark);
@@ -250,9 +301,11 @@ body {
   height: 500px;
   width: 100%;
   object-fit: cover;
+  /* Asegura que la imagen cubra todo el espacio sin deformarse. */
   transition: transform var(--transition-slow);
 }
 
+/* Efecto de zoom sutil en la imagen activa del carrusel. */
 .carousel-item.active img {
   transform: scale(1.02);
 }
@@ -262,6 +315,7 @@ body {
   width: 5%;
 }
 
+/* Gradiente sutil en los controles para que se integren mejor con la imagen. */
 .carousel-control-prev {
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
 }
@@ -284,6 +338,7 @@ body {
   overflow: hidden;
 }
 
+/* Animación de brillo que gira para atraer la atención. */
 .discount-banner::before {
   content: '';
   position: absolute;
@@ -313,6 +368,10 @@ body {
 
 .card-container {
   display: grid;
+  /*
+   * Crea una cuadrícula responsiva. Las columnas se ajustan automáticamente.
+   * Cada tarjeta tendrá un ancho mínimo de 300px y crecerá para ocupar el espacio disponible.
+   */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-xl);
   padding: var(--spacing-xl) 0;
@@ -326,10 +385,11 @@ body {
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
-  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  /* Efecto de vidrio para el fondo de la tarjeta. */
 }
 
+/* Efecto de barrido de luz al pasar el mouse. */
 .product-card::before {
   content: '';
   position: absolute;
@@ -347,6 +407,7 @@ body {
 
 .product-card:hover {
   transform: translateY(-10px);
+  /* Eleva la tarjeta. */
   box-shadow: var(--shadow-hover);
   border-color: var(--nintendo-red);
 }
@@ -356,6 +417,7 @@ body {
   height: 200px;
   object-fit: cover;
   border-radius: calc(var(--border-radius) - 10px);
+  /* Borde interior más pequeño que la tarjeta. */
   transition: transform var(--transition-base);
 }
 
@@ -380,6 +442,7 @@ body {
 /* ========================================
    8. SECCIONES DE JUEGOS
    ======================================== */
+
 .game-section {
   text-align: center;
   margin: 0 auto;
@@ -404,6 +467,7 @@ body {
   position: relative;
 }
 
+/* Línea decorativa debajo del título de la sección. */
 .section-title::after {
   content: '';
   position: absolute;
@@ -436,6 +500,7 @@ body {
   position: relative;
 }
 
+/* Efecto de brillo que aparece al pasar el mouse. */
 .pokemon-card::before {
   content: '';
   position: absolute;
@@ -452,6 +517,7 @@ body {
   opacity: 1;
 }
 
+/* Efecto 3D sutil al pasar el mouse. */
 .pokemon-card:hover {
   transform: scale(1.05) rotateY(5deg);
   box-shadow: 0 20px 40px rgba(106, 13, 173, 0.4);
@@ -554,7 +620,8 @@ body {
 .modal-content-modern img {
   width: 100px;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain;
+  /* `contain` evita que la imagen se recorte. */
   border-radius: 50%;
   margin: var(--spacing-md) 0;
   border: 3px solid white;
@@ -602,6 +669,10 @@ body {
   color: var(--form-placeholder-color);
 }
 
+/*
+ * Cambia el color del botón de cierre de Bootstrap (que es blanco por defecto)
+ * a rojo Nintendo usando un filtro CSS.
+ */
 .btn-close-red {
   filter: invert(17%) sepia(100%) saturate(3500%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
@@ -611,8 +682,15 @@ body {
    ======================================== */
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .fade-in-up {
@@ -620,24 +698,45 @@ body {
 }
 
 @keyframes shimmer {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 @keyframes float {
-  0% { transform: translateY(0); opacity: 0.7; }
-  100% { transform: translateY(-100vh); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
 }
 
 /* ========================================
    14. TEMA CLARO (LIGHT MODE)
    ======================================== */
 
+/*
+ * Cuando el body tiene la clase `light-mode`, estas variables sobreescriben
+ * las definidas en `:root`, cambiando la apariencia del sitio.
+ */
 body.light-mode {
   --body-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   --text-color: #343a40;
@@ -652,6 +751,8 @@ body.light-mode {
   --form-placeholder-color: rgba(0, 0, 0, 0.4);
   --nintendo-dark: #f8f9fa;
   --nintendo-light: #343a40;
+  --nintendo-red: #B00000;
+  /* Nuevo color rojo para el tema claro (mejor contraste) */
   --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
   --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
   --border-color-light: #dee2e6;
@@ -667,6 +768,7 @@ body.light-mode {
   gap: var(--spacing-xl);
   padding: var(--spacing-xl) 0;
   perspective: 1000px;
+  /* Activa la perspectiva 3D para los elementos hijos. */
 }
 
 .character-card {
@@ -674,6 +776,7 @@ body.light-mode {
   cursor: pointer;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
   transform-style: preserve-3d;
+  /* Permite que los hijos se transformen en un espacio 3D. */
 }
 
 .character-card:hover {
@@ -682,7 +785,7 @@ body.light-mode {
 }
 
 .character-card img {
-  width: 80%;
+  width: 40%;
   border-radius: var(--border-radius);
   transition: filter var(--transition-base);
   filter: drop-shadow(5px 5px 10px rgba(64, 255, 0, 0.256));
@@ -694,17 +797,18 @@ body.light-mode {
 
 .character-name-plate {
   position: absolute;
-  bottom: 15px;
+  bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(5px);
   color: white;
-  padding: var(--spacing-sm) var(--spacing-lg);
+  padding: 0.2rem 0.6rem;
   border-radius: var(--border-radius-large);
   font-weight: bold;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all var(--transition-base);
 }
@@ -722,16 +826,43 @@ body.light-mode {
   position: relative;
 }
 
+
+
+
+/* ========================================
+   15. ESTILOS PARA EL BOTÓN DE CIERRE DEL MODAL DE PERSONAJES
+   ======================================== */
+:root {
+  --close-btn-bg: #fdfdfd;
+  --close-btn-color: #fa0000;
+}
+
+.dark {
+  --close-btn-bg: #000000;
+  --close-btn-color: #f80202;
+}
+
 #closeCharacterModal {
+  background-color: var(--close-btn-bg);
+  color: var(--close-btn-color);
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  cursor: pointer;
   position: absolute;
   top: 15px;
   right: 15px;
   z-index: 10;
 }
 
+
 .character-modal-img {
-  width: 200px;
-  height: auto;
+  width: 120px;
+  height: 120px;
+  max-width: 100%;
+  object-fit: contain;
   margin-bottom: var(--spacing-md);
   filter: drop-shadow(0 10px 20px rgba(255, 43, 1, 0.546));
   border-radius: 0 !important;
@@ -755,7 +886,7 @@ body.light-mode {
 .character-modal-tag {
   display: inline-block;
   background: var(--nintendo-red);
-  color: white;
+  color: rgb(231, 231, 231);
   padding: var(--spacing-xs) var(--spacing-md);
   border-radius: var(--border-radius-small);
   font-weight: bold;
@@ -763,7 +894,8 @@ body.light-mode {
 
 .character-carousel-wrapper {
   position: relative;
-  padding: 0 40px; /* Add padding to make space for the buttons */
+  padding: 0 40px;
+  /* Espacio para los botones de navegación. */
 }
 
 #character-prev-btn,
@@ -793,8 +925,6 @@ body.light-mode {
   transition: all 0.3s ease;
 }
 
-
-
 .btn-carousel:hover {
   background-color: var(--nintendo-red);
   color: white;
@@ -808,31 +938,47 @@ body.light-mode {
 }
 
 body.light-mode .btn-carousel {
-    background-color: rgb(0, 249, 33);
-    border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgb(0, 249, 33);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 body.light-mode .btn-carousel:hover {
-    background-color: var(--nintendo-red);
-    color: white;
-    border-color: var(--nintendo-red);
+  background-color: var(--nintendo-red);
+  color: white;
+  border-color: var(--nintendo-red);
 }
 
-/* 🎆 ESTILOS PARA LAS PARTÍCULAS */
+/* ========================================
+   16. ESTILOS PARA LAS PARTÍCULAS DE CLIC
+   ======================================== */
+
 .click-particle {
   position: fixed;
+  /* Se posiciona relativo a la ventana del navegador. */
   width: 8px;
   height: 8px;
   border-radius: 50%;
   pointer-events: none;
+  /* Las partículas no interfieren con los clics. */
   z-index: 1000;
   animation: particleExplosion 0.8s ease-out forwards;
 }
 
 @keyframes particleExplosion {
-  0% { transform: translate(0, 0) scale(0); opacity: 1; }
-  20% { transform: translate(calc(var(--dx) * 0.2), calc(var(--dy) * 0.2)) scale(1.2); opacity: 1; }
-  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+
+  20% {
+    transform: translate(calc(var(--dx) * 0.2), calc(var(--dy) * 0.2)) scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
+  }
 }
 
 .character-card.clicked {
@@ -840,13 +986,22 @@ body.light-mode .btn-carousel:hover {
 }
 
 @keyframes cardClickEffect {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* ========================================
-   SECCIÓN DE NOTICIAS
+   17. SECCIÓN DE NOTICIAS
    ======================================== */
 
 .news-section {
@@ -897,6 +1052,7 @@ body.light-mode .btn-carousel:hover {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  /* Permite que el cuerpo de la tarjeta crezca y ocupe el espacio disponible. */
 }
 
 .news-card-tag {
@@ -906,14 +1062,23 @@ body.light-mode .btn-carousel:hover {
   font-weight: bold;
   margin-bottom: var(--spacing-md);
   align-self: flex-start;
+  /* Alinea la etiqueta a la izquierda. */
   color: white;
   font-size: var(--font-size-sm);
   text-transform: uppercase;
 }
 
-.tag-direct { background-color: var(--nintendo-red); }
-.tag-esports { background-color: var(--nintendo-purple); }
-.tag-update { background-color: var(--nintendo-blue); }
+.tag-direct {
+  background-color: var(--nintendo-red);
+}
+
+.tag-esports {
+  background-color: var(--nintendo-purple);
+}
+
+.tag-update {
+  background-color: var(--nintendo-blue);
+}
 
 .news-card-title {
   font-size: var(--font-size-lg);
@@ -931,7 +1096,7 @@ body.light-mode .btn-carousel:hover {
 }
 
 .news-card .btn-outline-light {
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(218, 218, 218, 0.5);
   color: var(--text-color);
   align-self: flex-start;
   font-weight: bold;
@@ -944,50 +1109,91 @@ body.light-mode .btn-carousel:hover {
   border-color: var(--nintendo-red);
 }
 
-/* === OVERRIDES ESPECÍFICOS PARA TEMA CLARO === */
-body.light-mode .product-price { color: var(--nintendo-red); }
-body.light-mode .product-card .text-light { color: var(--text-color) !important; }
-body.light-mode .navbar-nav .nav-link:hover { color: var(--nintendo-light) !important; }
-body.light-mode .dropdown-menu { background: #ffffff; border-color: #dee2e6; }
-body.light-mode .dropdown-item { color: #212529; }
-body.light-mode .dropdown-item:hover { background: var(--nintendo-red); color: white; }
-
 /* ========================================
-   15. MEDIA QUERIES (RESPONSIVE)
+   18. MEDIA QUERIES (RESPONSIVE)
    ======================================== */
 
+/* Para tablets y pantallas medianas */
 @media (max-width: 992px) {
-  .section-title { font-size: var(--font-size-xxl); }
-  .carousel-item img { height: 350px; }
+  .section-title {
+    font-size: var(--font-size-xxl);
+  }
+
+  .carousel-item img {
+    height: 350px;
+  }
 }
 
+/* Para móviles grandes y tablets en vertical */
 @media (max-width: 768px) {
-  .section-title { font-size: var(--font-size-xxl); margin-bottom: var(--spacing-md); }
-  .card-container, .pokemon-cards, .news-container { grid-template-columns: 1fr; gap: var(--spacing-md); }
-  .discount-banner { padding: var(--spacing-lg); }
-  .discount-banner h3 { font-size: var(--font-size-lg); }
-  .carousel-item img { height: 250px; }
-  .game-section { padding: var(--spacing-lg); margin: var(--spacing-xl) 0; }
-  .footer { padding: var(--spacing-xl) 0 var(--spacing-lg); }
-  .social-icons a { margin: 0 var(--spacing-sm); }
+  .section-title {
+    font-size: var(--font-size-xxl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .card-container,
+  .pokemon-cards,
+  .news-container {
+    grid-template-columns: 1fr;
+    /* Apila las tarjetas en una sola columna. */
+    gap: var(--spacing-md);
+  }
+
+  .discount-banner {
+    padding: var(--spacing-lg);
+  }
+
+  .discount-banner h3 {
+    font-size: var(--font-size-lg);
+  }
+
+  .carousel-item img {
+    height: 250px;
+  }
+
+  .game-section {
+    padding: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+  }
+
+  .footer {
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+  }
+
+  .social-icons a {
+    margin: 0 var(--spacing-sm);
+  }
 }
 
+/* Para móviles pequeños */
 @media (max-width: 480px) {
-  .modal-content-modern { width: 95%; padding: var(--spacing-lg); }
-  .product-card, .discount-banner { padding: var(--spacing-md); }
+  .modal-content-modern {
+    width: 95%;
+    padding: var(--spacing-lg);
+  }
+
+  .product-card,
+  .discount-banner {
+    padding: var(--spacing-md);
+  }
 }
 
 /* ========================================
-   16. UTILIDADES Y HELPERS
+   19. UTILIDADES Y HELPERS
    ======================================== */
 
-/* ... (otros helpers) ... */
+.navbar-toggler {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
 
-.navbar-toggler { border: none; background: transparent; padding: 0; }
-.navbar-toggler:focus { box-shadow: none; }
+.navbar-toggler:focus {
+  box-shadow: none;
+}
 
 /* ========================================
-   ESTILOS ADICIONALES PARA CARRITO Y TOASTS
+   20. ESTILOS ADICIONALES (CARRITO, TOASTS)
    ======================================== */
 
 .offcanvas-footer {
@@ -995,16 +1201,19 @@ body.light-mode .dropdown-item:hover { background: var(--nintendo-red); color: w
   border-top: 1px solid rgba(230, 0, 18, 0.3);
 }
 
-.quantity-btn, .remove-btn {
+.quantity-btn,
+.remove-btn {
   line-height: 1;
   padding: 0.2rem 0.5rem;
 }
 
-.object-fit-cover { object-fit: cover; }
+.object-fit-cover {
+  object-fit: cover;
+}
 
 body.light-mode .offcanvas-footer {
-    background: rgba(0, 0, 0, 0.05);
-    border-top: 1px solid #dee2e6;
+  background: rgba(0, 0, 0, 0.05);
+  border-top: 1px solid #dee2e6;
 }
 
 .toast-container {
@@ -1024,6 +1233,7 @@ body.light-mode .offcanvas-footer {
   gap: 1rem;
   opacity: 0;
   transform: translateX(100%);
+  /* Transición con efecto "bounce" */
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
@@ -1040,212 +1250,140 @@ body.light-mode .offcanvas-footer {
   border: 2px solid var(--nintendo-red);
 }
 
-.toast-notification-content p { margin: 0; font-weight: bold; }
-.toast-notification-content span { font-size: 0.875rem; opacity: 0.8; }
+.toast-notification-content p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.toast-notification-content span {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
 
 body.light-mode .toast-notification {
-    background: linear-gradient(135deg, #ffffff 0%, #e9ecef 100%);
-    color: var(--text-color);
-    border-color: #dee2e6;
+  background: linear-gradient(135deg, #ffffff 0%, #e9ecef 100%);
+  color: var(--text-color);
+  border-color: #dee2e6;
 }
 
+/* ========================================
+   21. EFECTO SUPER ESTRELLA - MARIO BROS
+   ======================================== */
 
-
-
-
-/* ====================================
-   EFECTO SUPER ESTRELLA - MARIO BROS
-   ==================================== */
-
-/* Clase base: Configuración inicial del botón */
 .super-star {
   position: relative;
-  /* Permite posicionar elementos pseudo (::before, ::after) */
   overflow: hidden;
-  /* Evita que las partículas se salgan del contenedor */
 }
 
-/* Estado activo: Se aplica cuando el botón tiene la clase 'active' */
 .super-star.active {
   animation: superStarGlow 3s ease-in-out;
-  /* Animación de brillo dorado por 3 segundos */
 }
 
-/* Imagen dentro del botón activo: Anima el icono/imagen */
 .super-star.active img {
   animation: superStarRotate 3s ease-in-out;
-  /* Rotación y cambio de colores por 3 segundos */
 }
 
-/* Partículas brillantes: Crea las estrellitas alrededor del botón */
 .super-star.active::before,
 .super-star.active::after {
   content: '✨';
-  /* Emoji de estrella como contenido */
   position: absolute;
-  /* Posicionamiento absoluto respecto al botón */
   font-size: 16px;
-  /* Tamaño de la estrellita */
   animation: floatingSparkles 2s ease-out;
-  /* Animación de flotación por 2 segundos */
   pointer-events: none;
-  /* No interfiere con los clics del mouse */
 }
 
-/* Primera partícula: Esquina superior izquierda */
 .super-star.active::before {
   top: -10px;
-  /* 10px arriba del borde del botón */
   left: -10px;
-  /* 10px a la izquierda del borde del botón */
   animation-delay: 0.2s;
-  /* Aparece 0.2 segundos después del inicio */
 }
 
-/* Segunda partícula: Esquina inferior derecha */
 .super-star.active::after {
   bottom: -10px;
-  /* 10px abajo del borde del botón */
   right: -10px;
-  /* 10px a la derecha del borde del botón */
   animation-delay: 0.8s;
-  /* Aparece 0.8 segundos después del inicio */
 }
 
-/* ANIMACIÓN 1: Brillo dorado del botón (como la estrella de Mario) */
 @keyframes superStarGlow {
 
-  /* Inicio y final: Estado de reposo */
   0%,
   100% {
     box-shadow: 0 0 10px #ffd700;
-    /* Brillo dorado suave */
     background: rgba(255, 215, 0, 0.1);
-    /* Fondo dorado muy transparente */
     transform: scale(1);
-    /* Tamaño normal del botón */
   }
 
-  /* 20%: Primer incremento de poder */
   20% {
     box-shadow: 0 0 50px #ffd700, 0 0 100px #ffff00;
-    /* Doble brillo: dorado + amarillo */
     background: rgba(255, 215, 0, 0.3);
-    /* Fondo más visible */
     transform: scale(1.05);
-    /* Crece 5% */
   }
 
-  /* 40%: MÁXIMO PODER - Punto culminante del efecto */
   40% {
     box-shadow: 0 0 70px #ffd700, 0 0 140px #ffff00, 0 0 210px #ffa500;
-    /* Triple brillo intenso */
     background: rgba(255, 215, 0, 0.2);
-    /* Fondo balanceado */
     transform: scale(1.1);
-    /* Tamaño máximo: crece 10% */
   }
 
-  /* 60%: Segundo incremento (bajada gradual) */
   60% {
     box-shadow: 0 0 50px #ffd700, 0 0 100px #ffff00;
-    /* Vuelve al doble brillo */
     background: rgba(255, 215, 0, 0.3);
-    /* Fondo más visible otra vez */
     transform: scale(1.05);
-    /* Tamaño intermedio */
   }
 
-  /* 80%: Decrecimiento hacia el estado normal */
   80% {
     box-shadow: 0 0 30px #ffd700;
-    /* Brillo moderado */
     background: rgba(255, 215, 0, 0.1);
-    /* Fondo casi transparente */
     transform: scale(1.02);
-    /* Casi el tamaño original */
   }
 }
 
-/* ANIMACIÓN 2: Rotación y cambio de colores de la imagen */
 @keyframes superStarRotate {
-
-  /* Inicio: Estado normal */
   0% {
     transform: rotate(0deg) scale(1);
-    /* Sin rotación, tamaño normal */
     filter: brightness(1) hue-rotate(0deg);
-    /* Brillo y colores normales */
   }
 
-  /* 25%: Primer cuarto de vuelta */
   25% {
     transform: rotate(90deg) scale(1.3);
-    /* Rota 90°, crece 30% */
     filter: brightness(1.8) hue-rotate(90deg);
-    /* Más brillante, colores cambiados */
   }
 
-  /* 50%: Media vuelta - Punto máximo de transformación */
   50% {
     transform: rotate(180deg) scale(1.1);
-    /* Rota 180°, tamaño intermedio */
     filter: brightness(2) hue-rotate(180deg);
-    /* Máximo brillo y cambio de color */
   }
 
-  /* 75%: Tercer cuarto de vuelta */
   75% {
     transform: rotate(270deg) scale(1.3);
-    /* Rota 270°, grande otra vez */
     filter: brightness(1.8) hue-rotate(270deg);
-    /* Alto brillo */
   }
 
-  /* 100%: Vuelta completa - Regreso al inicio */
   100% {
     transform: rotate(360deg) scale(1);
-    /* Vuelta completa, tamaño normal */
     filter: brightness(1) hue-rotate(360deg);
-    /* Colores y brillo normales */
   }
 }
 
-/* ANIMACIÓN 3: Partículas flotantes (estrellitas que suben) */
 @keyframes floatingSparkles {
-
-  /* Inicio: Partícula invisible y pequeña */
   0% {
     opacity: 0;
-    /* Completamente transparente */
     transform: scale(0) translateY(0);
-    /* Tamaño 0, sin movimiento vertical */
   }
 
-  /* Mitad: Máxima visibilidad y tamaño */
   50% {
     opacity: 1;
-    /* Completamente visible */
     transform: scale(1.2) translateY(-20px);
-    /* 20% más grande, sube 20px */
   }
 
-  /* Final: Se desvanece mientras continúa subiendo */
   100% {
     opacity: 0;
-    /* Vuelve a ser transparente */
     transform: scale(0.5) translateY(-50px);
-    /* Se hace pequeña, sube 50px en total */
   }
 }
 
-
 /* ========================================
-   FIN DEL ARCHIVO CSS
-   ========================*/
-
-/* ========================================
-   CHATBOT STYLES
+   22. CHATBOT
    ======================================== */
 
 #chatbot-container {
@@ -1267,15 +1405,16 @@ body.light-mode .toast-notification {
   justify-content: center;
   align-items: center;
   transition: all var(--transition-base);
-  /* Añadimos la animación de flotación */
   animation: float 2s ease-in-out infinite;
 }
 
-/* Keyframes para el efecto de flotación */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
@@ -1283,14 +1422,14 @@ body.light-mode .toast-notification {
 
 #chatbot-toggle-btn:hover {
   transform: scale(1.1);
-  /* Pausamos la animación al hacer hover para que el scale funcione correctamente */
   animation-play-state: paused;
+  /* Pausa la animación de flotar en hover. */
 }
 
 #chatbot-toggle-btn img {
   width: 60px;
   height: auto;
-  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
   transition: opacity var(--transition-fast), transform var(--transition-fast);
 }
 
@@ -1319,14 +1458,12 @@ body.light-mode .toast-notification {
   transform: scale(0.95) translateY(10px);
   opacity: 0;
   pointer-events: none;
+  /* El chatbot no es interactivo cuando está oculto. */
   transition: all var(--transition-base);
   border: 1px solid rgba(230, 0, 18, 0.3);
   backdrop-filter: blur(10px);
 }
 
-
-
-/* Específicamente para modo oscuro */
 body:not(.light-mode) #chatbot-window {
   background: rgba(33, 37, 41, 0.95);
   border: 1px solid rgba(230, 0, 18, 0.8);
@@ -1334,11 +1471,10 @@ body:not(.light-mode) #chatbot-window {
 }
 
 body.light-mode #chatbot-window {
-    background: var(--product-card-bg);
+  background: var(--product-card-bg);
 }
 
 #chatbot-container.open #chatbot-toggle-btn {
-  /* Detenemos la animación cuando el chatbot está abierto */
   animation: none;
 }
 
@@ -1413,7 +1549,7 @@ body.light-mode #chatbot-window {
 }
 
 body.light-mode #chatbot-input-container {
-    border-top: 1px solid #dee2e6bf;
+  border-top: 1px solid #dee2e6bf;
 }
 
 #chatbot-input {
@@ -1439,4 +1575,32 @@ body.light-mode #chatbot-input-container {
 
 #chatbot-send-btn:hover {
   transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .character-name-plate {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.5px;
+    bottom: 5px;
+  }
+}
+
+#chatbot-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1065;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#chatbot-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
 }

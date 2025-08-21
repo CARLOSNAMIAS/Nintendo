@@ -94,3 +94,36 @@ body.light-mode .cart-item-row {
   /* Línea separadora gris suave para modo claro (mejor contraste que blanco transparente) */
   border-bottom-color: var(--border-color-light);
 }
+/* =========================================
+   MEDIA QUERIES PARA RESPONSIVIDAD
+   ========================================= */
+
+@media (max-width: 768px) {
+  .cart-item-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .quantity-controls {
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .cart-item-row img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-card {
+    padding: 1rem;
+  }
+
+  .cart-item-row {
+    padding-bottom: 1.5rem;
+  }
+}

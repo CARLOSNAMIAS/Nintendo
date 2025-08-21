@@ -27,3 +27,35 @@ body.light-mode .summary-card {
   background-color: #ffffff;
   border-color: var(--border-color-light);
 }
+/* =========================================
+   MEDIA QUERIES PARA RESPONSIVIDAD
+   ========================================= */
+
+@media (max-width: 768px) {
+  .summary-item {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .summary-item .item-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .summary-card h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-card {
+    padding: 1rem;
+  }
+
+  .row.g-5 {
+      --bs-gutter-x: 1.5rem;
+  }
+}

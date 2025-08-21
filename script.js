@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ========================================
 
   let cart = CartLogic.getCart();
+  let elementThatTriggeredModal; // Para accesibilidad: guarda el elemento que abrió un modal
 
   const popularProductsData = [
     { imgSrc: './img/futbol2.avif', title: 'EA SPORTS FC™ 24', description: 'La experiencia futbolística más auténtica', price: 59.99 },
@@ -23,13 +24,14 @@ document.addEventListener('DOMContentLoaded', function () {
   ];
 
   const characterData = [
-    { id: 'mario', name: 'Mario', imgSrc: './img/mario-bros.png', sound: './sound/notificacion.mp3', description: "El héroe icónico del Reino Champiñón, siempre listo para saltar a la acción y frustrar los planes de Bowser.", tag: "Super Mario" },
-    { id: 'luigi', name: 'Luigi', imgSrc: './img/luigii.png', sound: './sound/notificacion.mp3', description: "El hermano menor de Mario. Aunque es un poco miedoso, es muy leal y ha salvado el día en más de una ocasión.", tag: "Super Mario" },
-    { id: 'peach', name: 'Peach', imgSrc: './img/princesaa.PNG', sound: './sound/notificacion.mp3', description: "La amable y elegante princesa del Reino Champiñón. A menudo es secuestrada por Bowser, pero no duda en unirse a la aventura.", tag: "Super Mario" },
-    { id: 'bowser', name: 'Bowser', imgSrc: './img/bower.png', sound: './sound/notificacion.mp3', description: "El rey de los Koopas y archienemigo de Mario. Su principal objetivo es conquistar el Reino Champiñón y casarse con Peach.", tag: "Super Mario" },
-    { id: 'wario', name: 'Wario', imgSrc: './img/wario.png', sound: './sound/notificacion.mp3', description: "El avaro y musculoso rival de Mario. Es el polo opuesto a nuestro héroe, motivado por la codicia y el ajo.", tag: "WarioWare" },
-    { id: 'zelda', name: 'Zelda', imgSrc: './img/zelda.avif', sound: './sound/notificacion.mp3', description: "La sabia y poderosa princesa de Hyrule, portadora de la Trifuerza de la Sabiduría.", tag: "The Legend of Zelda" },
-    { id: 'link', name: 'Link', imgSrc: './img/carrusel2.avif', sound: './sound/notificacion.mp3', description: "El valiente héroe elegido por la Diosa Hylia, destinado a proteger Hyrule de las fuerzas del mal.", tag: "The Legend of Zelda" }
+    { id: 'mario', name: 'Mario', imgSrc: './img/mario-bros.png', sound: './sound/Power.mp3', description: "El héroe icónico del Reino Champiñón, siempre listo para saltar a la acción y frustrar los planes de Bowser.", tag: "Super Mario" },
+    { id: 'luigi', name: 'Luigi', imgSrc: './img/luigii.png', sound: './sound/Power.mp3', description: "El hermano menor de Mario. Aunque es un poco miedoso, es muy leal y ha salvado el día en más de una ocasión.", tag: "Super Mario" },
+    { id: 'peach', name: 'Peach', imgSrc: './img/peach.png', sound: './sound/Power.mp3', description: "La amable y elegante princesa del Reino Champiñón. A menudo es secuestrada por Bowser, pero no duda en unirse a la aventura.", tag: "Super Mario" },
+    { id: 'bowser', name: 'Bowser', imgSrc: './img/bower.png', sound: './sound/Power.mp3', description: "El rey de los Koopas y archienemigo de Mario. Su principal objetivo es conquistar el Reino Champiñón y casarse con Peach.", tag: "Super Mario" },
+    { id: 'wario', name: 'Wario', imgSrc: './img/wario.png', sound: './sound/Power.mp3', description: "El avaro y musculoso rival de Mario. Es el polo opuesto a nuestro héroe, motivado por la codicia y el ajo.", tag: "WarioWare" },
+    { id: 'zelda', name: 'Zelda', imgSrc: './img/mario-car.png', sound: './sound/Power.mp3', description: "La sabia y poderosa princesa de Hyrule, portadora de la Trifuerza de la Sabiduría. Siempre busca proteger su reino y ayudar a Link.", tag: "The Legend of Zelda" },
+    { id: 'ganondorf', name: 'Ganondorf', imgSrc: './img/toad.png', sound: './sound/Power.mp3', description: "El rey de los Gerudo y principal antagonista de la saga. Busca obtener la Trifuerza para dominar Hyrule y derrotar a Link.", tag: "The Legend of Zelda" },
+    { id: 'link', name: 'Link', imgSrc: './img/nube.png', sound: './sound/Power.mp3', description: "El valiente héroe elegido por la Diosa Hylia, destinado a proteger Hyrule de las fuerzas del mal.", tag: "The Legend of Zelda" }
   ];
 
   const newsData = [
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>`;
 
   const characterRenderer = (c) => `
-    <div class="character-card fade-in-up" data-character-id="${c.id}">
+    <div class="character-card fade-in-up" data-character-id="${c.id}" tabindex="0" role="button" aria-label="Ver detalles de ${c.name}">
       <img src="${c.imgSrc}" alt="${c.name}">
       <div class="character-name-plate"><span>${c.name}</span></div>
     </div>`;
@@ -139,12 +141,12 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="mb-0 fw-bold">${item.name}</p>
             <p class="mb-1 text-muted">${item.price.toFixed(2)}</p>
             <div class="d-flex align-items-center">
-              <button class="btn btn-sm btn-outline-secondary quantity-btn" data-id="${item.id}" data-action="decrease">-</button>
-              <span class="mx-2">${item.quantity}</span>
-              <button class="btn btn-sm btn-outline-secondary quantity-btn" data-id="${item.id}" data-action="increase">+</button>
+              <button class="btn btn-sm btn-outline-secondary quantity-btn" data-id="${item.id}" data-action="decrease" aria-label="Disminuir cantidad de ${item.name}">-</button>
+              <span class="mx-2" aria-live="polite">${item.quantity}</span>
+              <button class="btn btn-sm btn-outline-secondary quantity-btn" data-id="${item.id}" data-action="increase" aria-label="Aumentar cantidad de ${item.name}">+</button>
             </div>
           </div>
-          <button class="btn btn-sm btn-outline-danger remove-btn" data-id="${item.id}">×</button>
+          <button class="btn btn-sm btn-outline-danger remove-btn" data-id="${item.id}" aria-label="Eliminar ${item.name} del carrito">×</button>
         </div>
       `;
       cartItemsContainer.innerHTML += cartItemHTML;
@@ -211,7 +213,13 @@ document.addEventListener('DOMContentLoaded', function () {
           
           playCharacterSound(char.sound);
           createClickParticles(card);
-          showCharacterModal(char);
+          showCharacterModal(char, card); // Pasamos la tarjeta que activó el modal
+      });
+      // Permitir activar con la tecla Enter para accesibilidad
+      characterContainer.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.target.classList.contains('character-card')) {
+          e.target.click();
+        }
       });
   }
 
@@ -241,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
     toast.innerHTML = `
-      <img src="${productImage}" alt="${productName}">
+      <img src="${productImage}" alt="">
       <div class="toast-notification-content">
         <p>${productName}</p>
         <span>Se agregó a tu carrito.</span>
@@ -259,9 +267,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const characterModal = document.getElementById('characterModal');
   
-  function showCharacterModal(character) {
+  function showCharacterModal(character, triggerElement) {
       if (!characterModal) return;
       
+      elementThatTriggeredModal = triggerElement; // Guardamos el elemento que abrió el modal
+
       const characterModalBody = document.getElementById('characterModalBody');
       characterModalBody.innerHTML = `
           <img src="${character.imgSrc}" class="character-modal-img" alt="${character.name}">
@@ -271,12 +281,33 @@ document.addEventListener('DOMContentLoaded', function () {
       
       characterModal.style.display = 'flex';
       characterModal.querySelector('.modal-content-modern').classList.add('show');
+
+      // --- Gestión de Foco para Accesibilidad ---
+      const closeButton = document.getElementById('closeCharacterModal');
+      closeButton.focus(); // Ponemos el foco en el botón de cerrar
+
+      characterModal.addEventListener('keydown', trapFocus);
   }
   
   function closeCharacterModalFunction() {
       const modalContent = characterModal.querySelector('.modal-content-modern');
       modalContent.classList.remove('show');
-      setTimeout(() => { characterModal.style.display = 'none'; }, 300);
+      setTimeout(() => { 
+          characterModal.style.display = 'none'; 
+          characterModal.removeEventListener('keydown', trapFocus); // Limpiamos el listener
+          if (elementThatTriggeredModal) {
+              elementThatTriggeredModal.focus(); // Devolvemos el foco al elemento original
+          }
+      }, 300);
+  }
+
+  function trapFocus(e) {
+      if (e.key !== 'Tab') return;
+
+      const closeButton = document.getElementById('closeCharacterModal');
+      // Como solo hay un elemento enfocable (el botón de cerrar), si se presiona Tab,
+      // prevenimos el comportamiento por defecto para que el foco no se vaya del modal.
+      e.preventDefault();
   }
   
   document.getElementById('closeCharacterModal')?.addEventListener('click', closeCharacterModalFunction);
@@ -295,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   renderItems(productContainer, popularProductsData, productRenderer);
   renderItems(pokemonContainer, pokemonData, pokemonRenderer);
-  renderCharacterCarousel(); // <--- Changed this line
+  renderCharacterCarousel();
   renderItems(newsContainer, newsData, newsRenderer);
   
   updateOffcanvasUI();
