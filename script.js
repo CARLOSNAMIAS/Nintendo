@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', function () {
   ];
 
   const characterData = [
-    { id: 'mario', name: 'Mario', imgSrc: './img/mario-bros.png', sound: './sound/Power.mp3', description: "El héroe icónico del Reino Champiñón, siempre listo para saltar a la acción y frustrar los planes de Bowser.", tag: "Super Mario" },
-    { id: 'luigi', name: 'Luigi', imgSrc: './img/luigii.png', sound: './sound/Power.mp3', description: "El hermano menor de Mario. Aunque es un poco miedoso, es muy leal y ha salvado el día en más de una ocasión.", tag: "Super Mario" },
-    { id: 'peach', name: 'Peach', imgSrc: './img/peach.png', sound: './sound/Power.mp3', description: "La amable y elegante princesa del Reino Champiñón. A menudo es secuestrada por Bowser, pero no duda en unirse a la aventura.", tag: "Super Mario" },
-    { id: 'bowser', name: 'Bowser', imgSrc: './img/bower.png', sound: './sound/Power.mp3', description: "El rey de los Koopas y archienemigo de Mario. Su principal objetivo es conquistar el Reino Champiñón y casarse con Peach.", tag: "Super Mario" },
-    { id: 'wario', name: 'Wario', imgSrc: './img/wario.png', sound: './sound/Power.mp3', description: "El avaro y musculoso rival de Mario. Es el polo opuesto a nuestro héroe, motivado por la codicia y el ajo.", tag: "WarioWare" },
-    { id: 'zelda', name: 'Zelda', imgSrc: './img/mario-car.png', sound: './sound/Power.mp3', description: "La sabia y poderosa princesa de Hyrule, portadora de la Trifuerza de la Sabiduría. Siempre busca proteger su reino y ayudar a Link.", tag: "The Legend of Zelda" },
-    { id: 'ganondorf', name: 'Ganondorf', imgSrc: './img/toad.png', sound: './sound/Power.mp3', description: "El rey de los Gerudo y principal antagonista de la saga. Busca obtener la Trifuerza para dominar Hyrule y derrotar a Link.", tag: "The Legend of Zelda" },
-    { id: 'link', name: 'Link', imgSrc: './img/nube.png', sound: './sound/Power.mp3', description: "El valiente héroe elegido por la Diosa Hylia, destinado a proteger Hyrule de las fuerzas del mal.", tag: "The Legend of Zelda" }
+    { id: 'mario', name: 'Mario', imgSrc: './img/mario-bros.png', sound: './sound/notificacion.mp3', description: "El héroe icónico del Reino Champiñón, siempre listo para saltar a la acción y frustrar los planes de Bowser.", tag: "Super Mario" },
+    { id: 'luigi', name: 'Luigi', imgSrc: './img/luigii.png', sound: './sound/notificacion.mp3', description: "El hermano menor de Mario. Aunque es un poco miedoso, es muy leal y ha salvado el día en más de una ocasión.", tag: "Super Mario" },
+    { id: 'peach', name: 'Peach', imgSrc: './img/peach.png', sound: './sound/notificacion.mp3', description: "La amable y elegante princesa del Reino Champiñón. A menudo es secuestrada por Bowser, pero no duda en unirse a la aventura.", tag: "Super Mario" },
+    { id: 'bowser', name: 'Bowser', imgSrc: './img/bower.png', sound: './sound/notificacion.mp3', description: "El rey de los Koopas y archienemigo de Mario. Su principal objetivo es conquistar el Reino Champiñón y casarse con Peach.", tag: "Super Mario" },
+    { id: 'wario', name: 'Wario', imgSrc: './img/wario.png', sound: './sound/notificacion.mp3', description: "El avaro y musculoso rival de Mario. Es el polo opuesto a nuestro héroe, motivado por la codicia y el ajo.", tag: "WarioWare" },
+    { id: 'zelda', name: 'Zelda', imgSrc: './img/mario-car.png', sound: './sound/notificacion.mp3', description: "La sabia y poderosa princesa de Hyrule, portadora de la Trifuerza de la Sabiduría. Siempre busca proteger su reino y ayudar a Link.", tag: "The Legend of Zelda" },
+    { id: 'ganondorf', name: 'Ganondorf', imgSrc: './img/toad.png', sound: './sound/notificacion.mp3', description: "El rey de los Gerudo y principal antagonista de la saga. Busca obtener la Trifuerza para dominar Hyrule y derrotar a Link.", tag: "The Legend of Zelda" },
+    { id: 'link', name: 'Link', imgSrc: './img/nube.png', sound: './sound/notificacion.mp3', description: "El valiente héroe elegido por la Diosa Hylia, destinado a proteger Hyrule de las fuerzas del mal.", tag: "The Legend of Zelda" }
   ];
 
   const newsData = [
