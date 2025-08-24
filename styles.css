@@ -753,6 +753,7 @@ body.light-mode {
   --nintendo-light: #343a40;
   --nintendo-red: #B00000;
   /* Nuevo color rojo para el tema claro (mejor contraste) */
+  --nintendo-yellow: #854d0e; /* Color oscuro para el precio en modo claro */
   --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
   --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
   --border-color-light: #dee2e6;
